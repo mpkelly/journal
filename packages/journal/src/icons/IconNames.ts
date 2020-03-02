@@ -1,0 +1,24 @@
+import { MaterialIconsRegular } from "udx-icons";
+
+export const CollectionIcon = `library_books`;
+export const FolderIcon = `${MaterialIconsRegular}:folder`;
+export const PageIcon = `file`;
+export const DeleteIcon = `delete`;
+export const ColorIcon = `brush`;
+export const ChevronRightIcon = "chevron-right";
+export const ChevronDownIcon = "chevron-down";
+export const SaveIcon = "save";
+export const ThemeIcon = "color_lens";
+export const SettingsIcon = "settings";
+export const ImagesIcon = "collections";
+export const VideosIcon = "video_library";
+export const TextIcon = "assignment";
+export const PrintIcon = "print";
+export const ExportIcon = "launch";
+export const ApplyTagIcon = "colorize";
+export const ViewExternalIcon = "open_in_new";
+export const AddIcon = "add";
+export const ClearIcon = "clear";
+export const RefreshIcon = "refresh";
+export const TagIcon = "label";
+export const UploadIcon = "cloud_upload";

@@ -1,0 +1,17 @@
+{
+  "name": "journal",
+  "version": "0.0.26",
+  "description": "A free, open-source, embeddable markdown-based Wiki",
+  "license": "ISC",
+  "private": true,
+  "devDependencies": {
+    "@types/history": "^4.7.3",
+    "@types/react": "^16.9.11",
+    "@types/react-dom": "16.8.3",
+    "@types/react-router-dom": "^4.3.5",
+    "@types/shortid": "0.0.29",
+    "@types/slate": "^0.47.5",
+    "@types/slate-react": "^0.22.9",
+    "@types/styled-components": "^4.4.0"
+  }
+}

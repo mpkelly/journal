@@ -1,0 +1,33 @@
+{
+  "name": "Journal",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Chrome version of Journal Wiki which also has an extension for for saving text, images, video and audio directly from web pages via the context menu.",
+  "homepage_url": "https://github.com/mpkelly/siam-wiki",
+  "icons": {
+    "16": "icons/icon.png",
+    "19": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
+  "default_locale": "en",
+  "background": {
+    "scripts": ["media-store.js", "background.js"],
+    "persistent": false
+  },
+  "permissions": ["contextMenus", "http://*/", "https://*/"],
+  "browser_action": {
+    "title": "Open Journal",
+    "default_icon": {
+      "19": "icons/icon.png",
+      "38": "icons/icon.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://fonts.googleapis.com https://cdnjs.cloudflare.com; object-src 'self'",
+  "content_scripts": [
+    {
+      "matches": ["https://www.google.com/*"],
+      "js": ["src/inject/inject.js", "./index.js"]
+    }
+  ]
+}

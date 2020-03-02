@@ -1,0 +1,33 @@
+{
+  "name": "chrome",
+  "version": "0.0.1",
+  "description": "Journal Wiki as a Chrome extension",
+  "keywords": [
+    "chrome",
+    "extension",
+    "Journal",
+    "wiki",
+    "browser"
+  ],
+  "author": "mkelly <kikemelly@gmail.com>",
+  "homepage": "https://github.com/mpkelly/siam-wiki#readme",
+  "license": "ISC",
+  "main": "dist/index.js",
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mpkelly/siam-wiki.git"
+  },
+  "scripts": {
+    "test": "echo \"Error: run tests from root\" && exit 1"
+  },
+  "bugs": {
+    "url": "https://github.com/mpkelly/siam-wiki/issues"
+  }
+}
