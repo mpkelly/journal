@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
     "@babel/runtime": "^7.7.2",
-    "@mpkelly/react-editor-kit": "file:../../../react-editor/packages/editor-kit",
+    "@mpkelly/react-editor-kit": "0.0.7",
     "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "*",
     "core-js": "^2.6.10",
@@ -77,5 +77,6 @@
     "dist": "webpack --mode=production && cp ./lib/index.js ../chrome/index.js",
     "publish": "npm run dist && npm run media-dist",
     "udx": "npm install udx-core@latest udx-react@latest udx-icons@latest"
-  }
+  },
+  "dependencies": {}
 }

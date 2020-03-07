@@ -45,6 +45,12 @@ const EditorStyle = `
     font-style:inherit;
     text-decoration:inherit;  
   }
+  blockquote {
+    font-size: larger;
+    font-style: italic;
+    border-left: 3px solid ${StyleSystem.colors.primary};
+    padding-left: 16px;
+  }
 `;
 
 const GlobalStyle = `

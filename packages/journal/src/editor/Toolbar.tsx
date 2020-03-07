@@ -18,7 +18,7 @@ import {
   StrikethroughButton,
   UnderlineButton,
   InlineCodeButton,
-  FontColorPickerButton,
+  ColorPickerButton,
   TextAlignLeftButton,
   TextAlignCenterButton,
   TextAlignRightButton,
@@ -101,7 +101,7 @@ export const Toolbar = (props: ToolbarProps) => {
             />
             <LinkButton className="material-icons-outlined" ligature="link" />
             <Divider />
-            <FontColorPickerButton
+            <ColorPickerButton
               className="material-icons-outlined"
               ligature="text_format"
             />

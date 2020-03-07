@@ -6,7 +6,7 @@ import * as shortid from "shortid";
 import db from "./Dexie";
 import { WikiSettings, DefaultSettings } from "../settings/WikiSettings";
 import { Tag } from "../tags/Tag";
-import { ExportOptions, exportDB, importDB } from "dexie-export-import";
+import { importFromJsonFile, exportToJson } from "./BackupDB";
 
 const collections = db.table<Collection, any>("collections");
 const settings = db.table<WikiSettings, any>("settings");
@@ -151,17 +151,12 @@ export const IndexDBDatabase: Database = {
   updateTag: (tag: Tag) => {
     return tags.update(tag.id, tag);
   },
-  exportDb: (options?: ExportOptions) => {
-    return exportDB(db, options);
+  exportDb: async () => {
+    const json = await exportToJson(db.backendDB());
+    return new Blob([json], { type: "application/json" });
   },
   importDb: (file: File) => {
-    return importDB(db, file, {
-      noTransaction: true,
-      progressCallback: progress => {
-        console.log(progress);
-        return true;
-      }
-    });
+    return importFromJsonFile(db.backendDB(), file, true);
   },
   delete: () => {
     return db.delete();

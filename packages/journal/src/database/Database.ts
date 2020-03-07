@@ -2,7 +2,6 @@ import { Collection } from "../collections/Collection";
 import { Item } from "../content/Item";
 import { WikiSettings } from "../settings/WikiSettings";
 import { Tag } from "../tags/Tag";
-import { ExportOptions } from "dexie-export-import";
 
 export interface Database {
   loadCollections(): Promise<Collection[]>;
@@ -22,7 +21,7 @@ export interface Database {
   addTag(): Promise<void>;
   deleteTag(tag: Tag): Promise<void>;
   updateTag(tag: Tag): Promise<number>;
-  exportDb(options?: ExportOptions): Promise<Blob>;
+  exportDb(): Promise<Blob>;
   importDb(file: File): Promise<void>;
   delete(): Promise<void>;
 }
