@@ -71,6 +71,7 @@ export const EditorPage = (props: EditorPageProps) => {
         height={"100%"}
         backgroundColor="content_background"
         overflow="hidden"
+        key={itemId}
       >
         <Show when={Boolean(itemId)}>
           <EditorKit plugins={plugins}>

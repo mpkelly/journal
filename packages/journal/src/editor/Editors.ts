@@ -23,6 +23,8 @@ export const useEditor = (props: EditorPageProps) => {
       if (item) {
         if (item.data) {
           setValue(item.data);
+        } else {
+          setValue(defaultValue());
         }
         setItem(item);
       }

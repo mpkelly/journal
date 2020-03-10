@@ -2,15 +2,14 @@
   "name": "Journal",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "Chrome version of Journal Wiki which also has an extension for for saving text, images, video and audio directly from web pages via the context menu.",
-  "homepage_url": "https://github.com/mpkelly/siam-wiki",
+  "description": "Journal - A wiki and media orgnaizer that supports grabbing images, video and text directly from web pages via the context menu.",
+  "homepage_url": "https://github.com/mpkelly/journal",
   "icons": {
     "16": "icons/icon.png",
     "19": "icons/icon.png",
     "48": "icons/icon.png",
     "128": "icons/icon.png"
   },
-  "default_locale": "en",
   "background": {
     "scripts": ["media-store.js", "background.js"],
     "persistent": false
