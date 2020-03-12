@@ -26,7 +26,8 @@ import {
   OrderedListButton,
   UnorderedListButton,
   QuoteButton,
-  ClearFormattingButton
+  ClearFormattingButton,
+  SpellCheckButton
 } from "@mpkelly/react-editor-kit";
 import { Breadcrumb } from "./Breadcrumb";
 
@@ -137,6 +138,10 @@ export const Toolbar = (props: ToolbarProps) => {
               ligature="format_quote"
             />
             <Divider />
+            <SpellCheckButton
+              className="material-icons-outlined"
+              ligature="spellcheck"
+            />
             <ClearFormattingButton
               className="material-icons-outlined"
               ligature="format_clear"

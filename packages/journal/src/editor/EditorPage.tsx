@@ -41,7 +41,8 @@ import {
   EditorToolbarPlugin,
   Plugin,
   ImagePlugin,
-  TextAlignPlugin
+  TextAlignPlugin,
+  Resizable
 } from "@mpkelly/react-editor-kit";
 import { FloatingToolbar } from "./FloatingToolbar";
 

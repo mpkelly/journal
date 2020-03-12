@@ -1,5 +1,5 @@
 import React from "react";
-import { Editor as TextEditor } from "@mpkelly/react-editor-kit";
+import { Editor as TextEditor, Resizable } from "@mpkelly/react-editor-kit";
 import { useSettings } from "../settings/SettingsContext";
 import { Node } from "slate";
 
@@ -11,16 +11,21 @@ export interface EditorProps {
 
 export const Editor = (props: EditorProps) => {
   const placeholder = props.readOnly ? undefined : "Write something...";
-  const { settings } = useSettings();
+  const { settings, updateSettings } = useSettings();
   return (
-    <TextEditor
-      style={{
-        width: settings.contentWidth,
-        height: "100%",
-        overflow: "auto"
-      }}
-      spellCheck={false}
-      {...props}
-    />
+    <div className="printable">
+      <Resizable
+        initialWidth={settings.contentWidth}
+        onChange={contentWidth => updateSettings({ contentWidth })}
+      >
+        <TextEditor
+          style={{
+            height: "100%",
+            overflow: "auto"
+          }}
+          {...props}
+        />
+      </Resizable>
+    </div>
   );
 };
