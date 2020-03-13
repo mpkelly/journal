@@ -3,11 +3,11 @@ import { Row, Icon, EditableText, styled, Menu, FlexProps } from "udx-react";
 import { useCollections } from "./CollectionContext";
 import { OverflowItem } from "../menu/OverflowMenu";
 import { Link } from "../routing/Link";
-import { CSSProperties } from "styled-components";
 import { Show } from "../util/Show";
 import { PopupMenuLayer } from "../style/Layers";
 import { Overlay } from "../util/Overlay";
 import { isRouteSelected } from "../routing/Router";
+import { CSSProperties } from "react";
 
 export interface TreeItemProps {
   items?: OverflowItem[];
