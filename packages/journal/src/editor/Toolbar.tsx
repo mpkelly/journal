@@ -30,6 +30,7 @@ import {
   SpellCheckButton
 } from "@mpkelly/react-editor-kit";
 import { Breadcrumb } from "./Breadcrumb";
+import { ExtendedColors } from "../color-picker/ColorPicker";
 
 export interface ToolbarProps extends FlexProps {
   collectionId: number;
@@ -105,6 +106,7 @@ export const Toolbar = (props: ToolbarProps) => {
             <ColorPickerButton
               className="material-icons-outlined"
               ligature="text_format"
+              colors={Colors}
             />
             <Divider />
             <TextAlignLeftButton
@@ -172,3 +174,13 @@ export const Toolbar = (props: ToolbarProps) => {
     </Row>
   );
 };
+
+const splitColors = (array: string[], size: number) => {
+  const results: string[][] = [];
+  while (array.length) {
+    results.push(array.splice(0, size));
+  }
+  return results;
+};
+
+const Colors = splitColors(ExtendedColors, 5);

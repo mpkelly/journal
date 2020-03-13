@@ -18,7 +18,8 @@ export const ColorPicker = (props: ColorPickerProps) => {
         width={120}
         boxShadow={0}
         backgroundColor="background"
-        {...rest}>
+        {...rest}
+      >
         {Colors.map(color => (
           <Row
             flexShrink={0}
@@ -39,16 +40,27 @@ export const ColorPicker = (props: ColorPickerProps) => {
 };
 
 export const Colors = [
-  "#F10E23",
-  "#F2E437",
-  "#F4AD2C",
-  "#F07426",
-  "#547D8E",
-  "#179DA4",
-  "#FEC300",
-  "#3EC380",
-  "pink",
-  "violet",
-  "amber",
-  "chocolate"
+  "#f6e58d",
+  "#ffbe76",
+  "#ff7979",
+  "#badc58",
+  "#dff9fb",
+  "#f9ca24",
+  "#eb4d4b",
+  "#f0932b",
+  "#6ab04c",
+  "#c7ecee",
+  "#7ed6df",
+  "#e056fd",
+  "#686de0",
+  "#95afc0",
+  "#22a6b3",
+  "#be2edd"
 ];
+
+export const ExtendedColors = Colors.concat([
+  "#4834d4",
+  "#535c68",
+  "#4C5ADE",
+  "#130f40"
+]);
