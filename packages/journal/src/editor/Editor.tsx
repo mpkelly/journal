@@ -2,6 +2,7 @@ import React from "react";
 import { Editor as TextEditor, Resizable } from "@mpkelly/react-editor-kit";
 import { useSettings } from "../settings/SettingsContext";
 import { Node } from "slate";
+import { Row } from "udx-react";
 
 export interface EditorProps {
   readOnly?: boolean;
@@ -13,7 +14,7 @@ export const Editor = (props: EditorProps) => {
   const placeholder = props.readOnly ? undefined : "Write something...";
   const { settings, updateSettings } = useSettings();
   return (
-    <div className="printable">
+    <Row className="printable" overflow="hidden">
       <Resizable
         initialWidth={settings.contentWidth}
         onChange={contentWidth => updateSettings({ contentWidth })}
@@ -26,6 +27,6 @@ export const Editor = (props: EditorProps) => {
           {...props}
         />
       </Resizable>
-    </div>
+    </Row>
   );
 };

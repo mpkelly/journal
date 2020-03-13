@@ -28,6 +28,10 @@ body,
   border-radius: 3px;
 }
 
+.rek-resizable {
+  overflow:hidden;
+}
+
 @media print {
   body * {
     visibility: hidden;
