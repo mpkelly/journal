@@ -11,8 +11,10 @@ export const useEditor = (props: EditorPageProps) => {
   const db = useDatabase();
   const [saved, setSaved] = useState(true);
   const [item, setItem] = useState<Item | undefined>(undefined);
-  const [value, setValue] = useState<any>(defaultValue());
+  const [value, setValue] = useState<Node[]>(defaultValue());
+  const lastSave = useRef<Node[]>([]);
   const loaded = useRef(false);
+  const saveCount = useRef(1);
 
   const collectionId = params.collectionId;
   const itemId = params.itemId;
@@ -60,11 +62,20 @@ export const useEditor = (props: EditorPageProps) => {
   const handleSave = (collectionId: number, itemId: string, value: any) => {
     db.updateItemData(collectionId, itemId, value).then(() => {
       setSaved(true);
+      saveCount.current += 1;
+      if (saveCount.current % 3) {
+        //Save every 3rd value to use as a backup.
+        lastSave.current = value;
+      }
     });
   };
 
   const instantSave = () => {
     handleSave(Number(params.collectionId), params.itemId, value);
+  };
+
+  const handleRestorePreviousValue = () => {
+    handleSave(Number(params.collectionId), params.itemId, lastSave.current);
   };
 
   const debouncedSave = debounce(handleSave, 3000);
@@ -78,7 +89,8 @@ export const useEditor = (props: EditorPageProps) => {
     instantSave,
     handleToggleLocked,
     handleItemChange,
-    readOnly
+    readOnly,
+    handleRestorePreviousValue
   };
 };
 

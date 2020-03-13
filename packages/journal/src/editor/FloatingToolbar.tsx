@@ -13,7 +13,7 @@ import {
 
 export const FloatingToolbar = () => {
   return (
-    <SelectionToolbar>
+    <SelectionToolbar delay={200}>
       <BoldButton className="material-icons-outlined" ligature="format_bold" />
       <ItalicButton
         className="material-icons-outlined"

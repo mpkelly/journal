@@ -44,6 +44,7 @@ import {
   TextAlignPlugin
 } from "@mpkelly/react-editor-kit";
 import { FloatingToolbar } from "./FloatingToolbar";
+import { ErrorBoundary } from "../errors/ErrorHandler";
 
 export interface EditorPageProps extends RouteComponentProps<RouteParams> {}
 
@@ -62,7 +63,8 @@ export const EditorPage = (props: EditorPageProps) => {
     instantSave,
     handleToggleLocked,
     handleItemChange,
-    readOnly
+    readOnly,
+    handleRestorePreviousValue
   } = useEditor(props);
   return (
     <Page>
@@ -93,11 +95,13 @@ export const EditorPage = (props: EditorPageProps) => {
               <Show when={!readOnly}>
                 <FloatingToolbar />
               </Show>
-              <Editor
-                value={value}
-                onChange={handleItemChange}
-                readOnly={readOnly}
-              />
+              <ErrorBoundary handleGoBack={handleRestorePreviousValue}>
+                <Editor
+                  value={value}
+                  onChange={handleItemChange}
+                  readOnly={readOnly}
+                />
+              </ErrorBoundary>
             </Article>
           </EditorKit>
         </Show>

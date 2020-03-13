@@ -45,6 +45,7 @@ export const StyleSystem: System = {
     brand: "#2D2A4A",
     secondary: "#908f8f",
     danger: "orange",
+    error: "orangered",
     muted: "#C7C7C7",
     selected: "rgba(0,0,0,.1)",
     background: "#F3F3F3",
@@ -75,6 +76,14 @@ export const StyleSystem: System = {
     large: {
       extends: ["text.paragraph"],
       fontSize: 20
+    },
+    xlarge: {
+      extends: ["text.paragraph"],
+      fontSize: 24
+    },
+    xxlarge: {
+      extends: ["text.paragraph"],
+      fontSize: 48
     },
     fieldLabel: {
       extends: ["text.paragraph"],
@@ -114,6 +123,10 @@ export const StyleSystem: System = {
     small: {
       extends: ["icons.regular"],
       fontSize: "16px !important"
+    },
+    xlarge: {
+      extends: ["icons.regular"],
+      fontSize: "64px !important"
     },
     xxlarge: {
       extends: ["icons.regular"],
@@ -650,7 +663,10 @@ export const StyleSystem: System = {
     siam: "Siam",
     images: "Images",
     video: "Videos",
-    text: "Text"
+    text: "Text",
+    somethingWentWrong: "Something went wrong",
+    unexpectedError:
+      "We weren't able to complete your last request. If this problem persists then please report this issue."
   },
   iconSets: [MaterialIconsOutline, MaterialIconsRegular, Unicons]
 };
