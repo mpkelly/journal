@@ -466,6 +466,10 @@ body,
     top: 0;
   }
 
+  [data-slate-editor=true] {
+    padding:16px;
+  }
+
   @page {
     size: auto;
     margin: .5cm;

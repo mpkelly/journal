@@ -13,6 +13,8 @@ chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
 });
 
 chrome.browserAction.onClicked.addListener(function() {
+  chrome.browserAction.setBadgeText({ text: "" });
+  localStorage.setItem("$journal_unread_count", "0");
   chrome.tabs.create({ url: chrome.runtime.getURL("index.html") });
 });
 
@@ -46,6 +48,10 @@ async function addMediaItem(info, tab) {
     content,
     tags
   });
+  let current = localStorage.getItem("$journal_unread_count") || "0";
+  const next = Number(current) + 1;
+  chrome.browserAction.setBadgeBackgroundColor({ color: [255, 140, 0, 255] });
+  chrome.browserAction.setBadgeText({ text: String(next) });
 }
 
 function getName(info) {
