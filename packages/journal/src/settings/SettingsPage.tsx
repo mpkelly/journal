@@ -27,9 +27,7 @@ export const SettingsPage = memo(() => {
               label="wikiName"
               value={settings.wikiName}
               onChange={(wikiName: string) => updateSettings({ wikiName })}
-              description={
-                "The name of your wiki as displayed in the top-left of the page"
-              }
+              description={"wikiNameDescription"}
             />
             <input
               type="file"

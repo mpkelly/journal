@@ -6,12 +6,12 @@ import React, {
   useRef,
   ChangeEvent
 } from "react";
-import { WikiSettings } from "./WikiSettings";
+import { JournalSettings } from "./JournalSettings";
 import { useDatabase } from "../database/Databases";
 import { downloadBlob } from "../util/Urls";
 
 export interface SettingsContextValue {
-  settings: WikiSettings;
+  settings: JournalSettings;
   updateSettings(change: SettingsChange): Promise<any>;
   handleExport(): void;
   handleImport(): void;
@@ -19,8 +19,8 @@ export interface SettingsContextValue {
   handleImportFile(event: ChangeEvent<HTMLInputElement>): void;
 }
 
-type keys = keyof WikiSettings;
-type SettingsChange = { [key in keys]?: WikiSettings[key] };
+type keys = keyof JournalSettings;
+type SettingsChange = { [key in keys]?: JournalSettings[key] };
 
 const Context = createContext<SettingsContextValue>({} as SettingsContextValue);
 
@@ -33,8 +33,8 @@ export const useSettings = () => {
 };
 
 export const SettingsProvider = (props: SettingsProviderProps) => {
-  const [settings, setSettings] = useState<WikiSettings>(
-    (null as unknown) as WikiSettings
+  const [settings, setSettings] = useState<JournalSettings>(
+    (null as unknown) as JournalSettings
   );
   const importRef = useRef<HTMLInputElement | null>(null);
   const db = useDatabase();
@@ -48,7 +48,7 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
   const updateSettings = async (change: SettingsChange) => {
     const next = { ...settings, ...change };
     setSettings(next);
-    await db.updateSettings(settings);
+    await db.updateSettings(next);
   };
 
   const handleExport = async () => {

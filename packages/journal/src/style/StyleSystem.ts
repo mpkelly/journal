@@ -666,7 +666,9 @@ export const StyleSystem: System = {
     text: "Text",
     somethingWentWrong: "Something went wrong",
     unexpectedError:
-      "We weren't able to complete your last request. If this problem persists then please report this issue."
+      "We weren't able to complete your last request. If this problem persists then please report this issue.",
+    wikiNameDescription:
+      "The name of your wiki as displayed in the top-left of the page"
   },
   iconSets: [MaterialIconsOutline, MaterialIconsRegular, Unicons]
 };

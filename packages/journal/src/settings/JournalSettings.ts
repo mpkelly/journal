@@ -1,4 +1,4 @@
-export interface WikiSettings {
+export interface JournalSettings {
   id: 1;
   wikiName: string;
   contentWidth: string | number;
@@ -7,7 +7,7 @@ export interface WikiSettings {
   borderRadius: number;
 }
 
-export const DefaultSettings: WikiSettings = {
+export const DefaultSettings: JournalSettings = {
   id: 1,
   wikiName: "Journal",
   contentWidth: 700,

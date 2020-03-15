@@ -144,5 +144,6 @@ const plugins: Plugin[] = [
   EditorToolbarPlugin,
   EditorStylePlugin,
   ImagePlugin,
-  TextAlignPlugin
+  TextAlignPlugin,
+  DividerPlugin
 ];

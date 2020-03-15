@@ -24,6 +24,7 @@ export const Editor = (props: EditorProps) => {
             height: "100%",
             overflow: "auto"
           }}
+          placeholder={placeholder}
           {...props}
         />
       </Resizable>

@@ -4,12 +4,12 @@ import { Collection } from "../collections/Collection";
 import { dispatchEvent } from "../util/Events";
 import * as shortid from "shortid";
 import db from "./Dexie";
-import { WikiSettings, DefaultSettings } from "../settings/WikiSettings";
+import { JournalSettings, DefaultSettings } from "../settings/JournalSettings";
 import { Tag } from "../tags/Tag";
 import { importFromJsonFile, exportToJson } from "./BackupDB";
 
 const collections = db.table<Collection, any>("collections");
-const settings = db.table<WikiSettings, any>("settings");
+const settings = db.table<JournalSettings, any>("settings");
 const tags = db.table<Tag, any>("tags");
 
 const ensureSettings = async () => {
@@ -129,11 +129,11 @@ export const IndexDBDatabase: Database = {
   deleteCollection: async (collectionId: any) => {
     return collections.delete(collectionId);
   },
-  loadSettings: async (): Promise<WikiSettings> => {
+  loadSettings: async (): Promise<JournalSettings> => {
     const records = await settings.toArray();
     return records[0];
   },
-  updateSettings: async (_settings: WikiSettings) => {
+  updateSettings: async (_settings: JournalSettings) => {
     return settings.update(_settings.id, _settings);
   },
   loadTags: (): Promise<Tag[]> => {

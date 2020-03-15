@@ -1,3 +1,3 @@
-#Journal Wiki
+# Journal Wiki
 
 More to follow.

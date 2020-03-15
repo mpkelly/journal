@@ -1,6 +1,6 @@
 import { Collection } from "../collections/Collection";
 import { Item } from "../content/Item";
-import { WikiSettings } from "../settings/WikiSettings";
+import { JournalSettings } from "../settings/JournalSettings";
 import { Tag } from "../tags/Tag";
 
 export interface Database {
@@ -15,8 +15,8 @@ export interface Database {
   updateItems(collectonId: any, items: Item[]): Promise<void>;
   deleteCollection(collectionId: any): Promise<void>;
   addCollection(): Promise<void>;
-  loadSettings(): Promise<WikiSettings>;
-  updateSettings(settings: WikiSettings): Promise<number>;
+  loadSettings(): Promise<JournalSettings>;
+  updateSettings(settings: JournalSettings): Promise<number>;
   loadTags(): Promise<Tag[]>;
   addTag(): Promise<void>;
   deleteTag(tag: Tag): Promise<void>;
