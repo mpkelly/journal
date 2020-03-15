@@ -22,11 +22,5 @@
       "38": "icons/icon.png"
     }
   },
-  "content_security_policy": "script-src 'self' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://fonts.googleapis.com https://ssl.google-analytics.com/ga.js; object-src 'self'",
-  "content_scripts": [
-    {
-      "matches": ["https://www.google.com/*"],
-      "js": ["src/inject/inject.js", "./index.js"]
-    }
-  ]
+  "content_security_policy": "script-src 'self' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://ssl.google-analytics.com/ga.js; object-src 'self'"
 }
