@@ -1,8 +1,8 @@
 import React from "react";
-import { Editor as TextEditor, Resizable } from "@mpkelly/react-editor-kit";
-import { useSettings } from "../settings/SettingsContext";
 import { Node } from "slate";
 import { Row } from "udx-react";
+import { Editor as TextEditor, Resizable } from "@mpkelly/react-editor-kit";
+import { useSettings } from "../settings/SettingsContext";
 
 export interface EditorProps {
   readOnly?: boolean;
@@ -11,7 +11,9 @@ export interface EditorProps {
 }
 
 export const Editor = (props: EditorProps) => {
-  const placeholder = props.readOnly ? undefined : "Write something...";
+  const placeholder = props.readOnly
+    ? undefined
+    : "Enter text, or paste or drop and image. Markdown is also supported.";
   const { settings, updateSettings } = useSettings();
   return (
     <Row className="printable" overflow="hidden">

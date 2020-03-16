@@ -2,7 +2,7 @@
   "name": "Journal",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "Journal - A wiki and media orgnaizer that supports grabbing images, video and text directly from web pages via the context menu.",
+  "description": "Journal - A wiki and media orgnaizer that supports saving images, video and text directly from web pages via the context menu.",
   "homepage_url": "https://github.com/mpkelly/journal",
   "icons": {
     "16": "icons/icon.png",
@@ -10,11 +10,11 @@
     "48": "icons/icon.png",
     "128": "icons/icon.png"
   },
+  "permissions": ["contextMenus", "activeTab"],
   "background": {
     "scripts": ["media-store.js", "background.js"],
     "persistent": false
   },
-  "permissions": ["contextMenus", "activeTab"],
   "browser_action": {
     "title": "Open Journal",
     "default_icon": {

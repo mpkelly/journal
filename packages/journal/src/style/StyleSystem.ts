@@ -221,6 +221,11 @@ export const StyleSystem: System = {
         backgroundColor: "primary",
         color: "white"
       },
+      danger: {
+        extends: ["components.labels.base"],
+        backgroundColor: "danger",
+        color: "white"
+      },
       tag: {
         extends: ["components.labels.base"],
         backgroundColor: "muted.L50",

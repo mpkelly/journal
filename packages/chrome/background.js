@@ -1,10 +1,16 @@
-// if you checked "fancy-settings" in extensionizr.com, uncomment this lines
+var _gaq = _gaq || [];
+_gaq.push(["_setAccount", "UA-160652049-1"]);
+_gaq.push(["_trackPageview"]);
 
-// var settings = new Store("settings", {
-//     "sample_setting": "This is how you use Store.js to remember values"
-// });
+(function() {
+  var ga = document.createElement("script");
+  ga.type = "text/javascript";
+  ga.async = true;
+  ga.src = "https://ssl.google-analytics.com/ga.js";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(ga, s);
+})();
 
-//example of using a message handler from the inject scripts
 chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
   if (chrome.pageAction) {
     chrome.pageAction.show(sender.tab.id);
@@ -18,7 +24,7 @@ chrome.browserAction.onClicked.addListener(function() {
   chrome.tabs.create({ url: chrome.runtime.getURL("index.html") });
 });
 
-const contextId = "siam-add-item";
+const contextId = "journal-add-item";
 
 chrome.contextMenus.create({
   id: contextId,

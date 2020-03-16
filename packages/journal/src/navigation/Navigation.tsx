@@ -1,5 +1,14 @@
 import React from "react";
-import { Column, Text, FlexProps, Row, Nav, Section } from "udx-react";
+import {
+  Column,
+  Text,
+  FlexProps,
+  Row,
+  Nav,
+  Section,
+  Badge,
+  Label
+} from "udx-react";
 import { Logo } from "../logo/Logo";
 import { Collections } from "../collections/Collections";
 import { CollectionsProvider } from "../collections/CollectionContext";
@@ -24,6 +33,9 @@ export const Navigation = (props: NavigationProps) => {
         <Text ml="lg" variant="large" color="nav_primaryText">
           {settings.wikiName}
         </Text>
+        <Label variant="danger" ml="auto">
+          BETA
+        </Label>
       </Section>
       <Column flex={1} height={0}>
         <Section flexDirection={"column"} flexGrow={1} overflowY="hidden">

@@ -26,7 +26,7 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "package": "zip -r releases/journal.0.0.1.zip manifest.json index.js popup.js media-store.js index.html background.js background.html lib _locales icons fonts css"
+    "package": "zip -r releases/journal.0.0.1.zip manifest.json index.js media-store.js index.html background.js background.html lib _locales icons fonts css"
   },
   "bugs": {
     "url": "https://github.com/mpkelly/siam-wiki/issues"

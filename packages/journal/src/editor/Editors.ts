@@ -71,7 +71,13 @@ export const useEditor = (props: EditorPageProps) => {
   };
 
   const instantSave = () => {
-    handleSave(Number(params.collectionId), params.itemId, value);
+    try {
+      handleSave(Number(params.collectionId), params.itemId, value);
+    } catch (Error) {
+      //TODO better error handling with some sort of UI
+      console.error("Error saving value", value);
+      handleRestorePreviousValue();
+    }
   };
 
   const handleRestorePreviousValue = () => {
