@@ -2,7 +2,7 @@
   "name": "Journal",
   "version": "0.0.1",
   "manifest_version": 2,
-  "description": "Journal - A wiki and media orgnaizer that supports saving images, video and text directly from web pages via the context menu.",
+  "description": "Journal - A wiki and media orgnanizer that supports saving images, video and text directly from web pages via the context menu.",
   "homepage_url": "https://github.com/mpkelly/journal",
   "icons": {
     "16": "icons/icon.png",
@@ -27,7 +27,7 @@
     "fonts/open-sans-v17-latin-700.woff2",
     "fonts/open-sans-v17-latin-regular.woff",
     "fonts/open-sans-v17-latin-regular.woff2",
-    "css/syles.css",
+    "css/styles.css",
     "index.html"
   ],
   "browser_action": {

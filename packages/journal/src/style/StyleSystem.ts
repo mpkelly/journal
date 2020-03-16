@@ -183,6 +183,10 @@ export const StyleSystem: System = {
         focusBackgroundColor: "muted.D50",
         activeBackgroundColor: "muted.L10",
         color: "primaryText"
+      },
+      "muted.small": {
+        extends: ["components.buttons.muted"],
+        height: 32
       }
     },
     switches: {

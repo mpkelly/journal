@@ -7,7 +7,12 @@ export interface MediaDatabase {
   add(media: Media): Promise<void>;
   update(media: Media): Promise<number>;
   delete(id: number): Promise<void>;
-  loadMedia(type?: MediaType, tagIds?: number[]): Promise<Media[]>;
+  loadMedia(
+    type: MediaType,
+    tagIdss: number[],
+    pageNumber: number,
+    pageSize: number
+  ): Promise<{ total: number; items: Media[] }>;
 }
 
 export const useMediaDatabase = () => {
@@ -15,12 +20,15 @@ export const useMediaDatabase = () => {
 };
 
 export const IndexDBMediaDatabase: MediaDatabase = {
-  loadMedia: (type?: MediaType, tagIds?: number[]) => {
+  loadMedia: async (
+    type: MediaType,
+    tagIds: number[],
+    pageNumber: number,
+    pageSize: number
+  ) => {
     let result: Dexie.Table<Media, any> | Dexie.Collection<Media, any> = media;
-    if (type) {
-      result = media.where("type").equals(type as string);
-    }
-    if (tagIds) {
+    result = media.where("type").equals(type as string);
+    if (tagIds.length) {
       result.filter(media => {
         for (let tag of media.tags) {
           if (tagIds.includes(tag)) {
@@ -30,7 +38,12 @@ export const IndexDBMediaDatabase: MediaDatabase = {
         return false;
       });
     }
-    return result.toArray();
+    const total = await result.count();
+    const items = await result
+      .offset(pageNumber * pageSize)
+      .limit(pageSize)
+      .toArray();
+    return { total, items };
   },
   add: async (_media: Media) => {
     _media.time = _media.time || Date.now();

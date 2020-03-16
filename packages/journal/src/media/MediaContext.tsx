@@ -6,6 +6,7 @@ import { ImagesIcon, VideosIcon, TextIcon } from "../icons/IconNames";
 import { useTags } from "../tags/TagContext";
 import { FileUpload } from "../upload/Upload";
 import { fileToBase64 } from "../util/Files";
+import { useCallback } from "react";
 
 export interface MediaContextValue {
   items: Media[][];
@@ -19,6 +20,13 @@ export interface MediaContextValue {
   handleUpdate(media: Media): void;
   handleUpload(upload: FileUpload): void;
   refresh(): void;
+  handlePreviousPage(): void;
+  handleNextPage(): void;
+  hasPrevious: boolean;
+  hasNext: boolean;
+  totalPages: number;
+  total: number;
+  currentPage: number;
 }
 const Context = createContext<MediaContextValue>({} as MediaContextValue);
 
@@ -30,6 +38,8 @@ export interface MediaProviderProps extends MediaPageProps {
   children: any;
 }
 
+const pageSize = 24;
+
 export const MediaProvider = (props: MediaProviderProps) => {
   const db = useMediaDatabase();
   const { selected } = useTags();
@@ -37,6 +47,8 @@ export const MediaProvider = (props: MediaProviderProps) => {
   const [type, setType] = useState<MediaType>(Tabs[0].type);
   const [media, setMedia] = useState<Media[]>([]);
   const [options, setOptions] = useState(initialOptions());
+  const [page, setPage] = useState(0);
+  const [total, setTotal] = useState(0);
 
   useEffect(() => {
     const initial = Tabs.find(tab => pathname.endsWith(tab.labelKey));
@@ -47,12 +59,28 @@ export const MediaProvider = (props: MediaProviderProps) => {
 
   useEffect(() => {
     loadMedia();
-  }, [type, selected]);
+  }, [type, selected, page]);
 
   const loadMedia = () => {
-    const tags = selected.length ? selected : undefined;
-    db.loadMedia(type, tags).then(setMedia);
+    const tags = selected.length ? selected : [];
+    db.loadMedia(type, tags, page, pageSize).then(result => {
+      setMedia(result.items);
+      setTotal(result.total);
+    });
   };
+  const totalPages = Math.ceil(total / pageSize);
+
+  const handlePreviousPage = () => {
+    setPage(page => page - 1);
+  };
+
+  const handleNextPage = () => {
+    setPage(page => page + 1);
+  };
+
+  const hasPrevious = page > 0;
+
+  const hasNext = page < totalPages - 1;
 
   const sortItems: MenuItem[] = sortChoices.map((choice, index) => {
     choice.onClick = () => setOptions(options => ({ ...options, sort: index }));
@@ -112,7 +140,14 @@ export const MediaProvider = (props: MediaProviderProps) => {
     handleUpdate,
     refresh: loadMedia,
     type,
-    handleUpload
+    handleUpload,
+    handlePreviousPage,
+    handleNextPage,
+    hasPrevious,
+    hasNext,
+    totalPages,
+    total,
+    currentPage: page + 1
   };
 
   return <Context.Provider value={context}>{props.children}</Context.Provider>;
