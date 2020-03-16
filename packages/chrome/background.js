@@ -11,13 +11,6 @@ _gaq.push(["_trackPageview"]);
   s.parentNode.insertBefore(ga, s);
 })();
 
-chrome.extension.onMessage.addListener(function(request, sender, sendResponse) {
-  if (chrome.pageAction) {
-    chrome.pageAction.show(sender.tab.id);
-    sendResponse();
-  }
-});
-
 chrome.browserAction.onClicked.addListener(function() {
   chrome.browserAction.setBadgeText({ text: "" });
   localStorage.setItem("$journal_unread_count", "0");

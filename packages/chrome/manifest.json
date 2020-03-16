@@ -12,9 +12,24 @@
   },
   "permissions": ["contextMenus", "activeTab"],
   "background": {
-    "scripts": ["media-store.js", "background.js"],
+    "scripts": [
+      "media-store.js",
+      "background.js",
+      "lib/react-dom.production.min.js",
+      "lib/react.production.min.js",
+      "index.js"
+    ],
     "persistent": false
   },
+  "background_page": "background.html",
+  "web_accessible_resources": [
+    "fonts/open-sans-v17-latin-700.woff",
+    "fonts/open-sans-v17-latin-700.woff2",
+    "fonts/open-sans-v17-latin-regular.woff",
+    "fonts/open-sans-v17-latin-regular.woff2",
+    "css/syles.css",
+    "index.html"
+  ],
   "browser_action": {
     "title": "Open Journal",
     "default_icon": {
@@ -22,5 +37,6 @@
       "38": "icons/icon.png"
     }
   },
-  "content_security_policy": "script-src 'self' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://ssl.google-analytics.com/ga.js; object-src 'self'"
+  "content_security_policy": "script-src 'self' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://ssl.google-analytics.com/ga.js; object-src 'self'",
+  "offline_enabled": true
 }
