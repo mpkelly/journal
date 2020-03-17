@@ -49,6 +49,7 @@ async function addMediaItem(info, tab) {
   });
   let current = localStorage.getItem("$journal_unread_count") || "0";
   const next = Number(current) + 1;
+  localStorage.setItem("$journal_unread_count", String(next));
   chrome.browserAction.setBadgeBackgroundColor({ color: [255, 140, 0, 255] });
   chrome.browserAction.setBadgeText({ text: String(next) });
 }

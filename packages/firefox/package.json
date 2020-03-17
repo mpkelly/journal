@@ -1,9 +1,15 @@
 {
-  "name": "chrome",
+  "name": "firefox",
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "addon@example.com",
+      "strict_min_version": "42.0"
+    }
+  },
   "version": "0.0.1",
   "description": "Journal Wiki as a Chrome extension",
   "keywords": [
-    "chrome",
+    "firefox",
     "extension",
     "Journal",
     "wiki",
@@ -26,9 +32,13 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "package": "zip -r releases/journal.0.0.1.zip extension/*"
+    "package": "web-ext build --source-dir ./addon",
+    "run": "web-ext run --source-dir ./addon"
   },
   "bugs": {
     "url": "https://github.com/mpkelly/siam-wiki/issues"
+  },
+  "devDependencies": {
+    "web-ext": "^4.1.0"
   }
 }

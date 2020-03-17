@@ -1,0 +1,48 @@
+{
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "mpkelly@journal.com",
+      "strict_min_version": "42.0"
+    }
+  },
+  "name": "Journal",
+  "version": "0.0.1",
+  "manifest_version": 2,
+  "description": "Journal - A wiki and media orgnanizer that supports saving images, video and text directly from web pages via the context menu.",
+  "homepage_url": "https://github.com/mpkelly/journal",
+  "icons": {
+    "16": "icons/icon.png",
+    "19": "icons/icon.png",
+    "48": "icons/icon.png",
+    "128": "icons/icon.png"
+  },
+  "permissions": ["contextMenus", "http://*/", "https://*/"],
+  "background": {
+    "scripts": [
+      "media-store.js",
+      "background.js",
+      "lib/react-dom.production.min.js",
+      "lib/react.production.min.js",
+      "index.js"
+    ]
+  },
+
+  "web_accessible_resources": [
+    "fonts/open-sans-v17-latin-700.woff",
+    "fonts/open-sans-v17-latin-700.woff2",
+    "fonts/open-sans-v17-latin-regular.woff",
+    "fonts/open-sans-v17-latin-regular.woff2",
+    "css/styles.css",
+    "background.html",
+    "index.html"
+  ],
+  "browser_action": {
+    "default_title": "Open Journal",
+    "default_icon": {
+      "19": "icons/icon.png",
+      "38": "icons/icon.png"
+    }
+  },
+  "content_security_policy": "script-src 'self' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://ssl.google-analytics.com/ga.js; object-src 'self'",
+  "offline_enabled": true
+}

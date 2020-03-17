@@ -32,40 +32,5 @@ body,
   overflow:hidden;
 }
 
-@media print {
-  body * {
-    visibility: hidden;
-  }
 
-  [data-slate-editor=true],
-  [data-slate-editor=true] *,
-  .printable,
-  .printable * {
-    visibility: visible;
-    width: auto;
-    height: auto;
-    overflow: visible !important;
-    -webkit-print-color-adjust: exact;
-    print-color-adjust: exact;      
-    color: #000 !important;
-  }
-
-  [data-slate-editor=true],
-  .printable {
-    position: absolute;
-    left: 0;
-    top: 0;
-  }
-
-  [data-slate-editor=true] {
-    padding:16px;
-  }
-
-  @page {
-    size: auto;
-    margin: .5cm;
-
-  }
-
-}
 `;

@@ -10,7 +10,7 @@
     "48": "icons/icon.png",
     "128": "icons/icon.png"
   },
-  "permissions": ["contextMenus", "activeTab"],
+  "permissions": ["contextMenus", "http://*/", "https://*/"],
   "background": {
     "scripts": [
       "media-store.js",
@@ -21,13 +21,13 @@
     ],
     "persistent": false
   },
-  "background_page": "background.html",
   "web_accessible_resources": [
     "fonts/open-sans-v17-latin-700.woff",
     "fonts/open-sans-v17-latin-700.woff2",
     "fonts/open-sans-v17-latin-regular.woff",
     "fonts/open-sans-v17-latin-regular.woff2",
     "css/styles.css",
+    "background.html",
     "index.html"
   ],
   "browser_action": {
