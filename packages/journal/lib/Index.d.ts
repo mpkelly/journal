@@ -1,1 +1,1 @@
-declare module "siam-wiki";
+export * from "./App";

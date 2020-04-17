@@ -75,9 +75,9 @@
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
     "watch": "webpack -w --mode=development",
-    "gen-typings": "tsc -d --emitDeclarationOnly --allowJs false --jsx react src/Index.tsx",
+    "typings": "tsc -d --emitDeclarationOnly --allowJs false --esModuleInterop true --skipLibCheck true --jsx react --outDir ./lib src/Index.tsx",
     "media-dist": "webpack --mode=production --config ./mediastore.webpack.config.js && cp ./lib/media-store.js ../chrome/extension/media-store.js && cp ./lib/media-store.js ../firefox/addon/media-store.js",
-    "dist": "webpack --mode=production && cp ./lib/index.js ../chrome/extension/index.js && cp ./lib/index.js ../firefox/addon/index.js",
+    "dist": "webpack --mode=production && cp ./lib/index.js ../chrome/extension/index.js && cp ./lib/index.js ../firefox/addon/index.js && npm run typings",
     "publish": "npm run dist && npm run media-dist",
     "udx": "npm install udx-core@latest udx-react@latest udx-icons@latest"
   },

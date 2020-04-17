@@ -3,7 +3,6 @@ import { createContext, useContext, useState } from "react";
 import { Tag } from "./Tag";
 import { Media, useMediaDatabase } from "../media/MediaDatabase";
 import { useDatabase } from "../database/Databases";
-import { useMedia } from "../media/MediaContext";
 
 export interface TagContextValue {
   tags: Tag[];
@@ -80,7 +79,7 @@ export const TagProvider = (props: TaggerProviderProps) => {
     updateTag,
     toggleTag,
     selected,
-    toggleSelected
+    toggleSelected,
   };
 
   return <Context.Provider value={context}>{props.children}</Context.Provider>;

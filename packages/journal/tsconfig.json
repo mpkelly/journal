@@ -1,6 +1,7 @@
 {
   "outDir": "./lib",
   "extends": "../../tsconfig.json",
+
   "include": ["./src/**/*", "tests/**/*"],
   "exclude": ["node_modules"]
 }

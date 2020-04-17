@@ -20,7 +20,7 @@ export function exportToJson(db: IDBDatabase): Promise<string> {
 
       transaction.addEventListener("error", reject);
 
-      for (const storeName of db.objectStoreNames) {
+      for (const storeName of Array.from(db.objectStoreNames)) {
         const allObjects: any = [];
         transaction
           .objectStore(storeName)
@@ -84,7 +84,7 @@ export function importFromJson(db: IDBDatabase, json: string): Promise<void> {
     transaction.addEventListener("error", reject);
 
     var importObject = JSON.parse(json);
-    for (const storeName of db.objectStoreNames) {
+    for (const storeName of Array.from(db.objectStoreNames)) {
       let count = 0;
       for (const toAdd of importObject[storeName]) {
         const request = transaction.objectStore(storeName).add(toAdd);
@@ -116,7 +116,7 @@ export function clearDatabase(db: IDBDatabase) {
     transaction.addEventListener("error", reject);
 
     let count = 0;
-    for (const storeName of db.objectStoreNames) {
+    for (const storeName of Array.from(db.objectStoreNames)) {
       transaction
         .objectStore(storeName)
         .clear()
