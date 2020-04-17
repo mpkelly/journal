@@ -1,0 +1,54 @@
+/* open-sans-regular - latin */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 400;
+  src: local("Open Sans Regular"), local("OpenSans-Regular"),
+    url("../fonts/open-sans-v17-latin-regular.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("../fonts/open-sans-v17-latin-regular.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+/* open-sans-700 - latin */
+@font-face {
+  font-family: "Open Sans";
+  font-style: normal;
+  font-weight: 700;
+  src: local("Open Sans Bold"), local("OpenSans-Bold"),
+    url("../fonts/open-sans-v17-latin-700.woff2") format("woff2"),
+    /* Chrome 26+, Opera 23+, Firefox 39+ */
+      url("../fonts/open-sans-v17-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
+}
+
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  [data-slate-editor="true"],
+  [data-slate-editor="true"] *,
+  .printable,
+  .printable * {
+    visibility: visible;
+    width: auto;
+    height: auto;
+    overflow: visible !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+    color: #000 !important;
+  }
+
+  [data-slate-editor="true"],
+  .printable {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  [data-slate-editor="true"] {
+    padding: 16px;
+  }
+
+  @page {
+    size: auto;
+    margin: 0.5cm;
+  }
+}

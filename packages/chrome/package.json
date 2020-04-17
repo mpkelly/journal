@@ -26,7 +26,7 @@
   },
   "scripts": {
     "test": "echo \"Error: run tests from root\" && exit 1",
-    "package": "zip -r releases/journal.0.0.1.zip extension/*"
+    "package": "zip -r releases/journal.0.0.2.zip extension/*"
   },
   "bugs": {
     "url": "https://github.com/mpkelly/siam-wiki/issues"
