@@ -42,6 +42,7 @@
     "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "*",
     "core-js": "^2.6.10",
+    "cypress": "^4.4.0",
     "dexie": "^3.0.0-rc.5",
     "dexie-export-import": "^1.0.0-rc.1",
     "dts-bundle": "^0.7.3",

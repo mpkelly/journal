@@ -28,11 +28,16 @@ export const Collections = () => {
           name={AddIcon}
           size="small"
           onClick={handleAdd}
+          data-id="add-collection"
           buttonProps={{ color: "nav_primaryText" }}
         />
       </Row>
-      <Column overflowY="auto" flexGrow={1} ref={ref => (scroll.current = ref)}>
-        {collections.map(collection => (
+      <Column
+        overflowY="auto"
+        flexGrow={1}
+        ref={(ref) => (scroll.current = ref)}
+      >
+        {collections.map((collection) => (
           <CollectionTree
             items={collection.content}
             id={collection.id}
