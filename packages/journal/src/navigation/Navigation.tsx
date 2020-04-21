@@ -7,7 +7,7 @@ import {
   Nav,
   Section,
   Badge,
-  Label
+  Label,
 } from "udx-react";
 import { Logo } from "../logo/Logo";
 import { Collections } from "../collections/Collections";
@@ -50,6 +50,7 @@ export const Navigation = (props: NavigationProps) => {
             color="nav_secondaryText"
             mb="lg"
             px="lg"
+            data-id="settings"
           />
           <MediaNavItems />
         </Section>
@@ -60,6 +61,7 @@ export const Navigation = (props: NavigationProps) => {
             labelKey="settings"
             color="nav_secondaryText"
             mb="md"
+            data-id="settings"
           />
           <SettingsNav />
         </Section>

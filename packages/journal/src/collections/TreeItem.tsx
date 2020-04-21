@@ -20,10 +20,21 @@ export interface TreeItemProps {
   onClick: (event: any) => any;
   icon: string;
   color?: any;
+  type?: string;
 }
 
 export const TreeItem = memo((props: TreeItemProps) => {
-  const { style, name, collectionId, id, icon, items, onClick, color } = props;
+  const {
+    style,
+    name,
+    collectionId,
+    id,
+    icon,
+    items,
+    onClick,
+    color,
+    type,
+  } = props;
   const [showContextMenu, setShowContextMenu] = useState(false);
   const path = `/${collectionId}/${id}`;
   const isSelected = isRouteSelected(path);
@@ -52,6 +63,7 @@ export const TreeItem = memo((props: TreeItemProps) => {
             isSelected && onClick(e);
           }}
           onContextMenu={toggleContextMenu}
+          data-id={type}
         >
           <Icon
             name={icon}
@@ -71,6 +83,7 @@ export const TreeItem = memo((props: TreeItemProps) => {
       <Show when={showContextMenu}>
         <Overlay onClick={toggleContextMenu}>
           <Menu
+            data-id={`${type}-options`}
             items={items || []}
             position={"absolute"}
             top={contextPoint.current.y}

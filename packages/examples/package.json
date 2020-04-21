@@ -56,10 +56,6 @@
     "webpack-glob": "^2.0.2"
   },
   "scripts": {
-    "watch": "webpack -w --mode=development",
-    "media-dist": "webpack --mode=production --config ./mediastore.webpack.config.js && cp ./lib/media-store.js ../chrome/media-store.js",
-    "dist": "webpack --mode=production && cp ./lib/index.js ../chrome/index.js",
-    "publish": "npm run dist && npm run media-dist",
-    "udx": "npm install udx-core@latest udx-react@latest udx-icons@latest"
+    "watch": "webpack -w --mode=development"
   }
 }

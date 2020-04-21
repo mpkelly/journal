@@ -13,6 +13,7 @@ export const SettingsItem: NavItemProps[] = [
   {
     icon: SettingsIcon,
     labelKey: "general",
-    path: "/settings/general"
-  }
+    path: "/settings/general",
+    type: "settings",
+  },
 ];

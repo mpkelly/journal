@@ -1,3 +1,4 @@
 {
-  "integrationFolder": "tests"
+  "integrationFolder": "tests",
+  "defaultCommandTimeout": 30000
 }

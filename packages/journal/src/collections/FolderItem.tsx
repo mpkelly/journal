@@ -11,19 +11,19 @@ export const FolderItem = (props: TreeItemProps) => {
     {
       nameKey: "addPage",
       leftIconName: PageIcon,
-      onClick: () => addPage(collectionId, id)
+      onClick: () => addPage(collectionId, id),
     },
     {
       nameKey: "addFolder",
       leftIconName: FolderIcon,
-      onClick: () => addFolder(collectionId, id)
+      onClick: () => addFolder(collectionId, id),
     },
     {
       nameKey: "deleteFolder",
       leftIconName: DeleteIcon,
-      onClick: () => deleteItem(collectionId, id)
-    }
+      onClick: () => deleteItem(collectionId, id),
+    },
   ];
 
-  return <TreeItem {...props} icon={FolderIcon} items={items} />;
+  return <TreeItem {...props} icon={FolderIcon} items={items} type="folder" />;
 };

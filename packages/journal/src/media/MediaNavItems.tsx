@@ -13,11 +13,13 @@ export const MediaItems: NavItemProps[] = [
   {
     icon: ImagesIcon,
     labelKey: "images",
-    path: "/media/images"
+    path: "/media/images",
+    type: "images",
   },
   {
     icon: VideosIcon,
     labelKey: "videos",
-    path: "/media/videos"
-  }
+    path: "/media/videos",
+    type: "videos",
+  },
 ];

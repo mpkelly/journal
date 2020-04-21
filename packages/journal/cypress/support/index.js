@@ -14,7 +14,16 @@
 // ***********************************************************
 
 // Import commands.js using ES2015 syntax:
-import './commands'
+import "./commands";
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+Cypress.on("window:before:load", async (win) => {
+  const request = win.indexedDB.open("SiamWikiDatabase", 4);
+  request.ononsuccess = () => {
+    db.transaction(["collections"], "readwrite")
+      .objectStore("collections")
+      .clear();
+  };
+});

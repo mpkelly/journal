@@ -7,7 +7,7 @@ import {
   CollectionIcon,
   FolderIcon,
   DeleteIcon,
-  ColorIcon
+  ColorIcon,
 } from "../icons/IconNames";
 
 export const CollectionItem = (props: TreeItemProps) => {
@@ -22,7 +22,7 @@ export const CollectionItem = (props: TreeItemProps) => {
       pickerPoint.current.left = event.clientX;
       pickerPoint.current.top = event.clientY;
     }
-    setShowColorPicker(value => !value);
+    setShowColorPicker((value) => !value);
   };
 
   const handleColorChange = (color: string) => {
@@ -33,23 +33,29 @@ export const CollectionItem = (props: TreeItemProps) => {
     {
       nameKey: "addFolder",
       leftIconName: FolderIcon,
-      onClick: () => addFolder(collectionId, id)
+      onClick: () => addFolder(collectionId, id),
     },
     {
       nameKey: "changeColor",
       leftIconName: ColorIcon,
-      onClick: toggleColorPicker
+      onClick: toggleColorPicker,
     },
     {
       nameKey: "deleteCollection",
       leftIconName: DeleteIcon,
-      onClick: () => deleteItem(collectionId, id)
-    }
+      onClick: () => deleteItem(collectionId, id),
+    },
   ];
 
   return (
     <Fragment>
-      <TreeItem {...props} color={color} icon={CollectionIcon} items={items} />
+      <TreeItem
+        {...props}
+        color={color}
+        icon={CollectionIcon}
+        items={items}
+        type="collection"
+      />
       <Show when={showColorPicker}>
         <ColorPicker
           onClose={toggleColorPicker}

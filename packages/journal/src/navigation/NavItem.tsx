@@ -7,10 +7,11 @@ export interface NavItemProps {
   icon: string;
   labelKey: string;
   path: string;
+  type: string;
 }
 
 export const NavItem = (props: NavItemProps) => {
-  const { icon, labelKey, path } = props;
+  const { icon, labelKey, path, type } = props;
   const isSelected = isRouteSelected(path);
   const background = isSelected ? "nav_selected" : undefined;
   return (
@@ -21,6 +22,7 @@ export const NavItem = (props: NavItemProps) => {
         borderRadius="sm"
         p={10}
         mx="md"
+        data-id={type}
       >
         <Icon name={icon} color="nav_secondaryText" />
         <Text ml="md" labelKey={labelKey} color="nav_primaryText" />

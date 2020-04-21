@@ -13,5 +13,6 @@ export interface TreeItemProps {
     onClick: (event: any) => any;
     icon: string;
     color?: any;
+    type?: string;
 }
 export declare const TreeItem: React.MemoExoticComponent<(props: TreeItemProps) => JSX.Element>;

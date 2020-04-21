@@ -23,10 +23,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mpkelly/siam-wiki.git"
+    "url": "git+https://github.com/mpkelly/journal.git"
   },
   "bugs": {
-    "url": "https://github.com/mpkelly/siam-wiki/issues"
+    "url": "https://github.com/mpkelly/journal/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
@@ -36,7 +36,7 @@
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
     "@babel/runtime": "^7.7.2",
-    "@mpkelly/react-editor-kit": "0.0.18",
+    "@mpkelly/react-editor-kit": "0.0.28",
     "@types/react": "^16.9.23",
     "@types/react-dom": "^16.9.5",
     "awesome-typescript-loader": "^5.2.1",

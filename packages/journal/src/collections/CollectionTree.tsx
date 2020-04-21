@@ -34,7 +34,7 @@ export const CollectionTree = (props: FileTreeProps) => {
 
 const itemStyle = {
   padding: 10,
-  marginBottom: 4
+  marginBottom: 4,
 };
 
 const muteStyle = { opacity: 0.3 };
@@ -53,14 +53,14 @@ const ItemRenderer = memo((props: any) => {
     connectDragSource,
     connectDropTarget,
     isDragging,
-    isClosestDragging
+    isClosestDragging,
   } = props;
   const style = {
     ...itemStyle,
     ...(isDragging || isClosestDragging ? muteStyle : null),
     width: "100%",
     paddingLeft: 16 + path.length * 8,
-    paddingRight: 16
+    paddingRight: 16,
   };
   const handleClick = () => {
     if (type === ItemType.Folder || type === ItemType.Collection) {
@@ -77,10 +77,12 @@ const ItemRenderer = memo((props: any) => {
     collapsed,
     id: itemId,
     onClick: handleClick,
-    icon: ""
+    icon: "",
   };
-  const el = <div className="tree-item">{createElement(type, itemProps)}</div>;
-  return connectDragSource(connectDropTarget(el));
+  const element = (
+    <div className="tree-item">{createElement(type, itemProps)}</div>
+  );
+  return connectDragSource(connectDropTarget(element));
 });
 
 const createElement = (type: ItemType, props: TreeItemProps) => {

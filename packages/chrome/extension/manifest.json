@@ -1,6 +1,6 @@
 {
   "name": "Journal",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "manifest_version": 2,
   "description": "Journal - A wiki and media orgnanizer that supports saving images, video and text directly from web pages via the context menu.",
   "homepage_url": "https://github.com/mpkelly/journal",

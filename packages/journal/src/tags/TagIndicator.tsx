@@ -18,12 +18,13 @@ export const TagIndicator = (props: TagIndicatorProps) => {
   return (
     <Label variant={"tag"} display={"inline-flex"} cursor={cursor} {...rest}>
       <StyledText
+        data-id="tag"
         value={name}
         color={"inherit"}
         fontWeight={"inherit"}
         fontSize={"inherit"}
         disabled={!Boolean(onUpdate)}
-        onSave={value => {
+        onSave={(value) => {
           tag.name = value;
           onUpdate && onUpdate(tag);
         }}

@@ -10,8 +10,8 @@ export const PageItem = (props: TreeItemProps) => {
     {
       nameKey: "delete",
       leftIconName: DeleteIcon,
-      onClick: () => deleteItem(collectionId, id)
-    }
+      onClick: () => deleteItem(collectionId, id),
+    },
   ];
-  return <TreeItem {...props} icon={PageIcon} items={items} />;
+  return <TreeItem {...props} icon={PageIcon} items={items} type="page" />;
 };
