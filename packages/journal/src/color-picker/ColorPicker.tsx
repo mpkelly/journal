@@ -1,5 +1,5 @@
 import React from "react";
-import { FlexProps, Row } from "udx-react";
+import { FlexProps, Row } from "@mpkelly/siam";
 import { Overlay } from "../util/Overlay";
 
 export interface ColorPickerProps extends FlexProps {

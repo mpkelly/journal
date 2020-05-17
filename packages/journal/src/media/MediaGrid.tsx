@@ -1,5 +1,5 @@
 import React from "react";
-import { Column, styled, Row, FlexProps } from "udx-react";
+import { Column, styled, Row, FlexProps } from "@mpkelly/siam";
 import { Media, MediaType } from "./MediaDatabase";
 import { Show } from "../util/Show";
 import { NotFound } from "./NotFound";

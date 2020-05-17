@@ -1,5 +1,5 @@
-import { IconProps, FlexProps } from "udx-react";
+import { IconProps, FlexProps } from "@mpkelly/siam";
 export interface IconButtonProps extends IconProps {
-    buttonProps?: FlexProps;
+  buttonProps?: FlexProps;
 }
 export declare const IconButton: (props: IconButtonProps) => JSX.Element;

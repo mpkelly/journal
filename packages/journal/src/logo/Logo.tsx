@@ -1,16 +1,14 @@
 import React from "react";
-import { Flex } from "udx-react";
-import { LogoBase64 } from "./LogoBase64";
+import { Row } from "@mpkelly/siam";
 
 export const Logo = () => {
   return (
-    <Flex borderRadius={"sm"} alignItems="center" justifyContent="center">
-      <Flex
+    <Row borderRadius={"sm"} gravity="center">
+      <Row
         flexGrow={0}
         flexShrink={0}
         borderRadius="md"
-        alignItems="center"
-        justifyContent="center"
+        gravity="center"
         size={40}
       >
         <svg
@@ -33,7 +31,7 @@ export const Logo = () => {
             fill="white"
           />
         </svg>
-      </Flex>
-    </Flex>
+      </Row>
+    </Row>
   );
 };

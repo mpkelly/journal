@@ -1,11 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Row, FlexProps, Text } from "udx-react";
+import React from "react";
+import { Row, FlexProps, Text, Icon, Scope } from "@mpkelly/siam";
 import { Show } from "../util/Show";
-import { Item } from "../content/Item";
-import { useDatabase } from "../database/Databases";
-import { Collection } from "../collections/Collection";
-import { IconButton } from "../icons/IconButton";
-import { SaveIcon, PrintIcon } from "../icons/IconNames";
+import { ItemData } from "../content/ItemData";
 import {
   EditorToolbar,
   HeadingSelect,
@@ -25,42 +21,25 @@ import {
   TextAlignJustifiedButton,
   OrderedListButton,
   UnorderedListButton,
-  QuoteButton,
+  BlockquoteButton,
   ClearFormattingButton,
-  SpellCheckButton
+  SpellCheckButton,
+  TableButton,
+  ReadOnlyButton,
 } from "@mpkelly/react-editor-kit";
-import { Breadcrumb } from "./Breadcrumb";
 import { ExtendedColors } from "../color-picker/ColorPicker";
 
 export interface ToolbarProps extends FlexProps {
-  collectionId: number;
-  item: Item;
   saved: boolean;
   onToggleLocked(): void;
   onSave(): void;
+  readOnly?: boolean;
   children?: JSX.Element | JSX.Element[];
 }
 
 export const Toolbar = (props: ToolbarProps) => {
-  const {
-    children,
-    collectionId,
-    item,
-    onToggleLocked,
-    onSave,
-    saved,
-    ...rest
-  } = props;
-  const db = useDatabase();
+  const { children, onToggleLocked, onSave, saved, readOnly, ...rest } = props;
 
-  const [collection, setCollection] = useState<Collection | undefined>(
-    undefined
-  );
-  useEffect(() => {
-    db.getCollection(collectionId).then(setCollection);
-  }, [item]);
-
-  const icon = item.locked ? "lock" : "lock-open";
   return (
     <Row
       minHeight={45}
@@ -70,10 +49,7 @@ export const Toolbar = (props: ToolbarProps) => {
       {...rest}
     >
       <Row mx="md" flexGrow={1}>
-        <Show when={item.locked && collection}>
-          <Breadcrumb collection={collection as Collection} item={item} />
-        </Show>
-        <Show when={!item.locked}>
+        <Show when={!readOnly}>
           <EditorToolbar>
             <HeadingSelect />
             <Divider />
@@ -82,94 +58,110 @@ export const Toolbar = (props: ToolbarProps) => {
             <FontSizeSelect />
             <Divider />
             <BoldButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_bold"
+              tooltipText={"⌘+B"}
+              tooltipOffsets={{ v: 8 }}
             />
             <ItalicButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_italic"
+              tooltipText={"⌘+I"}
+              tooltipOffsets={{ v: 8 }}
             />
             <StrikethroughButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_strikethrough"
+              tooltipText={"⌘+T"}
+              tooltipOffsets={{ v: 8 }}
             />
             <UnderlineButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_underlined"
+              tooltipText={"⌘+U"}
+              tooltipOffsets={{ v: 8 }}
             />
             <InlineCodeButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="code"
             />
-            <LinkButton className="material-icons-outlined" ligature="link" />
+            <LinkButton className="material-icons-round" ligature="link" />
             <Divider />
             <ColorPickerButton
-              className="material-icons-outlined"
-              ligature="text_format"
+              className="material-icons-round"
+              ligature="palette"
               colors={Colors}
             />
             <Divider />
+            <TableButton
+              className="material-icons-round"
+              ligature="border_all"
+            />
+            <Divider />
             <TextAlignLeftButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_align_left"
             />
             <TextAlignCenterButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_align_center"
             />
             <TextAlignRightButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_align_right"
             />
             <TextAlignJustifiedButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_align_justify"
             />
             <Divider />
             <OrderedListButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_list_numbered"
             />
             <UnorderedListButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_list_bulleted"
             />
             <Divider />
-            <QuoteButton
-              className="material-icons-outlined"
+            <BlockquoteButton
+              className="material-icons-round"
               ligature="format_quote"
             />
+
             <Divider />
             <SpellCheckButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="spellcheck"
             />
             <ClearFormattingButton
-              className="material-icons-outlined"
+              className="material-icons-round"
               ligature="format_clear"
             />
           </EditorToolbar>
         </Show>
       </Row>
-      <Row alignItems="center" flexShrink={0} ml="auto">
-        <Show when={saved}>
-          <Text labelKey="saved" color="muted" />
-        </Show>
-        <Show when={!saved}>
-          <IconButton name={SaveIcon} onClick={onSave} color={"primaryText"} />
-        </Show>
-        <Divider />
-        <IconButton
-          name={PrintIcon}
-          onClick={window.print}
-          color={"primaryText"}
-        />
-        <Divider />
-        <IconButton
-          name={icon}
-          onClick={onToggleLocked}
-          color={"primaryText"}
-        />
+      <Row gravity="center-start" flexShrink={0} ml="auto">
+        <Scope value="toolbar">
+          <Row minWidth={50}>
+            <Show when={saved}>
+              <Text labelKey="saved" color="muted" />
+            </Show>
+            <Show when={!saved}>
+              <Icon kind="button" name={"save"} onClick={onSave} />
+            </Show>
+          </Row>
+          <Divider />
+          <Icon kind="button" name={"print"} onClick={window.print} />
+          <Divider />
+          <ReadOnlyButton
+            className="material-icons-round"
+            ligature="lock_open"
+            readOnlyClassName="material-icons-round"
+            readOnlyLigature="lock"
+            onMouseDown={onToggleLocked}
+          />
+        </Scope>
       </Row>
     </Row>
   );

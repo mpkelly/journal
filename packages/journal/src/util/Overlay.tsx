@@ -1,6 +1,6 @@
 import React from "react";
-import { FlexProps, Flex } from "udx-react";
-import { OverlayLayer } from "../style/Layers";
+import { FlexProps, Row } from "@mpkelly/siam";
+import { OverlayLayer } from "../ui-system/Layers";
 
 export interface OverlayProps extends FlexProps {
   children?: any;
@@ -10,7 +10,7 @@ export interface OverlayProps extends FlexProps {
 export const Overlay = (props: OverlayProps) => {
   const { onClick, children, ...rest } = props;
   return (
-    <Flex
+    <Row
       position="fixed"
       height={"100vh"}
       width="100vw"
@@ -19,8 +19,9 @@ export const Overlay = (props: OverlayProps) => {
       zIndex={OverlayLayer}
       onClick={onClick}
       onContextMenu={onClick}
-      {...rest}>
+      {...rest}
+    >
       {children}
-    </Flex>
+    </Row>
   );
 };

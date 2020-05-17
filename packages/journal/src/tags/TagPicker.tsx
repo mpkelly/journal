@@ -1,5 +1,5 @@
 import React from "react";
-import { FlexProps, Row } from "udx-react";
+import { FlexProps, Row } from "@mpkelly/siam";
 import { useTags } from "./TagContext";
 import { TagIndicator } from "./TagIndicator";
 
@@ -30,14 +30,14 @@ export const TagPicker = (props: TagPickerProps) => {
       p="sm"
       {...rest}
     >
-      {tags.map(tag => {
+      {tags.map((tag) => {
         const variant = selectedTags.includes(tag.id) ? "tag" : "muted";
         return (
           <TagIndicator
             mr="sm"
             mb="sm"
             onClick={() => toggleSelected(tag.id)}
-            variant={variant}
+            kind={variant}
             tag={tag}
             key={tag.id}
           />

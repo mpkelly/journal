@@ -1,103 +1,75 @@
-import { useEffect, useState, useRef } from "react";
-import { Node } from "slate";
+import { useEffect, useState, useRef, useCallback } from "react";
+import { Element } from "@mpkelly/react-editor-kit";
 import { EditorPageProps } from "./EditorPage";
 import { useDatabase } from "../database/Databases";
-import { Item } from "../content/Item";
 import { debounce } from "../util/Debounce";
 
 export const useEditor = (props: EditorPageProps) => {
-  const { match } = props;
-  const { params } = match;
+  const { item } = props;
   const db = useDatabase();
   const [saved, setSaved] = useState(true);
-  const [item, setItem] = useState<Item | undefined>(undefined);
-  const [value, setValue] = useState<Node[]>(defaultValue());
-  const lastSave = useRef<Node[]>([]);
-  const loaded = useRef(false);
-  const saveCount = useRef(1);
+  const [value, setValue] = useState<Element[]>();
+  const [locked, setLocked] = useState<boolean>();
+  const lastSave = useRef<Element[]>();
 
-  const collectionId = params.collectionId;
-  const itemId = params.itemId;
+  useEffect(() => {
+    const value = item.data || defaultValue();
+    setValue(value);
+    setLocked(item.locked);
+    lastSave.current = value;
+  }, [item.id]);
 
-  const loadItem = () => {
-    loaded.current = false;
-    db.getItem(Number(params.collectionId), params.itemId).then(item => {
-      if (item) {
-        if (item.data) {
-          setValue(item.data);
-        } else {
-          setValue(defaultValue());
-        }
-        setItem(item);
-      }
-      loaded.current = true;
-    });
-  };
+  const handleToggleLocked = useCallback(() => {
+    console.log("Toggle!");
+    setLocked((locked) => !locked);
+    db.updateItem(item.id, { locked: !locked }).then(console.log);
+  }, [locked]);
 
-  useEffect(loadItem, [params.collectionId, params.itemId]);
-
-  const handleToggleLocked = () => {
-    setItem(item => {
-      const next = { ...item } as Item;
-      next.locked = !next.locked;
-      db.updateItem(Number(params.collectionId), next.id, {
-        locked: next.locked
-      });
-      return next;
-    });
-  };
-
-  const handleItemChange = (next: Node[]) => {
-    if (loaded.current) {
-      setValue(next);
-      if (JSON.stringify(next) !== JSON.stringify(value)) {
-        setSaved(false);
-        if (loaded.current) {
-          debouncedSave(Number(params.collectionId), params.itemId, next);
-        }
-      }
+  const handleItemChange = (next: Element[]) => {
+    setValue(next);
+    if (JSON.stringify(next) !== JSON.stringify(value)) {
+      setSaved(false);
+      debouncedSave(item.id, next);
     }
   };
 
-  const handleSave = (collectionId: number, itemId: string, value: any) => {
-    db.updateItemData(collectionId, itemId, value).then(() => {
+  const handleSave = (itemId: string, value: any) => {
+    db.updateItem(itemId, { data: value }).then(() => {
       setSaved(true);
-      saveCount.current += 1;
-      if (saveCount.current % 3) {
-        //Save every 3rd value to use as a backup.
-        lastSave.current = value;
-      }
+      // Remember the last valid value which can be reinstated as part
+      // of a rollback
+      lastSave.current = value;
     });
   };
 
-  const instantSave = () => {
+  const instantSave = useCallback(() => {
     try {
-      handleSave(Number(params.collectionId), params.itemId, value);
+      handleSave(item.id, value);
     } catch (Error) {
-      //TODO better error handling with some sort of UI
       console.error("Error saving value", value);
       handleRestorePreviousValue();
     }
-  };
+  }, [value]);
 
   const handleRestorePreviousValue = () => {
-    handleSave(Number(params.collectionId), params.itemId, lastSave.current);
+    if (lastSave.current) {
+      handleSave(item.id, lastSave.current);
+    }
   };
 
   const debouncedSave = debounce(handleSave, 3000);
-  const readOnly = item && item.locked;
   return {
-    itemId,
-    collectionId,
     item,
     saved,
-    value,
+    value: value || defaultValue(),
     instantSave,
     handleToggleLocked,
     handleItemChange,
-    readOnly,
-    handleRestorePreviousValue
+    readOnly: locked,
+    handleRestorePreviousValue,
   };
 };
 
-const defaultValue = () => [{ type: "paragraph", children: [{ text: "" }] }];
+const defaultValue = (): Element[] => [
+  { type: "paragraph", children: [{ text: "" }] },
+];

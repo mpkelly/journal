@@ -7,15 +7,15 @@ var path = require("path");
 
 var config = {
   entry: {
-    app: "./src/Index.tsx"
+    app: "./src/Index.tsx",
   },
   output: {
     path: path.join(__dirname, "dist"),
     filename: "index.js",
-    publicPath: "./dist"
+    publicPath: "./dist",
   },
   resolve: {
-    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"]
+    extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
   optimization: {
     minimize: true,
@@ -25,26 +25,26 @@ var config = {
         terserOptions: {
           ecma: 6,
           output: {
-            ascii_only: true
-          }
-        }
-      })
-    ]
+            ascii_only: true,
+          },
+        },
+      }),
+    ],
   },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: "awesome-typescript-loader" }]
+    rules: [{ test: /\.tsx?$/, loader: "awesome-typescript-loader" }],
   },
   plugins: [
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ["**/bundle*.*js"]
+      cleanOnceBeforeBuildPatterns: ["**/bundle*.*js"],
     }),
-    new HardSourceWebpackPlugin()
+    //new HardSourceWebpackPlugin()
     // new BundleAnalyzerPlugin()
   ],
   externals: {
     react: "React",
-    "react-dom": "ReactDOM"
-  }
+    "react-dom": "ReactDOM",
+  },
 };
 
 module.exports = (env, argv) => {

@@ -57,7 +57,7 @@ export const TagProvider = (props: TaggerProviderProps) => {
   }, []);
 
   const loadTags = () => {
-    db.loadTags().then(setTags);
+    db.getTags().then(setTags);
   };
 
   const addTag = () => {

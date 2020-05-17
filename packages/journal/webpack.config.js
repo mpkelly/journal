@@ -7,20 +7,20 @@ var path = require("path");
 
 var config = {
   entry: {
-    app: "./src/Index.tsx"
+    app: "./src/Index.tsx",
   },
   output: {
     path: path.join(__dirname, "lib"),
     filename: "index.js",
     publicPath: "./lib",
     libraryTarget: "umd",
-    umdNamedDefine: true
+    umdNamedDefine: true,
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
     alias: {
-      react: path.resolve("node_modules/react")
-    }
+      react: path.resolve("node_modules/react"),
+    },
   },
   optimization: {
     minimize: true,
@@ -30,21 +30,21 @@ var config = {
         terserOptions: {
           ecma: 6,
           output: {
-            ascii_only: true
-          }
-        }
-      })
-    ]
+            ascii_only: true,
+          },
+        },
+      }),
+    ],
   },
   module: {
-    rules: [{ test: /\.tsx?$/, loader: "awesome-typescript-loader" }]
+    rules: [{ test: /\.tsx?$/, loader: "awesome-typescript-loader" }],
   },
   plugins: [
     new CleanWebpackPlugin({
-      cleanOnceBeforeBuildPatterns: ["**/bundle*.*js"]
+      cleanOnceBeforeBuildPatterns: ["**/bundle*.*js"],
     }),
-    new HardSourceWebpackPlugin()
-    // new BundleAnalyzerPlugin()
+    //new HardSourceWebpackPlugin(),
+    // new BundleAnalyzerPlugin(),
   ],
   externals: {
     react: {
@@ -52,21 +52,21 @@ var config = {
       commonjs2: "react",
       amd: "react",
       root: "React",
-      umd: "react"
+      umd: "react",
     },
     "react-dom": {
       commonjs: "react-dom",
       commonjs2: "react-dom",
       amd: "react-dom",
       root: "ReactDOM",
-      umd: "react-dom"
-    }
-  }
+      umd: "react-dom",
+    },
+  },
 };
 
 module.exports = (env, argv) => {
   if (argv.mode === "development") {
-    config.devtool = "cheap-source-map";
+    config.devtool = "eval";
   }
   return config;
 };

@@ -1,5 +1,5 @@
 import React from "react";
-import { Paragraph, Text } from "udx-react";
+import { Text } from "@mpkelly/siam";
 import { Panel } from "../panel/Panel";
 import { MediaItemProps } from "./MediaItemProps";
 import { getDomain } from "../util/Urls";
@@ -9,9 +9,9 @@ export const TextItem = (props: MediaItemProps) => {
   const text = media.content;
   return (
     <Panel flexDirection="column" m="md" p={0} {...rest}>
-      <Paragraph variant={"large"} m={0}>
+      <Text as="p" kind={"large"} m={0}>
         {text}
-      </Paragraph>
+      </Text>
     </Panel>
   );
 };

@@ -1,6 +1,5 @@
 import React from "react";
-import { Row, H1, Picker, Icon, Text, Button } from "udx-react";
-import { ChevronDownIcon, RefreshIcon, UploadIcon } from "../icons/IconNames";
+import { Row, Icon, Text, Button } from "@mpkelly/siam";
 import { useMedia } from "./MediaContext";
 import { IconButton } from "../icons/IconButton";
 import { useUpload } from "../upload/Upload";
@@ -17,19 +16,19 @@ export const Toolbar = () => {
     handleNextPage,
     handlePreviousPage,
     totalPages,
-    currentPage
+    currentPage,
   } = useMedia();
   const { openFileBrowser } = useUpload(handleUpload);
 
   return (
     <Row alignItems="center" mb={"lg"}>
-      <H1 labelKey="media" m={0} width={180} />
+      <Text as="h1" labelKey="media" m={0} width={180} />
       <Show when={totalPages > 0}>
         <Row alignItems="center">
           <Show when={hasPrevious}>
             <Button
               onClick={handlePreviousPage}
-              variant="muted.small"
+              kind="muted.small"
               maxWidth={30}
             >
               <Icon name={"chevron-left"} />
@@ -39,40 +38,28 @@ export const Toolbar = () => {
             {currentPage} / {totalPages}
           </Text>
           <Show when={hasNext}>
-            <Button
-              onClick={handleNextPage}
-              variant="muted.small"
-              maxWidth={30}
-            >
+            <Button onClick={handleNextPage} kind="muted.small" maxWidth={30}>
               <Icon name={"chevron-right"} />
             </Button>
           </Show>
         </Row>
       </Show>
       <Row alignItems="center" ml="auto">
-        <IconButton
-          color={"primaryText"}
-          name={UploadIcon}
-          onClick={openFileBrowser}
-        />
-        <IconButton
-          color={"primaryText"}
-          name={RefreshIcon}
-          onClick={refresh}
-          buttonProps={{ ml: "md" }}
-        />
-        <Picker
+        <Icon kind="button" name={"upload"} onClick={openFileBrowser} />
+        <Icon kind="button" name={"refresh"} onClick={refresh} ml="md" />
+        //TODO
+        {/* <Picker
           ml="md"
           items={sortItems}
           menuLocation="bottom-end"
           selectedItem={sortItem}
-          variant="muted"
+          kind="muted"
         >
-          <Text variant="small" color="inherit" fontWeight="bold">
+          <Text kind="small" color="inherit" fontWeight="bold">
             {sortItem.name}
           </Text>
           <Icon name={ChevronDownIcon} color="inherit" />
-        </Picker>
+        </Picker> */}
       </Row>
     </Row>
   );

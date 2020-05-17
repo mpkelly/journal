@@ -1,8 +1,7 @@
 import React, { useContext, createContext, useState, useEffect } from "react";
 import { Media, useMediaDatabase, MediaType } from "./MediaDatabase";
-import { MenuItem } from "udx-react";
+import { MenuItem } from "@mpkelly/siam";
 import { MediaPageProps } from "./MediaPage";
-import { ImagesIcon, VideosIcon, TextIcon } from "../icons/IconNames";
 import { useTags } from "../tags/TagContext";
 import { FileUpload } from "../upload/Upload";
 import { fileToBase64 } from "../util/Files";
@@ -10,8 +9,8 @@ import { useCallback } from "react";
 
 export interface MediaContextValue {
   items: Media[][];
-  sortItems: MenuItem[];
-  sortItem: MenuItem;
+  sortItems: any[];
+  sortItem: any;
   tabIndex: number;
   mediaIcon: string;
   type: MediaType;
@@ -51,7 +50,7 @@ export const MediaProvider = (props: MediaProviderProps) => {
   const [total, setTotal] = useState(0);
 
   useEffect(() => {
-    const initial = Tabs.find(tab => pathname.endsWith(tab.labelKey));
+    const initial = Tabs.find((tab) => pathname.endsWith(tab.labelKey));
     if (initial) {
       setType(initial.type);
     }
@@ -63,7 +62,7 @@ export const MediaProvider = (props: MediaProviderProps) => {
 
   const loadMedia = () => {
     const tags = selected.length ? selected : [];
-    db.loadMedia(type, tags, page, pageSize).then(result => {
+    db.loadMedia(type, tags, page, pageSize).then((result) => {
       setMedia(result.items);
       setTotal(result.total);
     });
@@ -71,19 +70,20 @@ export const MediaProvider = (props: MediaProviderProps) => {
   const totalPages = Math.ceil(total / pageSize);
 
   const handlePreviousPage = () => {
-    setPage(page => page - 1);
+    setPage((page) => page - 1);
   };
 
   const handleNextPage = () => {
-    setPage(page => page + 1);
+    setPage((page) => page + 1);
   };
 
   const hasPrevious = page > 0;
 
   const hasNext = page < totalPages - 1;
 
-  const sortItems: MenuItem[] = sortChoices.map((choice, index) => {
-    choice.onClick = () => setOptions(options => ({ ...options, sort: index }));
+  const sortItems: any[] = sortChoices.map((choice, index) => {
+    choice.onClick = () =>
+      setOptions((options) => ({ ...options, sort: index }));
     return choice;
   });
 
@@ -103,7 +103,7 @@ export const MediaProvider = (props: MediaProviderProps) => {
 
   const handleUpload = async (upload: FileUpload) => {
     await Promise.all(
-      upload.images.map(async image => {
+      upload.images.map(async (image) => {
         const content = await fileToBase64(image);
         db.add({
           type: MediaType.Image,
@@ -111,7 +111,7 @@ export const MediaProvider = (props: MediaProviderProps) => {
           content,
           source: "uploaded",
           pageSource: "",
-          tags: []
+          tags: [],
         });
         return true;
       })
@@ -125,7 +125,7 @@ export const MediaProvider = (props: MediaProviderProps) => {
   if (options.sort == 1) {
     mediaItems.reverse();
   }
-  const tabIndex = Tabs.findIndex(tab => tab.type == type);
+  const tabIndex = Tabs.findIndex((tab) => tab.type == type);
   const items = groupitems(mediaItems, Tabs[tabIndex].columns);
   const mediaIcon = Tabs[tabIndex].icon;
 
@@ -147,7 +147,7 @@ export const MediaProvider = (props: MediaProviderProps) => {
     hasNext,
     totalPages,
     total,
-    currentPage: page + 1
+    currentPage: page + 1,
   };
 
   return <Context.Provider value={context}>{props.children}</Context.Provider>;
@@ -167,10 +167,10 @@ const groupitems = (items: Media[], count: number) => {
   return groups;
 };
 
-const sortChoices: MenuItem[] = [{ name: "Date Asc." }, { name: "Date Desc." }];
+const sortChoices: any[] = [{ name: "Date Asc." }, { name: "Date Desc." }];
 
 export const Tabs = [
-  { labelKey: "images", icon: ImagesIcon, type: MediaType.Image, columns: 3 },
-  { labelKey: "videos", icon: VideosIcon, type: MediaType.Video, columns: 2 },
-  { labelKey: "text", icon: TextIcon, type: MediaType.Text, columns: 2 }
+  { labelKey: "images", icon: "images", type: MediaType.Image, columns: 3 },
+  { labelKey: "videos", icon: "videos", type: MediaType.Video, columns: 2 },
+  { labelKey: "text", icon: "text", type: MediaType.Text, columns: 2 },
 ];

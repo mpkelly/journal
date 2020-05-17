@@ -4,7 +4,7 @@ import React, {
   useEffect,
   useContext,
   useRef,
-  ChangeEvent
+  ChangeEvent,
 } from "react";
 import { JournalSettings } from "./JournalSettings";
 import { useDatabase } from "../database/Databases";
@@ -40,7 +40,7 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
   const db = useDatabase();
 
   const loadSettings = () => {
-    return db.loadSettings().then(settings => {
+    return db.getSettings().then((settings) => {
       setSettings(settings);
     });
   };
@@ -83,7 +83,7 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
     handleExport,
     handleImportRef,
     handleImport,
-    handleImportFile
+    handleImportFile,
   };
 
   if (!settings) {

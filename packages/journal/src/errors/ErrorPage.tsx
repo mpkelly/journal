@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Icon, Column, Text, Button } from "udx-react";
+import { Row, Icon, Column, Text, Button } from "@mpkelly/siam";
 
 export interface ErrorPageProps {
   handleGoBack(): void;
@@ -16,12 +16,12 @@ export const ErrorPage = (props: ErrorPageProps) => {
       alignItems="center"
     >
       <Column alignItems="flex-start">
-        <Icon name={"error"} color="danger" variant="xlarge" />
-        <Text mt="xl" variant="xxlarge" labelKey="somethingWentWrong" />
+        <Icon name={"error"} color="danger" kind="xlarge" />
+        <Text mt="xl" kind="xxlarge" labelKey="somethingWentWrong" />
         <Text
           mt="md"
           color="secondary"
-          variant="xlarge"
+          kind="xlarge"
           labelKey="unexpectedError"
           maxWidth={600}
         />

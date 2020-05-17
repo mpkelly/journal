@@ -1,19 +1,19 @@
 import * as React from "react";
-import { SystemProvider } from "udx-react";
-import { StyleSystem } from "./style/StyleSystem";
+import { Siam } from "@mpkelly/siam";
 import { Router } from "./routing/Router";
-import { Style } from "./style/Style";
+import { Style } from "./ui-system/Style";
 import { FileUpload } from "./upload/FileUpload";
 import { SettingsProvider } from "./settings/SettingsContext";
+import { SiamSystem } from "./ui-system/SiamSystem";
 
 export const Journal = () => {
   return (
-    <SystemProvider system={StyleSystem}>
+    <Siam system={SiamSystem}>
       <SettingsProvider>
         <Style />
         <Router />
         <FileUpload />
       </SettingsProvider>
-    </SystemProvider>
+    </Siam>
   );
 };

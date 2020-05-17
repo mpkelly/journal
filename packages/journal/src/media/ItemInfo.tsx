@@ -1,8 +1,7 @@
 import React, { useState, MouseEvent, memo } from "react";
-import { Row, Text, FlexProps, Column } from "udx-react";
+import { Row, Text, FlexProps, Column } from "@mpkelly/siam";
 import { Media } from "./MediaDatabase";
 import { getDomain } from "../util/Urls";
-import { ViewExternalIcon, DeleteIcon, TagIcon } from "../icons/IconNames";
 import { IconButton } from "../icons/IconButton";
 import { useMedia } from "./MediaContext";
 import { Show } from "../util/Show";
@@ -24,7 +23,7 @@ export const ItemInfo = memo((props: ItemInfoProps) => {
   };
 
   const handleToggleShowTags = (event: MouseEvent<any>) => {
-    setShowTags(showTags => !showTags);
+    setShowTags((showTags) => !showTags);
   };
 
   const handleTagsChange = (tags: number[]) => {
@@ -41,20 +40,23 @@ export const ItemInfo = memo((props: ItemInfoProps) => {
           <Text>{domain}</Text>
         </Show>
         <IconButton
-          name={DeleteIcon}
-          buttonProps={{ ml: "auto" }}
+          name={"delete"}
+          ml="auto"
+          kind="button"
           onClick={() => handleDelete(media)}
         />
         <IconButton
-          name={TagIcon}
-          buttonProps={{ ml: "md" }}
+          name={"tags"}
+          kind="button"
+          ml="md"
           onClick={handleToggleShowTags}
           color={showTags ? "primary" : undefined}
         />
         <Show when={media.pageSource}>
           <IconButton
-            name={ViewExternalIcon}
-            buttonProps={{ ml: "md" }}
+            name={"launch"}
+            kind="button"
+            ml="md"
             onClick={handleViewUrl}
           />
         </Show>

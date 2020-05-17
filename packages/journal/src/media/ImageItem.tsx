@@ -1,6 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { MediaItemProps } from "./MediaItemProps";
-import { Row, styled } from "udx-react";
+import { Row, styled } from "@mpkelly/siam";
 import { Show } from "../util/Show";
 import { Overlay } from "../util/Overlay";
 import { stop } from "../util/Events";
@@ -10,7 +10,7 @@ export const ImageItem = (props: MediaItemProps) => {
   const [showPreview, setShowPreview] = useState(false);
 
   const togglePreview = () => {
-    setShowPreview(show => !show);
+    setShowPreview((show) => !show);
   };
   const source = media.content
     ? `data:image/png;base64,${media.content}`

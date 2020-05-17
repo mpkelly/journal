@@ -1,5 +1,5 @@
 import React from "react";
-import { IconProps, Row, FlexProps, Icon } from "udx-react";
+import { IconProps, Row, FlexProps, Icon } from "@mpkelly/siam";
 
 export interface IconButtonProps extends IconProps {
   buttonProps?: FlexProps;

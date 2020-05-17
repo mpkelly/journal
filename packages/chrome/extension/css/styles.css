@@ -19,32 +19,54 @@
       url("../fonts/open-sans-v17-latin-700.woff") format("woff"); /* Chrome 6+, Firefox 3.6+, IE 9+, Safari 5.1+ */
 }
 
+.rek-table td {
+  vertical-align: text-top;
+}
+
 @media print {
   body * {
     visibility: hidden;
   }
-  [data-slate-editor="true"],
-  [data-slate-editor="true"] *,
+
+  *::-webkit-scrollbar {
+    width: 0px;
+    height: 0px;
+  }
+
   .printable,
   .printable * {
     visibility: visible;
     width: auto;
     height: auto;
-    overflow: visible !important;
     -webkit-print-color-adjust: exact;
     print-color-adjust: exact;
+    background-color: white !important;
     color: #000 !important;
   }
 
-  [data-slate-editor="true"],
+  .editorWrapper > .rek-resizable {
+    margin: 0;
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100vw !important;
+  }
   .printable {
     position: absolute;
+    overflow-y: visible;
+    overflow-x: hidden;
     left: 0;
     top: 0;
   }
 
+  .rek-resize-handle {
+    display: none !important;
+  }
+
   [data-slate-editor="true"] {
-    padding: 16px;
+    margin: 0;
+    overflow-x: hidden;
   }
 
   @page {

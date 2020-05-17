@@ -1,5 +1,5 @@
 import React, { memo } from "react";
-import { Column, Input, Text, FlexProps } from "udx-react";
+import { Column, Input, Text, FlexProps } from "@mpkelly/siam";
 import { Show } from "../util/Show";
 
 export interface SettingProps extends FlexProps {
@@ -17,11 +17,11 @@ export const Setting = memo((props: SettingProps) => {
         mt={"lg"}
         labelKey={label}
         value={value}
-        onChange={event => onChange(event.currentTarget.value)}
+        onChange={onChange}
         width="100%"
       />
       <Show when={description}>
-        <Text variant="small" color="secondary" mt={"sm"}>
+        <Text kind="small" color="secondary" mt={"sm"}>
           {description}
         </Text>
       </Show>

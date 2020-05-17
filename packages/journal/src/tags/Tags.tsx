@@ -1,7 +1,6 @@
 import React from "react";
 import { Tag } from "./Tag";
-import { Section, Row, Text, FlexProps, styled, Checkbox } from "udx-react";
-import { DeleteIcon, AddIcon } from "../icons/IconNames";
+import { Section, Row, Text, FlexProps, styled, Checkbox } from "@mpkelly/siam";
 import { IconButton } from "../icons/IconButton";
 import { TagIndicator } from "./TagIndicator";
 import { useTags } from "./TagContext";
@@ -15,20 +14,20 @@ export const Tags = (props: TagsProps) => {
   return (
     <Section flexDirection="column" {...rest}>
       <Row alignItems="center" mt="xl" mb="md">
-        <Text variant="label" labelKey="tags" m={0} />
+        <Text kind="label" labelKey="tags" m={0} />
         <IconButton
           buttonProps={{ ml: "auto", color: "primaryText" }}
-          name={AddIcon}
-          variant="small"
+          name={"add"}
+          kind="small"
           onClick={addTag}
         />
       </Row>
 
-      {tags.map(tag => (
+      {tags.map((tag) => (
         <TagItem
           tag={tag}
           onDelete={() => deleteTag(tag)}
-          onUpdate={tag => updateTag(tag)}
+          onUpdate={(tag) => updateTag(tag)}
         />
       ))}
     </Section>
@@ -51,13 +50,13 @@ export const TagItem = (props: TagItemProps) => {
         onChange={() => toggleSelected(tag.id as number)}
         mr={"sm"}
       />
-      <TagIndicator tag={tag} onUpdate={tag => onUpdate(tag)} />
+      <TagIndicator tag={tag} onUpdate={(tag) => onUpdate(tag)} />
 
       <Row ml="auto" className="toolbar">
         <IconButton
           buttonProps={{ ml: "sm" }}
-          name={DeleteIcon}
-          variant="small"
+          name={"delete"}
+          kind="small"
           color={"primaryText"}
           onClick={onDelete}
         />

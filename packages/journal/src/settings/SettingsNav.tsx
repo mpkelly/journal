@@ -1,17 +1,16 @@
 import React from "react";
-import { Column, FlexProps } from "udx-react";
-import { SettingsIcon } from "../icons/IconNames";
-import { NavItemProps, NavItem } from "../navigation/NavItem";
+import { Column, FlexProps } from "@mpkelly/siam";
+import { NavItemViewProps, NavItemView } from "../navigation/NavItemView";
 
 export interface SettingsNavProps extends FlexProps {}
 
 export const SettingsNav = (props: SettingsNavProps) => {
-  return <Column {...props}>{SettingsItem.map(NavItem)}</Column>;
+  return <Column {...props}>{SettingsItem.map(NavItemView)}</Column>;
 };
 
-export const SettingsItem: NavItemProps[] = [
+export const SettingsItem: NavItemViewProps[] = [
   {
-    icon: SettingsIcon,
+    icon: "settings",
     labelKey: "general",
     path: "/settings/general",
     type: "settings",

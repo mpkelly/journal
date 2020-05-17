@@ -27,6 +27,8 @@
   body * {
     visibility: hidden;
     overflow: visible !important;
+    background-color: white !important;
+    color: #000 !important;
   }
 
   [data-slate-editor="true"],

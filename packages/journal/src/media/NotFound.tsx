@@ -1,5 +1,5 @@
 import React from "react";
-import { Column, Icon, Text } from "udx-react";
+import { Column, Icon, Text } from "@mpkelly/siam";
 
 export interface NotFoundProps {
   icon: string;
@@ -14,10 +14,11 @@ export const NotFound = (props: NotFoundProps) => {
       height="100%"
       border="1px solid dividers"
       justifyContent="center"
-      alignItems="center">
+      alignItems="center"
+    >
       <Column alignItems="center">
-        <Icon variant="xxlarge" color="muted" name={icon} mb="md" />
-        <Text color="muted" variant="large" labelKey={labelKey} />
+        <Icon kind="xxlarge" color="muted" name={icon} mb="md" />
+        <Text color="muted" kind="large" labelKey={labelKey} />
       </Column>
     </Column>
   );

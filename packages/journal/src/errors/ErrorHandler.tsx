@@ -3,6 +3,7 @@ import { ErrorPageProps, ErrorPage } from "./ErrorPage";
 
 export interface ErrorHandlerprops extends ErrorPageProps {
   children: JSX.Element | JSX.Element[];
+  autoRollback?: boolean;
 }
 
 export interface ErrorHandlerState {
@@ -23,15 +24,18 @@ export class ErrorBoundary extends React.Component<
   }
 
   componentDidCatch(error: any, errorInfo: any) {
-    //Lame error handling - check!
-    //V2 will contain something more sophisticated e.g. an alert :-)
     console.log(error, errorInfo);
   }
 
+  handleGoBack = () => {
+    this.setState({ hasError: false });
+    this.props.handleGoBack();
+  };
+
   render() {
-    const { children, handleGoBack } = this.props;
+    const { children } = this.props;
     if (this.state.hasError) {
-      return <ErrorPage handleGoBack={handleGoBack} />;
+      return <ErrorPage handleGoBack={this.handleGoBack} />;
     }
 
     return children;

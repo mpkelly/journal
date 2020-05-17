@@ -1,8 +1,7 @@
 import React from "react";
-import { Label, FlexProps, EditableText, Icon, styled } from "udx-react";
+import { Label, FlexProps, EditableText, Icon, styled } from "@mpkelly/siam";
 import { Tag } from "./Tag";
 import { Show } from "../util/Show";
-import { ClearIcon } from "../icons/IconNames";
 
 export interface TagIndicatorProps extends FlexProps {
   tag: Tag;
@@ -16,7 +15,7 @@ export const TagIndicator = (props: TagIndicatorProps) => {
   const canDelete = Boolean(onDelete);
   const cursor = props.onClick ? "pointer" : undefined;
   return (
-    <Label variant={"tag"} display={"inline-flex"} cursor={cursor} {...rest}>
+    <Label kind={"tag"} display={"inline-flex"} cursor={cursor} {...rest}>
       <StyledText
         data-id="tag"
         value={name}
@@ -24,16 +23,16 @@ export const TagIndicator = (props: TagIndicatorProps) => {
         fontWeight={"inherit"}
         fontSize={"inherit"}
         disabled={!Boolean(onUpdate)}
-        onSave={(value) => {
+        onSave={(value: string) => {
           tag.name = value;
           onUpdate && onUpdate(tag);
         }}
       />
       <Show when={canDelete}>
         <Icon
-          name={ClearIcon}
-          variant="small"
-          color={"secondaryText"}
+          name={"clear"}
+          kind="small"
+          color={"secondary.text"}
           ml="sm"
           cursor={"pointer"}
           onClick={() => onDelete && onDelete()}

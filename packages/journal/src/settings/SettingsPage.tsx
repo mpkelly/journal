@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Page } from "../page/Page";
-import { Column, H1, Row, Button } from "udx-react";
+import { Column, Text, Row, Button } from "@mpkelly/siam";
 import { Panel } from "../panel/Panel";
 import { Setting } from "./Setting";
 import { useSettings } from "./SettingsContext";
@@ -14,13 +14,13 @@ export const SettingsPage = memo(() => {
     handleExport,
     handleImportRef,
     handleImport,
-    handleImportFile
+    handleImportFile,
   } = useSettings();
 
   return (
     <Page>
       <Column p="lg" flexGrow={1}>
-        <H1 labelKey="settings" />
+        <Text as="h1" labelKey="settings" />
         <Row flexGrow={1}>
           <Panel flexGrow={1} height={"100%"} flexDirection={"column"}>
             <Setting
@@ -39,13 +39,13 @@ export const SettingsPage = memo(() => {
               <Button
                 onClick={handleExport}
                 labelKey="exportData"
-                variant="muted"
+                kind="muted"
               />
               <Button
                 onClick={handleImport}
                 labelKey="importData"
                 ml="md"
-                variant="muted"
+                kind="muted"
               />
             </Row>
           </Panel>

@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Text as _Text } from "udx-react";
+import { Row, Text as _Text } from "@mpkelly/siam";
 import ReactPlayer from "react-player";
 import { MediaItemProps } from "./MediaItemProps";
 

@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, Picker, Icon, FlexProps } from "udx-react";
+import { Row, FlexProps } from "@mpkelly/siam";
 import { stop } from "../util/Events";
 
 export interface OverflowMenuProps extends FlexProps {
@@ -11,13 +11,8 @@ export interface OverflowItem {
   onClick: (event?: any) => any;
 }
 
+//TODO
 export const OverflowMenu = (props: OverflowMenuProps) => {
   const { items, ...rest } = props;
-  return (
-    <Row {...rest} onClick={stop}>
-      <Picker variant={"muted"} items={items}>
-        <Icon name="more_vert" variant="small" />
-      </Picker>
-    </Row>
-  );
+  return <Row {...rest} onClick={stop}></Row>;
 };

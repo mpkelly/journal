@@ -1,12 +1,13 @@
-import React from "react";
-import { Article, Column } from "udx-react";
+import React, { Fragment, useMemo } from "react";
+import { Article, Column, useSiam, System } from "@mpkelly/siam";
 import { Page } from "../page/Page";
 import { Editor } from "./Editor";
 import { RouteComponentProps } from "react-router";
 import { Show } from "../util/Show";
 import { Toolbar } from "./Toolbar";
-import { Item } from "../content/Item";
-import { EditorStylePlugin } from "./EditorStylePlugin";
+import { ItemData } from "../content/ItemData";
+//TODO
+//import { EditorStylePlugin } from "./EditorStylePlugin";
 
 import { useEditor } from "./Editors";
 import {
@@ -19,7 +20,7 @@ import {
   UnderlinePlugin,
   OrderedListPlugin,
   UnorderedListPlugin,
-  QuotePlugin,
+  BlockquotePlugin,
   H1Plugin,
   H2Plugin,
   H3Plugin,
@@ -30,9 +31,10 @@ import {
   SuperscriptPlugin,
   VideoPlugin,
   TablePlugin,
-  CodeHighlighterPlugin,
-  EnterKeyHandler,
-  StylePlugin,
+  CodePlugin,
+  EnterKeyPlugin,
+  FontsPlugin,
+  ColorPlugin,
   createBreakoutPlugin,
   DividerPlugin,
   HistoryPlugin,
@@ -41,22 +43,22 @@ import {
   EditorToolbarPlugin,
   Plugin,
   ImagePlugin,
-  TextAlignPlugin
+  TextAlignPlugin,
+  createClearFormattingPlugin,
+  createInitialLetterPlugin,
 } from "@mpkelly/react-editor-kit";
-import { FloatingToolbar } from "./FloatingToolbar";
 import { ErrorBoundary } from "../errors/ErrorHandler";
+import { EditorContainer } from "./EditorContainer";
+import { FormatContextMenuPlugin } from "./FormatContextMenuPlugin";
+import { InsertContextMenuPlugin } from "./InsertContextMenuPlugin";
+import { createEditorStylePlugin } from "./EditorPageStylePlugin";
 
-export interface EditorPageProps extends RouteComponentProps<RouteParams> {}
-
-export interface RouteParams {
-  collectionId: string;
-  itemId: string;
+export interface EditorPageProps extends RouteComponentProps {
+  item: ItemData;
 }
 
 export const EditorPage = (props: EditorPageProps) => {
   const {
-    itemId,
-    collectionId,
     item,
     saved,
     value,
@@ -64,50 +66,44 @@ export const EditorPage = (props: EditorPageProps) => {
     handleToggleLocked,
     handleItemChange,
     readOnly,
-    handleRestorePreviousValue
+    handleRestorePreviousValue,
   } = useEditor(props);
+  const { system } = useSiam();
+  const plugins = useMemo(() => createPlugins(system), []);
   return (
-    <Page>
+    <Page p="0">
       <Column
         width="100%"
         height={"100%"}
-        backgroundColor="content_background"
+        backgroundColor="content"
         overflow="hidden"
-        key={itemId}
       >
-        <Show when={Boolean(itemId)}>
-          <EditorKit plugins={plugins}>
-            <Show when={Boolean(item)}>
-              <Toolbar
-                item={item as Item}
-                saved={saved}
-                collectionId={Number(collectionId)}
-                onSave={instantSave}
-                onToggleLocked={handleToggleLocked}
-              />
-            </Show>
-            <Article
-              flexDirection="column"
-              flexGrow={1}
-              overflowY={"hidden"}
-              alignItems={"center"}
-            >
-              <Show when={!readOnly}>
-                <FloatingToolbar />
-              </Show>
-              <ErrorBoundary handleGoBack={handleRestorePreviousValue}>
-                <Editor
-                  value={value}
-                  onChange={handleItemChange}
-                  readOnly={readOnly}
-                />
-              </ErrorBoundary>
-            </Article>
-          </EditorKit>
-        </Show>
+        <EditorKit plugins={plugins} readOnly={readOnly}>
+          <Toolbar
+            readOnly={readOnly}
+            saved={saved}
+            onSave={instantSave}
+            onToggleLocked={handleToggleLocked}
+          />
+          <EditorContainer
+            flexDirection="column"
+            flexGrow={1}
+            overflow={"hidden"}
+            alignItems={"center"}
+            backgroundColor="background"
+          >
+            <ErrorBoundary handleGoBack={handleRestorePreviousValue}>
+              <Editor value={value} onChange={handleItemChange} />
+            </ErrorBoundary>
+          </EditorContainer>
+        </EditorKit>
       </Column>
     </Page>
   );
+};
+
+const createPlugins = (system: System) => {
+  return plugins.concat(createEditorStylePlugin(system));
 };
 
 const plugins: Plugin[] = [
@@ -119,7 +115,7 @@ const plugins: Plugin[] = [
   UnderlinePlugin,
   OrderedListPlugin,
   UnorderedListPlugin,
-  QuotePlugin,
+  BlockquotePlugin,
   H1Plugin,
   H2Plugin,
   H3Plugin,
@@ -132,18 +128,21 @@ const plugins: Plugin[] = [
   UnorderedListPlugin,
   VideoPlugin,
   TablePlugin,
-  CodeHighlighterPlugin,
-  EnterKeyHandler,
-  StylePlugin,
-  CodeHighlighterPlugin,
+  CodePlugin,
+  EnterKeyPlugin,
+  FontsPlugin,
+  ColorPlugin,
   createBreakoutPlugin(),
   DividerPlugin,
   HistoryPlugin,
   ConstraintsPlugin,
   SelectionToolbarPlugin,
   EditorToolbarPlugin,
-  EditorStylePlugin,
   ImagePlugin,
   TextAlignPlugin,
-  DividerPlugin
+  DividerPlugin,
+  createClearFormattingPlugin(),
+  createInitialLetterPlugin(),
+  FormatContextMenuPlugin,
+  InsertContextMenuPlugin,
 ];
