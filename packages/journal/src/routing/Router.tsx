@@ -11,8 +11,8 @@ export const Router = () => {
     <HashRouter>
       <Match>
         <Route exact path={"/library"} component={LibraryPage} />
-        <Route exact path={"/templates"} component={TemplatesPage} />
         <Route exact path={"/library/view/:itemId"} component={ContentPage} />
+        <Route exact path={"/templates"} component={TemplatesPage} />
         <Route exact path={"/media/images"} component={MediaPage} />
         <Route exact path={"/media/videos"} component={MediaPage} />
         <Route exact path={"/settings/general"} component={SettingsPage} />

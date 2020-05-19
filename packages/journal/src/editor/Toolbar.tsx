@@ -1,5 +1,5 @@
 import React from "react";
-import { Row, FlexProps, Text, Icon, Scope } from "@mpkelly/siam";
+import { Row, FlexProps, Text, Icon, Scope, MenuItem } from "@mpkelly/siam";
 import { Show } from "../util/Show";
 import { ItemData } from "../content/ItemData";
 import {
@@ -26,6 +26,10 @@ import {
   SpellCheckButton,
   TableButton,
   ReadOnlyButton,
+  LayoutButton,
+  LayoutMenuItem,
+  CustomLayoutMenuItem,
+  LayoutAction,
 } from "@mpkelly/react-editor-kit";
 import { ExtendedColors } from "../color-picker/ColorPicker";
 
@@ -115,6 +119,18 @@ export const Toolbar = (props: ToolbarProps) => {
               ligature="format_align_justify"
             />
             <Divider />
+            <LayoutButton
+              className="material-icons-round"
+              ligature="view_array"
+            >
+              <LayoutMenuItem text="1:1" layout={[1, 1]} />
+              <LayoutMenuItem text="2:1" layout={[2, 1]} />
+              <LayoutMenuItem text="1:2" layout={[1, 2]} />
+              <LayoutMenuItem text="1:1:1" layout={[1, 1, 1]} />
+              <LayoutMenuItem text="1:3:1" layout={[1, 3, 1]} />
+              <CustomLayoutMenuItem text="Custom" />
+            </LayoutButton>
+            <Divider />
             <OrderedListButton
               className="material-icons-round"
               ligature="format_list_numbered"
@@ -152,7 +168,14 @@ export const Toolbar = (props: ToolbarProps) => {
             </Show>
           </Row>
           <Divider />
-          <Icon kind="button" name={"print"} onClick={window.print} />
+          <Icon
+            kind="button"
+            name={"print"}
+            onClick={(event: React.MouseEvent) => {
+              event.preventDefault();
+              window.print();
+            }}
+          />
           <Divider />
           <ReadOnlyButton
             className="material-icons-round"

@@ -18,6 +18,7 @@ export const TreeItemView = (props: TreeItemViewProps) => {
     provided,
     icon,
     color,
+    selected,
     ...rest
   } = props;
   const folderIcon = item.isExpanded ? "folder-open" : "folder-closed";
@@ -27,7 +28,9 @@ export const TreeItemView = (props: TreeItemViewProps) => {
       gravity={4}
       borderRadius="sm"
       py="sm"
+      selected={selected}
       selectedBackgroundColor="muted-alpha10"
+      hoverBackgroundColor="muted-alpha10"
       {...rest}
       ref={provided.innerRef}
       {...provided.draggableProps}
@@ -46,9 +49,22 @@ export const TreeItemView = (props: TreeItemViewProps) => {
           }
         />
       </Optional>
-      <Icon name={icon} mr="md" color={color} kind="small" />
+      <Icon
+        name={icon}
+        mr="md"
+        color="secondary.text"
+        kind="small"
+        selectedColor={"primary.text"}
+        selected={selected}
+      />
       <Link to={`/library/view/${item.id}`}>
-        <Text>{item.data.name}</Text>
+        <Text
+          color="secondary.text"
+          selectedColor={"primary.text"}
+          selected={selected}
+        >
+          {item.data.name}
+        </Text>
       </Link>
     </Row>
   );

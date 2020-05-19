@@ -20,7 +20,7 @@ export const Editor = (props: EditorProps) => {
       <Resizable
         initialWidth={settings.contentWidth}
         onChange={(contentWidth) => updateSettings({ contentWidth })}
-        style={{ margin: 0 }}
+        style={{ margin: "0 auto" }}
       >
         <Row
           id="editor"

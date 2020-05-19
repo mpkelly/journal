@@ -46,6 +46,8 @@ import {
   TextAlignPlugin,
   createClearFormattingPlugin,
   createInitialLetterPlugin,
+  Element,
+  LayoutPlugin,
 } from "@mpkelly/react-editor-kit";
 import { ErrorBoundary } from "../errors/ErrorHandler";
 import { EditorContainer } from "./EditorContainer";
@@ -53,8 +55,9 @@ import { FormatContextMenuPlugin } from "./FormatContextMenuPlugin";
 import { InsertContextMenuPlugin } from "./InsertContextMenuPlugin";
 import { createEditorStylePlugin } from "./EditorPageStylePlugin";
 
-export interface EditorPageProps extends RouteComponentProps {
+export interface EditorPageProps {
   item: ItemData;
+  defaultValue?(): Element[];
 }
 
 export const EditorPage = (props: EditorPageProps) => {
@@ -77,8 +80,9 @@ export const EditorPage = (props: EditorPageProps) => {
         height={"100%"}
         backgroundColor="content"
         overflow="hidden"
+        key={item.id}
       >
-        <EditorKit plugins={plugins} readOnly={readOnly}>
+        <EditorKit plugins={plugins} readOnly={readOnly} id="documenteditor">
           <Toolbar
             readOnly={readOnly}
             saved={saved}
@@ -145,4 +149,5 @@ const plugins: Plugin[] = [
   createInitialLetterPlugin(),
   FormatContextMenuPlugin,
   InsertContextMenuPlugin,
+  LayoutPlugin,
 ];

@@ -27,19 +27,22 @@ export const LightTheme = {
 };
 
 export const DarkTheme = {
-  accent: "#3bd386",
+  accent: "#22c3a7",
   muted: "#ccc",
-  content: "#2c2c2d",
-  "primary.text": "rgba(255,255,255,.9)",
+  content: "#222225",
+  "primary.text": "rgba(255,255,255,.95)",
   "secondary.text": "rgba(255,255,255,.6)",
-  "light.text": "rgba(255,255,255,.9)",
+  "light.text": "rgba(255,255,255,.95)",
   danger: "orangered",
-  background: "#2c2c2d",
+  background: "#222225",
   dividers: "rgba(0,0,0,.2)",
-  collection: "orange",
-  document: "#bff6ff",
+  collection: "#bfd664",
+  document: "#3c9cdb",
   wikipage: "lightpink",
   folder: "muted",
+  nav: {
+    background: "#1f1f21",
+  },
   toolbar: {
     muted: "accent",
     "primary.text": "white",
@@ -103,6 +106,7 @@ export const SiamSystem: System = {
   },
   layers: {
     popup: 10,
+    dialogs: 1000,
     tooltips: 100000,
   },
   components: {
@@ -180,6 +184,13 @@ export const SiamSystem: System = {
         extends: ["components.button.base"],
         backgroundColor: "danger",
         hoverBackgroundColor: "danger-alpha50",
+        default: true,
+      },
+      text: {
+        extends: ["components.button.base"],
+        backgroundColor: "transparent",
+        hoverBackgroundColor: "muted-alpha20",
+        activeBackgroundColor: "muted-alpha40",
         default: true,
       },
     },
@@ -356,6 +367,7 @@ export const SiamSystem: System = {
         extends: ["components.label.primary"],
         backgroundColor: "orange",
         color: "light.text",
+        fontSize: 10,
       },
     },
     badge: {

@@ -7,9 +7,13 @@ import {
   EditableText,
   Select,
   MenuItemModel,
+  Portal,
+  Show,
 } from "@mpkelly/siam";
 import { useContainerPage } from "../collection-page/ContainerPageContext";
 import { ItemData } from "../content/ItemData";
+import { ConfirmDialogView } from "../dialog/ConfirmDialogView";
+import { OverlayView } from "../dialog/OverlayView";
 
 export interface HeaderViewProps extends FlexProps {
   item: ItemData;
@@ -19,7 +23,14 @@ export interface HeaderViewProps extends FlexProps {
 
 export const HeaderView = (props: HeaderViewProps) => {
   const { item, menuItems, icon } = props;
-  const { addItem, handleNameChanged } = useContainerPage();
+  const {
+    addItem,
+    handleNameChanged,
+    showDeleteConfirmation,
+    handleDeleteItem,
+    handleConfirmDelete,
+    handleCancelDelete,
+  } = useContainerPage();
   return (
     <Header flexDirection="row" gravity={"start"}>
       <Row gravity="start">
@@ -31,7 +42,12 @@ export const HeaderView = (props: HeaderViewProps) => {
         />
       </Row>
       <Row gravity="start" ml="auto">
-        <Icon name="delete" kind="button" mr="md" />
+        <Icon
+          name="delete"
+          kind="button"
+          mr="md"
+          onClick={() => handleDeleteItem(item.id)}
+        />
         <Select
           items={menuItems}
           onItemClicked={(item: MenuItemModel) => addItem(item.itemType)}
@@ -39,6 +55,22 @@ export const HeaderView = (props: HeaderViewProps) => {
           <Icon name="add" kind="button" />
         </Select>
       </Row>
+      <Show when={showDeleteConfirmation}>
+        <Portal>
+          <OverlayView
+            gravity={"top-center"}
+            p="xxl"
+            onClick={handleCancelDelete}
+          >
+            <ConfirmDialogView
+              messageKey="confirmDelete"
+              onConfirm={handleConfirmDelete}
+              onCancel={handleCancelDelete}
+              buttonKind="danger"
+            />
+          </OverlayView>
+        </Portal>
+      </Show>
     </Header>
   );
 };

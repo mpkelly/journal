@@ -32,6 +32,11 @@ export const IndexDBDatabase: Database = {
   getItem: async (id: string): Promise<ItemData | undefined> => {
     return await items.get(id);
   },
+
+  deleteItems: async (ids: string[]): Promise<void> => {
+    return await items.bulkDelete(ids);
+  },
+
   addItem: async (item: ItemData): Promise<void> => {
     if (!item.id) {
       item.id = newId();

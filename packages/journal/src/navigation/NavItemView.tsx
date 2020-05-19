@@ -1,7 +1,6 @@
 import React, { ReactNode, Fragment } from "react";
 import { Row, Icon, Text, Show, ElementProps } from "@mpkelly/siam";
 import { Link } from "../routing/Link";
-import { useLocation } from "react-router-dom";
 
 export interface NavItemViewProps extends ElementProps<any> {
   icon: string;
@@ -9,24 +8,26 @@ export interface NavItemViewProps extends ElementProps<any> {
   path: string;
   type: string;
   children?: ReactNode;
+  rightContent?: ReactNode;
 }
 
 export const NavItemView = (props: NavItemViewProps) => {
-  const { icon, labelKey, path, type, children, ...rest } = props;
-  const { pathname } = useLocation();
-  const isActive = pathname.startsWith(path);
+  const { icon, labelKey, path, type, children, rightContent, ...rest } = props;
+  const { hash } = window.location;
+  const isActive = hash.startsWith(`#${path}`);
   return (
     <Fragment>
-      <Link to={path}>
+      <Link to={path} {...rest}>
         <Row
           alignItems="center"
           selected={isActive}
           selectedBackgroundColor={"muted-alpha10"}
+          hoverBackgroundColor={"muted-alpha10"}
           borderRadius="sm"
           p={10}
+          my="md"
           mx="md"
           data-id={type}
-          {...rest}
         >
           <Icon
             name={icon}
@@ -34,7 +35,14 @@ export const NavItemView = (props: NavItemViewProps) => {
             selectedColor={"accent"}
             selected={isActive}
           />
-          <Text ml="md" labelKey={labelKey} />
+          <Text
+            ml="md"
+            color={"secondary.text"}
+            selectedColor="primary.text"
+            selected={isActive}
+            labelKey={labelKey}
+          />
+          <Show when={rightContent}>{rightContent}</Show>
         </Row>
       </Link>
       <Show when={isActive}>{children}</Show>

@@ -37,7 +37,9 @@ export const CollectionsTreeView = memo((props: CollectionsTreeViewProps) => {
         return <CollectionTreeItemView selected={selected} {...props} />;
       case ItemType.Folder:
         return <FolderTreeItemView selected={selected} {...props} />;
-      case ItemType.Page:
+      case ItemType.Document:
+        return <FileTreeItemView selected={selected} {...props} />;
+      case ItemType.WikiPage:
         return <FileTreeItemView selected={selected} {...props} />;
     }
     throw Error("Unhandled item " + JSON.stringify(item));
@@ -90,8 +92,8 @@ export const isValid = (
         //it's a file or page which can be moved anywhere except for root
         return (
           destination.parentId !== "root" &&
-          destinationItem.type !== ItemType.File &&
-          destinationItem.type !== ItemType.Page
+          destinationItem.type !== ItemType.WikiPage &&
+          destinationItem.type !== ItemType.Document
         );
       }
     }

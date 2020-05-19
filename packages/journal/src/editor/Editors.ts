@@ -11,16 +11,16 @@ export const useEditor = (props: EditorPageProps) => {
   const [value, setValue] = useState<Element[]>();
   const [locked, setLocked] = useState<boolean>();
   const lastSave = useRef<Element[]>();
+  const createDefault = props.defaultValue || defaultValue;
 
   useEffect(() => {
-    const value = item.data || defaultValue();
+    const value = item.data || createDefault();
     setValue(value);
     setLocked(item.locked);
     lastSave.current = value;
   }, [item.id]);
 
   const handleToggleLocked = useCallback(() => {
-    console.log("Toggle!");
     setLocked((locked) => !locked);
     db.updateItem(item.id, { locked: !locked }).then(console.log);
   }, [locked]);
@@ -61,7 +61,7 @@ export const useEditor = (props: EditorPageProps) => {
   return {
     item,
     saved,
-    value: value || defaultValue(),
+    value: value || createDefault(),
     instantSave,
     handleToggleLocked,
     handleItemChange,

@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexProps, MenuItemModel } from "@mpkelly/siam";
-import { ContainerPage } from "./ContainerPage";
+import { ContainerPage } from "../container-page/ContainerPage";
 import { ItemType, ItemData } from "../content/ItemData";
 
 export interface CollectionsPageProps extends FlexProps {
@@ -9,19 +9,5 @@ export interface CollectionsPageProps extends FlexProps {
 
 export const CollectionsPage = (props: CollectionsPageProps) => {
   const { item, ...rest } = props;
-  const items: MenuItemModel[] = [
-    {
-      labelKey: "addFolder",
-      iconName: "folder",
-      itemType: ItemType.Folder,
-    },
-    {
-      labelKey: "addDocument",
-      iconName: "file",
-      itemType: ItemType.Page,
-    },
-  ];
-  return (
-    <ContainerPage icon="collection" item={item} menuItems={items} {...rest} />
-  );
+  return <ContainerPage icon="collection" item={item} {...rest} />;
 };

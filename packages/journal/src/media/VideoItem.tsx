@@ -9,13 +9,7 @@ export const VideoItem = (props: MediaItemProps) => {
   const { media, ...rest } = props;
   const source = media.source;
   return (
-    <Row
-      m="md"
-      alignItems="center"
-      justifyContent="center"
-      backgroundColor="muted.L50"
-      {...rest}
-    >
+    <Row m="md" gravity="center" backgroundColor="muted-alpha20" {...rest}>
       <Player url={source} width={"100%"} height={350} controls />
     </Row>
   );

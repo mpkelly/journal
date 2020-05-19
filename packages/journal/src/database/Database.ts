@@ -9,6 +9,7 @@ export interface Database {
 
   getItem(id: string): Promise<ItemData | undefined>;
   addItem(item: ItemData): Promise<void>;
+  deleteItems(ids: string[]): Promise<void>;
   updateItem(id: string, changes: Partial<ItemData>): Promise<number>;
   getChildren(
     id: string,
@@ -40,3 +41,10 @@ export type PagedResult<T> = {
   page: number;
   items: T[];
 };
+
+export const emptyPagedResult = () => ({
+  count: 0,
+  pageSize: 0,
+  page: 0,
+  items: [],
+});

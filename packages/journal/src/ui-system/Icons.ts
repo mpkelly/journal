@@ -28,7 +28,7 @@ export const Icons: IconBundle = {
     ligature: "description",
     className,
   },
-  "wiki-page": {
+  wikipage: {
     ligature: "ballot",
     className,
   },
@@ -102,6 +102,10 @@ export const Icons: IconBundle = {
   },
   template: {
     ligature: "post_add",
+    className,
+  },
+  confirm: {
+    ligature: "info",
     className,
   },
 };

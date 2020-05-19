@@ -6,7 +6,6 @@ import { TagProvider } from "../tags/TagContext";
 import { Toolbar } from "./Toolbar";
 import { MediaGrid } from "./MediaGrid";
 import { MediaProvider } from "./MediaContext";
-import { Navigation } from "./Navigation";
 
 export interface MediaPageProps extends RouteComponentProps {}
 
@@ -18,7 +17,6 @@ export const MediaPage = withRouter((props: MediaPageProps) => {
           <Column p="lg" flexGrow={1} overflowY={"hidden"}>
             <Toolbar />
             <Row flexGrow={1} overflowY={"hidden"} pl={3}>
-              <Navigation />
               <MediaGrid />
             </Row>
           </Column>

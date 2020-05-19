@@ -5,13 +5,13 @@
   <meta charset="utf-8" />
   <title>Journal</title>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.5/umd/react.production.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.5/umd/react-dom.production.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react/16.8.5/umd/react.development.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/react-dom/16.8.5/umd/react-dom.development.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/clear-sans-webfont@1.1.1/css/clear-sans.css">
-  <link rel="stylesheet" href="../chrome/extension/css/styles.css">
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Material+Icons+Round">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../chrome/extension/css/styles.css" media="print">
   <style>
     html,
     body,
@@ -21,6 +21,10 @@
       width: 100vw;
       height: 100vh;
       overflow: hidden;
+    }
+
+    * {
+      box-sizing: border-box;
     }
   </style>
 </head>

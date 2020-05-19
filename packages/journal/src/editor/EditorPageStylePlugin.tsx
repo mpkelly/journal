@@ -25,18 +25,13 @@ const getStyle = (system: System) => {
       --gray-light2-color:rgba(255,255,255,0.1);
       --divider-color: var(--gray-light-color);
       --control-hover-color: var(--gray-light-color);!important;
-      --input-background-color: var(---gray-light2-color);
+      --input-background-color: var(--gray-light2-color);
       --action-color: var(--editor-primary);
       --button-color: var(--editor-light);
       --danger-color: red;
       --focus-color: var(--editor-primary);
       --selection-color: #E3E3E3;
       --editor-ui-font: 'Noto Sans TC', sans-serif;
-    }
-  
-  
-    .rek-selection-toolbar {
-      background-color:var(--editor-dark);
     }
   
     .rek-icon-button {
@@ -66,6 +61,11 @@ const getStyle = (system: System) => {
     .rek-list-item {
       font-size:16px;
     }  
+
+    a:visited,
+    a {
+      color:var(--action-color);
+    }
 `;
 };
 

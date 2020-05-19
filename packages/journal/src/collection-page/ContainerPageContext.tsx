@@ -2,10 +2,13 @@ import React, { createContext, useContext, useState, useEffect } from "react";
 import { useDatabase } from "../database/Databases";
 import { newId } from "../util/Identity";
 import { ItemType, createItem, ItemData } from "../content/ItemData";
-import { createNewCollectionItem } from "../collections-tree/CollectionsData";
+import {
+  createNewCollectionItem,
+  CollectionsItemData,
+} from "../collections-tree/CollectionsData";
 import { fireEvent } from "../events/Events";
 import { useParams } from "react-router-dom";
-import { PagedResult } from "../database/Database";
+import { PagedResult, emptyPagedResult } from "../database/Database";
 
 export interface ContainerPageContextContextValue {
   addItem(type: ItemType): void;
@@ -14,7 +17,14 @@ export interface ContainerPageContextContextValue {
   hasPrevious: boolean;
   handleNext(): void;
   handlePrevious(): void;
+  showDeleteConfirmation: boolean;
+  handleDeleteItem(itemId: string): void;
+  handleConfirmDelete(): void;
+  handleCancelDelete(): void;
   items: ItemData[];
+  count: number;
+  page: number;
+  totalPages: number;
 }
 
 const defaultValue = ({} as unknown) as ContainerPageContextContextValue;
@@ -29,25 +39,21 @@ export const useContainerPage = () => {
   return useContext(Context);
 };
 
-export const PageSize = 20;
+export const PageSize = 10;
 
 let count = 1;
-/**
- *
- * Works with any type of 'container' i.e. folder or collection
- */
+
 export const ContainerPageProvider = (props: CollectionsPageProviderProps) => {
   const { children, itemId: collectionId } = props;
-  const [page, setPage] = useState(0);
   const { itemId } = useParams();
-
   const db = useDatabase();
+  const [itemToDelete, setItemToDelete] = useState<string>();
+  const [page, setPage] = useState(0);
+  const [items, setItems] = useState<PagedResult<ItemData>>(emptyPagedResult());
 
   useEffect(() => {
     db.getChildren(itemId, page, PageSize).then(setItems);
   }, [itemId, page]);
-
-  const [items, setItems] = useState<PagedResult<ItemData>>();
 
   const hasNext = Boolean(
     items && items.page + 1 < items.count / items.pageSize
@@ -99,6 +105,35 @@ export const ContainerPageProvider = (props: CollectionsPageProviderProps) => {
     db.getChildren(itemId, 0, PageSize).then(setItems);
   };
 
+  const handleConfirmDelete = async () => {
+    const collections = await db.getCollections();
+    const item = collections.items.find((item) => item.id === itemId);
+    if (item) {
+      const getChildren = (item: CollectionsItemData, all: string[] = []) => {
+        const children = item.children;
+        all = all.concat(children);
+        children.forEach((child) => {
+          const childItem = collections.items.find((item) => item.id === child);
+          if (childItem) {
+            getChildren(childItem, all);
+          }
+        });
+        return all;
+      };
+      const all = getChildren(item);
+      console.log("All", all);
+      await db.transact(async () => {
+        db.deleteItems(all);
+        const next = { ...collections };
+        next.items = next.items.filter((item) => !all.includes(item.id));
+        db.updateCollections(next);
+        return;
+      }, ["items", "collections"]);
+    }
+  };
+
+  const handleCancelDelete = () => setItemToDelete(undefined);
+
   const context = {
     addItem,
     handleNameChanged,
@@ -106,7 +141,14 @@ export const ContainerPageProvider = (props: CollectionsPageProviderProps) => {
     hasPrevious,
     handleNext,
     handlePrevious,
-    items: items ? items.items : [],
+    items: items.items,
+    count: items.count,
+    page: page + 1,
+    totalPages: items.count ? Math.ceil(items.count / items.pageSize) : 0,
+    showDeleteConfirmation: Boolean(itemToDelete),
+    handleDeleteItem: setItemToDelete,
+    handleConfirmDelete,
+    handleCancelDelete,
   };
 
   return <Context.Provider value={context}>{children}</Context.Provider>;

@@ -7,10 +7,10 @@ export interface ItemData {
 }
 
 export enum ItemType {
-  Page,
+  Document,
   Folder,
   Collection,
-  File,
+  WikiPage,
 }
 
 export const createCollectionItem = (id: string, name: string) => {

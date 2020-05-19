@@ -4,6 +4,7 @@ import React, {
   useEffect,
   useContext,
   useCallback,
+  ReactNode,
 } from "react";
 import { useDatabase } from "../database/Databases";
 import {
@@ -25,7 +26,7 @@ const defaultValue = ({} as unknown) as CollectionTreeContextValue;
 const Context = createContext<CollectionTreeContextValue>(defaultValue);
 
 export interface CollectionsTreeProviderProps {
-  children: JSX.Element;
+  children: ReactNode;
 }
 
 export const useCollectionsTree = () => {

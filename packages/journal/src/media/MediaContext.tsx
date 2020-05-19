@@ -8,7 +8,8 @@ import { fileToBase64 } from "../util/Files";
 import { useCallback } from "react";
 
 export interface MediaContextValue {
-  items: Media[][];
+  groups: Media[][];
+  media: Media[];
   sortItems: any[];
   sortItem: any;
   tabIndex: number;
@@ -126,11 +127,12 @@ export const MediaProvider = (props: MediaProviderProps) => {
     mediaItems.reverse();
   }
   const tabIndex = Tabs.findIndex((tab) => tab.type == type);
-  const items = groupitems(mediaItems, Tabs[tabIndex].columns);
+  const groups = groupitems(mediaItems, Tabs[tabIndex].columns);
   const mediaIcon = Tabs[tabIndex].icon;
 
   const context = {
-    items,
+    groups,
+    media,
     sortItems,
     sortItem,
     tabIndex,
