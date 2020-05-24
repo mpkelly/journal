@@ -108,4 +108,36 @@ export const Icons: IconBundle = {
     ligature: "info",
     className,
   },
+  menu: {
+    ligature: "menu",
+    className,
+  },
+  code: {
+    ligature: "code",
+    className,
+  },
+  execute: {
+    ligature: "play_arrow",
+    className,
+  },
+  style: {
+    ligature: "style",
+    className,
+  },
+  function: {
+    ligature: "functions",
+    className,
+  },
+  help: {
+    ligature: "help_outline",
+    className,
+  },
+  snippets: {
+    ligature: "view_quilt",
+    className,
+  },
+  outline: {
+    ligature: "list",
+    className,
+  },
 };

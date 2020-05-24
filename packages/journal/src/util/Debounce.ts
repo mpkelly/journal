@@ -4,19 +4,19 @@ export type Options = {
   isImmediate: boolean;
 };
 
-let timeoutId: ReturnType<typeof setTimeout> | undefined;
-
 export function debounce<F extends Procedure>(
   func: F,
   waitMilliseconds: number,
   options: Options = {
-    isImmediate: false
+    isImmediate: false,
   }
 ): F {
-  return function(this: any, ...args: any[]) {
+  let timeoutId: ReturnType<typeof setTimeout> | undefined;
+
+  return function (this: any, ...args: any[]) {
     const context = this;
 
-    const doLater = function() {
+    const doLater = function () {
       timeoutId = undefined;
       if (!options.isImmediate) {
         func.apply(context, args);

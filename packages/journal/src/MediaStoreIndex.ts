@@ -1,4 +1,4 @@
 export {
   MediaType,
-  IndexDBMediaDatabase as MediaStore
-} from "./media/MediaDatabase";
+  IndexDBMediaDatabase as MediaStore,
+} from "./features/media/MediaDatabase";
