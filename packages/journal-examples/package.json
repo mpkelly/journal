@@ -8,8 +8,7 @@
     "journal",
     "wiki"
   ],
-  "author": "mkelly <kikemelly@gmail.com>",
-  "homepage": "https://github.com/mpkelly/siam-wiki#readme",
+  "author": "mpkelly <kikemelly@gmail.com>",
   "license": "ISC",
   "main": "dist/index.js",
   "directories": {

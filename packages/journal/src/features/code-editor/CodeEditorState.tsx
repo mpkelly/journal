@@ -14,17 +14,17 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
   const { file } = props;
   const db = useDatabase();
   const [state, setState] = useState<{
-    activeCode?: CodeFile;
-    codes: CodeFile[];
-  }>({ activeCode: undefined, codes: [] });
+    activeCodeFile?: CodeFile;
+    codeFiles: CodeFile[];
+  }>({ activeCodeFile: undefined, codeFiles: [] });
 
-  const { activeCode, codes } = state;
+  const { activeCodeFile, codeFiles } = state;
 
   useEffect(() => {
     if (file.linkedCode) {
       db.getAllCodes(file.linkedCode).then((codes) => {
         if (codes.length) {
-          setState({ activeCode: codes[0], codes });
+          setState({ activeCodeFile: codes[0], codeFiles: codes });
           updateStyles(codes);
         }
       });
@@ -44,8 +44,8 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
       }, ["code", "files"]);
 
       setState((state) => {
-        const codes = [code].concat(state.codes);
-        return { activeCode: code, codes };
+        const codes = [code].concat(state.codeFiles);
+        return { activeCodeFile: code, codeFiles: codes };
       });
     },
     [file]
@@ -54,19 +54,19 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
   const handleChange = useCallback(
     (data: Node[]) => {
       if (
-        activeCode &&
-        Node.string(activeCode.data[0]) !== Node.string(data[0])
+        activeCodeFile &&
+        Node.string(activeCodeFile.data[0]) !== Node.string(data[0])
       ) {
-        db.updateCode(activeCode?.id, { data }).then(() => {
-          const next = { ...activeCode, data };
-          const nextCodes = codes.slice();
-          nextCodes.splice(nextCodes.indexOf(activeCode), 1, next);
-          setState({ activeCode: next, codes: nextCodes });
-          updateStyles(nextCodes);
+        db.updateCode(activeCodeFile?.id, { data }).then(() => {
+          const next = { ...activeCodeFile, data };
+          const files = codeFiles.slice();
+          files.splice(files.indexOf(activeCodeFile), 1, next);
+          setState({ activeCodeFile: next, codeFiles: files });
+          updateStyles(files);
         });
       }
     },
-    [activeCode, codes]
+    [activeCodeFile, codeFiles]
   );
 
   const handleUnlinkCode = useCallback(
@@ -79,30 +79,30 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
       }, ["code", "files"]);
 
       setState((state) => {
-        const codes = state.codes.slice();
-        codes.splice(codes.indexOf(code), 1);
-        return { activeCode: code, codes };
+        const files = state.codeFiles.slice();
+        files.splice(files.indexOf(code), 1);
+        return { activeCodeFile: code, codeFiles: files };
       });
     },
-    [file, codes]
+    [file, codeFiles]
   );
 
   const handleExecuteCode = useCallback(() => {
-    if (activeCode) {
-      const func = eval(Node.string(activeCode.data[0]));
+    if (activeCodeFile) {
+      const func = eval(Node.string(activeCodeFile.data[0]));
       const context = {
         nodes: file.data,
       };
       func(context);
     }
-  }, [activeCode, file]);
+  }, [activeCodeFile, file]);
 
   const handleSetActive = (activeCode: CodeFile) => {
-    setState((current) => ({ ...current, activeCode }));
+    setState((current) => ({ ...current, activeCodeFile: activeCode }));
   };
 
-  const updateStyles = (codes: CodeFile[]) => {
-    const css = codes
+  const updateStyles = (codeFiles: CodeFile[]) => {
+    const css = codeFiles
       .filter((code) => code.type === CodeType.Css)
       .map((code) => (code.data ? Node.string(code.data[0]) : ""))
       .join("\n");
@@ -111,8 +111,8 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
   };
 
   return {
-    codes,
-    activeCode,
+    codes: codeFiles,
+    activeCode: activeCodeFile,
     handleCreate,
     handleChange,
     handleSetActive,
