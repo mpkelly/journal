@@ -23,7 +23,7 @@ export const TemplateCard = (props: TemplateCardProps) => {
       <Text kind="large">{template.name}</Text>
       <Row mt="auto" gravity="center-start">
         <Icon name="document" />
-        <Button labelKey="create" kind="muted" onClick={onCreate} ml="auto" />
+        <Button labelKey="create" kind="text" onClick={onCreate} ml="auto" />
       </Row>
     </Column>
   );

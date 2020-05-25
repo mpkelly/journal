@@ -204,6 +204,14 @@ export const JournalSystem: System = {
         focusBackgroundColor: "accent-dark1",
         activeBackgroundColor: "accent-dark2",
       },
+      muted: {
+        extends: ["components.button.base"],
+        default: true,
+        backgroundColor: "muted",
+        hoverBackgroundColor: "muted-alpha50",
+        focusBackgroundColor: "muted-dark1",
+        activeBackgroundColor: "muted-dark2",
+      },
       danger: {
         extends: ["components.button.base"],
         backgroundColor: "danger",
