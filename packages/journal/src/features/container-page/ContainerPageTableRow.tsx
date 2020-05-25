@@ -32,6 +32,7 @@ export const ContainerPageTableRow = (props: ContainerPageTableRowProps) => {
         <Select
           items={menuItems}
           onItemClicked={() => handleDeleteItem(file.id)}
+          location="start"
         >
           <Icon name={"more"} kind="button" ml="auto" />
         </Select>

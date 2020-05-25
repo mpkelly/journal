@@ -1,6 +1,6 @@
 import db from "./Dexie";
 import { Database, UnitOfDBWork } from "./Database";
-import { File as JFile } from "../file/File";
+import { File as JFile, FileType } from "../file/File";
 import { JournalSettings, DefaultSettings } from "../settings/JournalSettings";
 import { Tag } from "../tags/Tag";
 import { importFromJsonFile, exportToJson } from "./DatabaseBackup";
@@ -24,8 +24,19 @@ export const JournalDatabase: Database = {
   getCollections: async () => {
     const results: JFile[] = [];
     await files.each((item) => {
-      const { data, ...rest } = item;
-      return results.push(rest);
+      if (!item.template) {
+        const { data, ...rest } = item;
+        if (item.type == FileType.Collection || item.type == FileType.Folder) {
+          rest.accepts = [
+            FileType.Folder,
+            FileType.Document,
+            FileType.WikiPage,
+          ];
+        } else {
+          rest.accepts = [];
+        }
+        results.push(rest);
+      }
     });
     return results;
   },
@@ -43,6 +54,10 @@ export const JournalDatabase: Database = {
     }
     file.locked = false;
     return files.add(file, file.id);
+  },
+
+  getTemplates: async () => {
+    return await files.filter((file) => Boolean(file.template)).toArray();
   },
 
   updateFile: async (id: string, changes: Partial<JFile>): Promise<number> => {
@@ -79,10 +94,15 @@ export const JournalDatabase: Database = {
     // TODO look at optimising this. It shoudln't be an issue for listing
     // files and folders but could be for images later.
     // See https://github.com/dfahlander/Dexie.js/issues/838
-    count = await files.where("parentId").equals(fileId).count();
+    count = await files
+      .where("parentId")
+      .equals(fileId)
+      .filter((item) => !item.template)
+      .count();
     results = await files
       .where("parentId")
       .equals(fileId)
+      .filter((item) => !item.template)
       .reverse()
       .offset(page * pageSize)
       .limit(pageSize)

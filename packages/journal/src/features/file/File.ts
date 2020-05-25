@@ -5,6 +5,7 @@ export interface File extends FlatNode {
   type: FileType;
   data?: any;
   locked?: boolean;
+  template?: boolean;
 }
 
 export enum FileType {
@@ -25,5 +26,16 @@ export const createFile = (
   expanded = true,
   parentId?: any
 ): File => {
-  return { id, name, type, expanded, parentId };
+  return { id, name, type, expanded, parentId, data: contentForType(type) };
+};
+
+const contentForType = (type: FileType) => {
+  switch (type) {
+    case FileType.Document:
+      return [{ type: "paragraph", children: [{ text: "" }] }];
+    case FileType.WikiPage:
+      return [{ type: "fixed-title", children: [{ text: "" }] }];
+    default:
+      return null;
+  }
 };

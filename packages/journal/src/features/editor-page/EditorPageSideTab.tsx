@@ -3,11 +3,7 @@ import { SideTab } from "./EditorSideTabState";
 import { EditorPageCodeTab } from "./EditorPageCodeTab";
 import { EditorPageOutlineTab } from "./EditorPageOutlineTab";
 import { EditorPageTemplatesTab } from "./EditorPageTemplatesTab";
-import {
-  useEditorState,
-  useEditorSideTabState,
-  CodeEditorStateProvider,
-} from "./EditorPageState";
+import { useEditorState, useEditorSideTabState } from "./EditorPageState";
 
 export const EditorPageSideTab = () => {
   const { file } = useEditorState();
@@ -21,10 +17,6 @@ export const EditorPageSideTab = () => {
     case SideTab.Templates:
       return <EditorPageTemplatesTab width={300} file={file} />;
     case SideTab.Code:
-      return (
-        <CodeEditorStateProvider file={file}>
-          <EditorPageCodeTab flex="1 1 0" width="100%" />
-        </CodeEditorStateProvider>
-      );
+      return <EditorPageCodeTab flex="1 1 0" width="100%" />;
   }
 };

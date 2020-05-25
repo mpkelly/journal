@@ -301,6 +301,7 @@ export const JournalSystem: System = {
         },
       },
     },
+
     menu: {
       primary: {
         position: "relative",

@@ -1,4 +1,5 @@
-import { IconBundle } from "@mpkelly/siam";
+import React from "react";
+import { Text, IconBundle, ElementProps, IconProps } from "@mpkelly/siam";
 
 const className = "material-icons";
 
@@ -139,5 +140,20 @@ export const Icons: IconBundle = {
   outline: {
     ligature: "list",
     className,
+  },
+  variable: {
+    component: (props: IconProps) => (
+      <Text
+        style={{
+          fontFamily: "monospace",
+          fontWeight: 700,
+          transform: "scale(.8,1)",
+          fontSize: 20,
+        }}
+        {...props}
+      >
+        &#123;x&#125;
+      </Text>
+    ),
   },
 };

@@ -6,13 +6,18 @@ import { FileType, createFile, File } from "../file/File";
 import { fireEvent } from "../../util/events/Events";
 import { useParams } from "react-router-dom";
 import { PagedResult, emptyPagedResult } from "../database/Database";
-import { NodeId } from "../../components/tree-kit/Node";
+import {
+  NodeId,
+  toTreeNodes,
+  findTreeNodeById,
+  toFlatNodes,
+} from "../../components/tree-kit/Node";
 
 //TODO make varaible
 export const PageSize = 10;
 let count = 1;
 
-export const useContainerPageState = () => {
+const containerPageState = () => {
   const { fileId } = useParams();
   const db = useDatabase();
   const [itemToDelete, setItemToDelete] = useState<NodeId>();
@@ -41,8 +46,8 @@ export const useContainerPageState = () => {
         const id = newId();
         //TODO use I18NLabels
         const name = `New item ${count++}`;
-        const item = createFile(id, name, type, true, fileId);
-        await db.addFile(item);
+        const file = createFile(id, name, type, true, fileId);
+        await db.addFile(file);
         db.getChildren(fileId, 0, PageSize).then(setItems);
         fireEvent("collectionschanged");
       });
@@ -50,7 +55,24 @@ export const useContainerPageState = () => {
     [fileId]
   );
 
-  const handleConfirmDelete = () => {};
+  const handleConfirmDelete = useCallback(() => {
+    if (!itemToDelete) {
+      return;
+    }
+    db.getCollections().then((files) => {
+      const tree = toTreeNodes(files);
+      const result = findTreeNodeById(itemToDelete, tree);
+      if (result && result.node) {
+        const ids = toFlatNodes([result.node]).map((node) => node.id);
+        db.deleteFiles(ids)
+          .then(handleCancelDelete)
+          .then(() => {
+            fireEvent("collectionschanged");
+            db.getChildren(fileId, 0, PageSize).then(setItems);
+          });
+      }
+    });
+  }, [itemToDelete, fileId]);
 
   const handleCancelDelete = () => setItemToDelete(undefined);
 
@@ -72,6 +94,6 @@ export const useContainerPageState = () => {
   };
 };
 
-export const [ContainerPageStateProvider, useCodeEditorState] = constate(
-  useContainerPageState
+export const [ContainerPageStateProvider, useContainerPageState] = constate(
+  containerPageState
 );

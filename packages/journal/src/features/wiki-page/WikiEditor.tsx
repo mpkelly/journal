@@ -80,7 +80,7 @@ export interface WikiEditorProps {
 
 export const WikiEditor = (props: WikiEditorProps) => {
   const { system } = props;
-  const { value, handleToggleLocked, handleItemChange } = useEditorState({
+  const { value, handleToggleLocked, handleChange } = useEditorState({
     file: props.file,
     defaultValue,
   });
@@ -120,7 +120,7 @@ export const WikiEditor = (props: WikiEditorProps) => {
           onChange={console.log}
           style={{ margin: 0 }}
         >
-          <Editor value={value} onChange={handleItemChange} />
+          <Editor value={value} onChange={handleChange} />
         </Resizable>
         <Toolbar />
       </div>

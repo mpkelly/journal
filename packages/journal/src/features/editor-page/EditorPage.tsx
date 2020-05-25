@@ -8,6 +8,7 @@ import { EditorPageEditor } from "./EditorPageEditor";
 import {
   EditorStateProvider,
   EditorSideTabStateProvider,
+  CodeEditorStateProvider,
 } from "./EditorPageState";
 import { EditorPageSideTab } from "./EditorPageSideTab";
 
@@ -30,7 +31,9 @@ export const EditorPage = (props: EditorPageProps) => {
         <EditorStateProvider {...props}>
           <EditorPageEditor>
             <EditorSideTabStateProvider>
-              <EditorPageSideTab />
+              <CodeEditorStateProvider file={file}>
+                <EditorPageSideTab />
+              </CodeEditorStateProvider>
               <EditorPageToolbar width={50} minWidth={50} />
             </EditorSideTabStateProvider>
           </EditorPageEditor>

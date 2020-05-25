@@ -2,7 +2,6 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { Element } from "@mpkelly/react-editor-kit";
 import { EditorPageProps } from "../editor-page/EditorPage";
 import { useDatabase } from "../database/DatabaseState";
-import { debounce } from "../../util/Debounce";
 import { NodeId } from "../../components/tree-kit/Node";
 
 export const useEditorState = (props: EditorPageProps) => {
@@ -13,6 +12,7 @@ export const useEditorState = (props: EditorPageProps) => {
   const [locked, setLocked] = useState<boolean>();
   const lastSave = useRef<Element[]>();
   const createDefault = props.defaultValue || defaultValue;
+  const saveTimeout = useRef<any>();
 
   useEffect(() => {
     const value = file.data || createDefault();
@@ -26,7 +26,7 @@ export const useEditorState = (props: EditorPageProps) => {
     db.updateFile(file.id, { locked: !locked }).then(console.log);
   }, [locked]);
 
-  const handleItemChange = (next: Element[]) => {
+  const handleChange = (next: Element[]) => {
     file.data = next;
     setValue(next);
     if (JSON.stringify(next) !== JSON.stringify(value)) {
@@ -35,7 +35,7 @@ export const useEditorState = (props: EditorPageProps) => {
     }
   };
 
-  const handleSave = (fileId: NodeId, value: any) => {
+  const handleSave = (fileId: NodeId, value: Element[]) => {
     db.updateFile(fileId, { data: value }).then(() => {
       setSaved(true);
       // Remember the last valid value which can be reinstated as part
@@ -46,7 +46,7 @@ export const useEditorState = (props: EditorPageProps) => {
 
   const instantSave = useCallback(() => {
     try {
-      handleSave(file.id, value);
+      handleSave(file.id, value as Element[]);
     } catch (Error) {
       console.error("Error saving value", value);
       handleRestorePreviousValue();
@@ -59,14 +59,18 @@ export const useEditorState = (props: EditorPageProps) => {
     }
   };
 
-  const debouncedSave = debounce(handleSave, 3000);
+  const debouncedSave = (id: any, value: Element[]) => {
+    clearTimeout(saveTimeout.current);
+    saveTimeout.current = setTimeout(() => handleSave(id, value), 3000);
+  };
+
   return {
     file,
     saved,
     value: value || createDefault(),
     instantSave,
     handleToggleLocked,
-    handleItemChange,
+    handleChange,
     readOnly: locked,
     handleRestorePreviousValue,
   };

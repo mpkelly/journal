@@ -38,6 +38,12 @@ export const EditorPageToolbar = (props: FlexProps) => {
         my="md"
       />
       <Icon
+        name="variable"
+        kind="button"
+        onClick={() => handleSideTabChange(SideTab.Templates)}
+        my="md"
+      />
+      <Icon
         mt="auto"
         name="help"
         kind="button"

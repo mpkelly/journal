@@ -8,7 +8,7 @@ export interface Database {
 
   getFile(id: any): Promise<JFile | undefined>;
   addFile(item: JFile): Promise<void>;
-  deleteFiles(ids: string[]): Promise<void>;
+  deleteFiles(ids: any[]): Promise<void>;
   updateFile(id: any, changes: Partial<JFile>): Promise<number>;
 
   getCode(id: any): Promise<CodeFile | undefined>;
@@ -16,6 +16,8 @@ export interface Database {
   addCode(code: CodeFile): Promise<void>;
   deleteCode(id: any): Promise<void>;
   updateCode(id: any, changes: Partial<CodeFile>): Promise<number>;
+
+  getTemplates(): Promise<JFile[]>;
 
   getChildren(
     id: string,

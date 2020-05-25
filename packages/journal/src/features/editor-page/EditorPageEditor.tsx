@@ -37,7 +37,6 @@ import {
   ImagePlugin,
   TextAlignPlugin,
   createClearFormattingPlugin,
-  createInitialLetterPlugin,
   LayoutPlugin,
   Plugin,
 } from "@mpkelly/react-editor-kit";
@@ -56,7 +55,7 @@ export const EditorPageEditor = (props: EditorPageEditorProps) => {
     value,
     instantSave,
     handleToggleLocked,
-    handleItemChange,
+    handleChange,
     readOnly,
     handleRestorePreviousValue,
   } = useEditorState();
@@ -81,7 +80,7 @@ export const EditorPageEditor = (props: EditorPageEditorProps) => {
           id="editor"
         >
           <ErrorBoundary handleGoBack={handleRestorePreviousValue}>
-            <Editor value={value} onChange={handleItemChange} />
+            <Editor value={value} onChange={handleChange} />
           </ErrorBoundary>
         </EditorContainer>
         {children}

@@ -5,14 +5,17 @@ import {
   createOutline,
   useEditorKit,
   ReactEditor,
+  Element,
 } from "@mpkelly/react-editor-kit";
-import { useEditorState } from "./EditorPageState";
 
 const FontSize = 20;
 
-export const EditorPageOutlineTab = (props: FlexProps) => {
-  const { ...rest } = props;
-  const { value } = useEditorState();
+export interface EditorPageOutlineTabProps extends FlexProps {
+  value: Element[];
+}
+
+export const EditorPageOutlineTab = (props: EditorPageOutlineTabProps) => {
+  const { value, ...rest } = props;
   const { editor } = useEditorKit();
   const outline = createOutline(value);
   const handleClick = (node: Node) => {

@@ -56,7 +56,7 @@ export const findTreeNodeById = (
   id: NodeId,
   nodes: TreeNode[],
   parent: TreeNode | null = null
-): { node?: Node; parent?: Node | null } | null => {
+): { node?: TreeNode; parent?: TreeNode | null } | null => {
   for (let node of nodes) {
     if (node.id === id) {
       return { node, parent };

@@ -25,8 +25,8 @@ export const ContainerPageHeader = (props: ContainerPageHeaderProps) => {
     handleNameChanged,
   } = useContainerPageState();
   return (
-    <Header flexDirection="row" gravity={"start"}>
-      <Row gravity="start">
+    <Header flexDirection="row" gravity={"center-start"}>
+      <Row gravity="center-start">
         <Icon name={icon} kind="large" mr="md" color="accent" />
         <EditableText
           kind="large"

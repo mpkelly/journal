@@ -38,7 +38,7 @@ export const CodeEditorToolbar = (props: CodeEditorToolbarProps) => {
       codeType: CodeType.Css,
     },
     {
-      iconName: "function",
+      iconName: "execute",
       labelKey: "addScript",
       codeType: CodeType.JavaScript,
     },

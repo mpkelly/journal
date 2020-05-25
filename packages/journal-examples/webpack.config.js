@@ -1,4 +1,4 @@
-//const TerserPlugin = require("terser-webpack-plugin");
+const TerserPlugin = require("terser-webpack-plugin");
 var HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
@@ -18,18 +18,18 @@ var config = {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],
   },
   optimization: {
-    // minimize: true,
-    // minimizer: [
-    //   new TerserPlugin({
-    //     parallel: true,
-    //     terserOptions: {
-    //       ecma: 6,
-    //       output: {
-    //         ascii_only: true,
-    //       },
-    //     },
-    //   }),
-    // ],
+    minimize: true,
+    minimizer: [
+      new TerserPlugin({
+        parallel: true,
+        terserOptions: {
+          ecma: 6,
+          output: {
+            ascii_only: true,
+          },
+        },
+      }),
+    ],
   },
   module: {
     rules: [{ test: /\.tsx?$/, loader: "awesome-typescript-loader" }],

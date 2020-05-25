@@ -1,7 +1,7 @@
 import React, { Fragment } from "react";
 import useBoolean from "react-hanger/useBoolean";
 import { Button, FlexProps, Portal, Column, Show } from "@mpkelly/siam";
-import { TemplatePageCreateDialog } from "../template/TemplatePageCreateDialog";
+import { TemplateCreateDialog } from "../template/TemplateCreateDialog";
 import { Overlay } from "../../util/Overlay";
 import { CreateTemplateInfo } from "../template/TemplateInfo";
 import { File } from "../file/File";
@@ -23,7 +23,7 @@ export const EditorPageTemplatesTab = (props: EditorPageTemplatesTabProps) => {
       <Show when={create.value}>
         <Portal>
           <Overlay onClick={create.toggle} gravity="center">
-            <TemplatePageCreateDialog file={file} />
+            <TemplateCreateDialog file={file} onCancel={create.toggle} />
           </Overlay>
         </Portal>
       </Show>
