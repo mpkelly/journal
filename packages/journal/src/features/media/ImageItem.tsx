@@ -3,7 +3,7 @@ import scrollIntoView from "scroll-into-view-if-needed";
 import { Row, styled, getStyles, ElementProps } from "@mpkelly/siam";
 import { MediaItemProps } from "./MediaItemProps";
 import { Show } from "../../util/Show";
-import { Overlay } from "../../util/Overlay";
+import { Overlay } from "../../components/dialog/Overlay";
 import { stop } from "../../util/Events";
 
 export const ImageItem = (props: MediaItemProps) => {

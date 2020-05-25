@@ -2,6 +2,7 @@ import { File as JFile } from "../file/File";
 import { JournalSettings } from "../settings/JournalSettings";
 import { Tag } from "../tags/Tag";
 import { CodeFile } from "../code-editor/CodeFile";
+import { Variable } from "../variables/Variable";
 
 export interface Database {
   getCollections(): Promise<JFile[]>;
@@ -18,6 +19,11 @@ export interface Database {
   updateCode(id: any, changes: Partial<CodeFile>): Promise<number>;
 
   getTemplates(): Promise<JFile[]>;
+
+  incrementCount(id: string): Promise<number>;
+  addVariable(variable: Variable): Promise<void>;
+  updateVariable(id: any, changes: Partial<Variable>): Promise<number>;
+  deleteVariable(id: any): Promise<void>;
 
   getChildren(
     id: string,

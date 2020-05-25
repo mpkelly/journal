@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import useBoolean from "react-hanger/useBoolean";
-import { Button, FlexProps, Portal, Column, Show } from "@mpkelly/siam";
+import { Button, FlexProps, Column, Show } from "@mpkelly/siam";
 import { TemplateCreateDialog } from "../template/TemplateCreateDialog";
-import { Overlay } from "../../util/Overlay";
+import { Overlay } from "../../components/dialog/Overlay";
 import { CreateTemplateInfo } from "../template/TemplateInfo";
 import { File } from "../file/File";
+import { Dialog } from "../../components/dialog/Dialog";
 
 export interface EditorPageTemplatesTabProps extends FlexProps {
   file: File;
@@ -21,11 +22,9 @@ export const EditorPageTemplatesTab = (props: EditorPageTemplatesTabProps) => {
         <CreateTemplateInfo />
       </Column>
       <Show when={create.value}>
-        <Portal>
-          <Overlay onClick={create.toggle} gravity="center">
-            <TemplateCreateDialog file={file} onCancel={create.toggle} />
-          </Overlay>
-        </Portal>
+        <Dialog onClickOutside={create.toggle}>
+          <TemplateCreateDialog file={file} onCancel={create.toggle} />
+        </Dialog>
       </Show>
     </Fragment>
   );

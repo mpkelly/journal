@@ -1,8 +1,8 @@
 import React from "react";
-import { FlexProps, Portal, Show } from "@mpkelly/siam";
+import { FlexProps, Show } from "@mpkelly/siam";
 import { useContainerPageState } from "./ContainerPageState";
-import { OverlayView } from "../../components/dialog/OverlayView";
 import { ConfirmDialogView } from "../../components/dialog/ConfirmDialogView";
+import { Dialog } from "../../components/dialog/Dialog";
 
 export interface ContainerPageDeleteDialogProps extends FlexProps {}
 
@@ -15,20 +15,19 @@ export const ContainerPageDeleteDialog = () => {
 
   return (
     <Show when={showDeleteConfirmation}>
-      <Portal>
-        <OverlayView
-          gravity={"top-center"}
-          p="xxl"
-          onClick={handleCancelDelete}
-        >
-          <ConfirmDialogView
-            messageKey="confirmDelete"
-            onConfirm={handleConfirmDelete}
-            onCancel={handleCancelDelete}
-            buttonKind="danger"
-          />
-        </OverlayView>
-      </Portal>
+      <Dialog
+        gravity={"top-center"}
+        p="xxl"
+        onClickOutside={handleCancelDelete}
+        height={140}
+      >
+        <ConfirmDialogView
+          messageKey="confirmDelete"
+          onConfirm={handleConfirmDelete}
+          onCancel={handleCancelDelete}
+          buttonKind="danger"
+        />
+      </Dialog>
     </Show>
   );
 };

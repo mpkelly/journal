@@ -8,6 +8,7 @@ db.version(2).stores({
   tags: "++id",
   files: "++id, parentId",
   code: "id",
+  variables: "id",
 });
 db.open();
 

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import { Text, Button, Icon, FlexProps, Column, Row } from "@mpkelly/siam";
 
 export interface ConfirmDialogViewProps extends FlexProps {
@@ -10,25 +10,9 @@ export interface ConfirmDialogViewProps extends FlexProps {
 }
 
 export const ConfirmDialogView = (props: ConfirmDialogViewProps) => {
-  const {
-    message,
-    messageKey,
-    onConfirm,
-    onCancel,
-    buttonKind,
-    ...rest
-  } = props;
+  const { message, messageKey, onConfirm, onCancel, buttonKind } = props;
   return (
-    <Column
-      p="lg"
-      width={300}
-      height={170}
-      zIndex={"dialogs"}
-      backgroundColor="content"
-      borderRadius="sm"
-      boxShadow="sm"
-      {...rest}
-    >
+    <Fragment>
       <Row gravity="center-start">
         <Icon name="confirm" mr="md" />
         <Text kind="large" labelKey={messageKey}>
@@ -44,6 +28,6 @@ export const ConfirmDialogView = (props: ConfirmDialogViewProps) => {
           kind={buttonKind}
         />
       </Row>
-    </Column>
+    </Fragment>
   );
 };

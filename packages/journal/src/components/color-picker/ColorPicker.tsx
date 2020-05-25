@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexProps, Row } from "@mpkelly/siam";
-import { Overlay } from "../../util/Overlay";
+import { Overlay } from "../dialog/Overlay";
 
 export interface ColorPickerProps extends FlexProps {
   selectedColor: string;

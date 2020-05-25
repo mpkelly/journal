@@ -6,11 +6,13 @@ import { Tag } from "../tags/Tag";
 import { importFromJsonFile, exportToJson } from "./DatabaseBackup";
 import { newId } from "../../util/Identity";
 import { CodeFile } from "../code-editor/CodeFile";
+import { Variable } from "../variables/Variable";
 
 const files = db.table<JFile, any>("files");
 const settings = db.table<JournalSettings, any>("settings");
 const tags = db.table<Tag, any>("tags");
 const code = db.table<CodeFile, any>("code");
+const variables = db.table<Variable, any>("variables");
 
 const ensureSettings = async () => {
   const records = await settings.toArray();
@@ -40,6 +42,19 @@ export const JournalDatabase: Database = {
     });
     return results;
   },
+  incrementCount: (id: any) => {
+    return Promise.resolve(1);
+  },
+  addVariable: (variable: Variable) => {
+    return variables.add(variable, variable.id);
+  },
+  updateVariable: (id: any, changes: Partial<Variable>) => {
+    return variables.update(id, changes);
+  },
+  deleteVariable: (id: string) => {
+    return variables.delete(id);
+  },
+
   getFile: async (id: string): Promise<JFile | undefined> => {
     return await files.get(id);
   },

@@ -1,6 +1,6 @@
 import React from "react";
-import { FlexProps, Row } from "@mpkelly/siam";
-import { OverlayLayer } from "../ui-system/Layers";
+import { FlexProps, Row, Column } from "@mpkelly/siam";
+import { OverlayLayer } from "../../ui-system/Layers";
 
 export interface OverlayProps extends FlexProps {
   children?: any;
