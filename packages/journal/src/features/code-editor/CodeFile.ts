@@ -6,6 +6,8 @@ export interface CodeFile {
   type: CodeType;
   name: string;
   data: any;
+  //Called "default" in the UI
+  global?: boolean;
 }
 
 export enum CodeType {
@@ -13,7 +15,11 @@ export enum CodeType {
   JavaScript,
 }
 
-export const createCodeFile = (type: CodeType, name: string): CodeFile => {
+export const createCodeFile = (
+  type: CodeType,
+  name: string,
+  global = false
+): CodeFile => {
   const id = newId();
   let data: Node[] = [];
 
@@ -43,7 +49,7 @@ export const createCodeFile = (type: CodeType, name: string): CodeFile => {
     ];
   }
 
-  return { id, name, type, data };
+  return { id, name, type, data, global };
 };
 
 export const DefaultCSS = `/**

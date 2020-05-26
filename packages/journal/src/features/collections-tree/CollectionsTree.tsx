@@ -6,7 +6,11 @@ import { CollectionTreeItem } from "./CollectionTreeItem";
 import { FolderTreeItem } from "./FolderTreeItem";
 import { DocumenTreeItem } from "./DocumenTreeItem";
 import { WikiPageTreeItem } from "./WikiPageTreeItem";
-import { TreeNode, FlatNode } from "../../components/tree-kit/Node";
+import {
+  TreeNode,
+  FlatNode,
+  createAlphaNumericSort,
+} from "../../components/tree-kit/Node";
 import { Tree } from "../../components/tree-kit/Tree";
 import { useCollectionsTreeState } from "../collection-page/CollectionsPageState";
 
@@ -51,10 +55,13 @@ export const CollectionsTreeView = (props: FlexProps) => {
         renderElement={renderItem}
         nodes={collections}
         handleChange={handleChange}
+        sortFunction={treeSortFunction}
       />
     </TreeContainer>
   );
 };
+
+const treeSortFunction = createAlphaNumericSort("name");
 
 const TreeContainer = styled(Column)`
   ${(props) => getStyles(props, "components.tree")}

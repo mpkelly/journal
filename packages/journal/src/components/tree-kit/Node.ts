@@ -17,6 +17,25 @@ export interface TreeNode extends FlatNode {
   children: TreeNode[];
 }
 
+export type TreeNodeSort = (a: TreeNode, b: TreeNode) => number;
+
+export const createAlphaNumericSort = (
+  property: keyof TreeNode
+): TreeNodeSort => {
+  return (a: TreeNode, b: TreeNode) => {
+    const val = String(a[property]).localeCompare(String(b[property]));
+    console.log(val);
+    return val;
+  };
+};
+
+export const sortTree = (tree: TreeNode[], sortFunction: TreeNodeSort) => {
+  tree.sort(sortFunction);
+  tree.forEach((node) => {
+    sortTree(node.children, sortFunction);
+  });
+};
+
 export const toFlatNode = (node: TreeNode, parentId?: NodeId): FlatNode => {
   const { children, ...rest } = node;
   return { ...rest, parentId };

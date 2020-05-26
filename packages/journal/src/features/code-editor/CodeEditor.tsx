@@ -1,4 +1,4 @@
-import React, { useMemo, memo } from "react";
+import React, { useMemo, memo, ReactNode } from "react";
 import { FlexProps, Column, useSiam, styled } from "@mpkelly/siam";
 import {
   EditorKit,
@@ -9,15 +9,18 @@ import {
 } from "@mpkelly/react-editor-kit";
 import { createEditorStylePlugin } from "../editor-page/EditorPageStylePlugin";
 import { Show } from "../../util/Show";
-import { CodeEditorToolbar } from "./CodeEditorToolbar";
-import { useCodeEditorState } from "../editor-page/EditorPageState";
 
-export interface CodeEditorProps extends FlexProps {}
+import { CodeFile } from "./CodeFile";
+
+export interface CodeEditorProps extends FlexProps {
+  codeFile?: CodeFile;
+  onChange(node: Node[]): void;
+  children?: ReactNode;
+}
 
 export const CodeEditor = memo((props: CodeEditorProps) => {
-  const { ...rest } = props;
+  const { codeFile, onChange, children, ...rest } = props;
   const { system } = useSiam();
-  const { activeCode, handleChange } = useCodeEditorState();
   const plugins: Plugin[] = useMemo(
     () => [
       createCodePlugin({ hideToolbar: true }),
@@ -25,7 +28,7 @@ export const CodeEditor = memo((props: CodeEditorProps) => {
     ],
     []
   );
-  const hasContent = Boolean(activeCode);
+  const hasContent = Boolean(codeFile);
   return (
     <EditorContainer {...rest} borderLeft="1px solid dividers">
       <Show when={hasContent}>
@@ -33,13 +36,13 @@ export const CodeEditor = memo((props: CodeEditorProps) => {
           <Editor
             placeholder={""}
             {...props}
-            value={activeCode?.data as Node[]}
-            onChange={handleChange}
+            value={codeFile?.data as Node[]}
+            onChange={onChange}
             style={{ width: "100%", height: "100%" }}
           />
         </EditorKit>
       </Show>
-      <CodeEditorToolbar mt="auto" />
+      {children}
     </EditorContainer>
   );
 });

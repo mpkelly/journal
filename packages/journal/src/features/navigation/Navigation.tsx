@@ -17,14 +17,14 @@ import { useSettings } from "../settings/SettingsContext";
 import { CollectionsPageNavItems } from "../collection-page/CollectionsPageNavItems";
 import { CodePageNavItem } from "../code-page/CodePageNavItem";
 import { CollectionsTreeStateProvider } from "../collection-page/CollectionsPageState";
+import { NavigationHeader } from "./NavigationHeader";
+import useBoolean from "react-hanger/useBoolean";
 
 export interface NavigationProps extends FlexProps {}
 
 export const Navigation = (props: NavigationProps) => {
   const { ...rest } = props;
-  const { settings } = useSettings();
-  const [collapsed, setCollapsed] = useState(false);
-  const toggleCollapsed = () => setCollapsed((collapsed) => !collapsed);
+  const collapsed = useBoolean(false);
   return (
     <Scope value="nav">
       <Nav
@@ -34,34 +34,14 @@ export const Navigation = (props: NavigationProps) => {
         overflow={!collapsed ? "hidden" : ""}
         position="relative"
         flexShrink={0}
-        ml={collapsed ? -280 : 0}
+        ml={collapsed.value ? -280 : 0}
         transition="all .4s"
         {...rest}
       >
-        <Section
-          flexDirection="row"
-          mb="md"
-          px="lg"
-          height={40}
-          gravity={"center-start"}
-        >
-          <Logo />
-          <Text ml="md" kind="large">
-            {settings.wikiName}
-          </Text>
-          <Label kind="beta" ml="md">
-            BETA
-          </Label>
-          <Show when={!collapsed}>
-            <Icon
-              kind="small.button"
-              name="clear"
-              color="secondary.text"
-              ml="auto"
-              onClick={toggleCollapsed}
-            />
-          </Show>
-        </Section>
+        <NavigationHeader
+          collapsed={collapsed.value}
+          onToggleCollapsed={collapsed.toggle}
+        />
         <Column flexGrow={1} flexShrink={1} overflow="hidden" mt="lg">
           <CollectionsTreeStateProvider>
             <CollectionsPageNavItems />
@@ -70,15 +50,15 @@ export const Navigation = (props: NavigationProps) => {
           <MediaNavItemsView />
           <SettingsNav mt="auto" />
         </Column>
-        <Show when={collapsed}>
+        <Show when={collapsed.value}>
           <Icon
             kind="button"
             name="menu"
             position="absolute"
             right={-40}
             bottom={16}
-            onClick={toggleCollapsed}
-            backgroundColor="background-dark1"
+            onClick={collapsed.toggle}
+            backgroundColor="background"
             zIndex="dialogs"
           />
         </Show>

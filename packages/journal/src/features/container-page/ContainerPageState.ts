@@ -5,13 +5,13 @@ import { newId } from "../../util/Identity";
 import { FileType, createFile, File } from "../file/File";
 import { fireEvent } from "../../util/events/Events";
 import { useParams } from "react-router-dom";
-import { PagedResult, emptyPagedResult } from "../database/Database";
 import {
   NodeId,
   toTreeNodes,
   findTreeNodeById,
   toFlatNodes,
 } from "../../components/tree-kit/Node";
+import { usePagerState } from "../../components/pager/PagerState";
 
 //TODO make varaible
 export const PageSize = 10;
@@ -21,19 +21,20 @@ const containerPageState = () => {
   const { fileId } = useParams();
   const db = useDatabase();
   const [itemToDelete, setItemToDelete] = useState<NodeId>();
-  const [page, setPage] = useState(0);
-  const [items, setItems] = useState<PagedResult<File>>(emptyPagedResult());
+
+  const {
+    items,
+    setItems,
+    page,
+    hasNext,
+    hasPrevious,
+    handleNext,
+    handlePrevious,
+  } = usePagerState<File>();
 
   useEffect(() => {
     db.getChildren(fileId, page, PageSize).then(setItems);
   }, [fileId, page]);
-
-  const hasNext = Boolean(
-    items && items.page + 1 < items.count / items.pageSize
-  );
-  const hasPrevious = page > 0;
-  const handlePrevious = () => setPage((page) => page - 1);
-  const handleNext = () => setPage((page) => page + 1);
 
   const handleNameChanged = async (name: string) => {
     db.updateFile(fileId, { name });

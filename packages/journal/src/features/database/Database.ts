@@ -12,11 +12,11 @@ export interface Database {
   deleteFiles(ids: any[]): Promise<void>;
   updateFile(id: any, changes: Partial<JFile>): Promise<number>;
 
-  getCode(id: any): Promise<CodeFile | undefined>;
-  getAllCodes(ids: any[]): Promise<CodeFile[]>;
-  addCode(code: CodeFile): Promise<void>;
-  deleteCode(id: any): Promise<void>;
-  updateCode(id: any, changes: Partial<CodeFile>): Promise<number>;
+  getCodeFile(id: any): Promise<CodeFile | undefined>;
+  getAllCodeFiles(ids?: any[]): Promise<CodeFile[]>;
+  addCodeFile(code: CodeFile): Promise<void>;
+  deleteCodeFile(id: any): Promise<void>;
+  updateCodeFile(id: any, changes: Partial<CodeFile>): Promise<number>;
 
   getTemplates(): Promise<JFile[]>;
 

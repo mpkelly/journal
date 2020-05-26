@@ -22,10 +22,10 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
 
   useEffect(() => {
     if (file.linkedCode) {
-      db.getAllCodes(file.linkedCode).then((codes) => {
-        if (codes.length) {
-          setState({ activeCodeFile: codes[0], codeFiles: codes });
-          updateStyles(codes);
+      db.getAllCodeFiles(file.linkedCode).then((codeFiles) => {
+        if (codeFiles.length) {
+          setState({ activeCodeFile: codeFiles[0], codeFiles });
+          updateStyles(codeFiles);
         }
       });
     }
@@ -37,7 +37,7 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
       const code = createCodeFile(type, name);
 
       db.transact(async () => {
-        db.addCode(code);
+        db.addCodeFile(code);
         const linkedCode = [code.id].concat(file.linkedCode || []);
         file.linkedCode = linkedCode;
         db.updateFile(file.id, { linkedCode });
@@ -57,13 +57,19 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
         activeCodeFile &&
         Node.string(activeCodeFile.data[0]) !== Node.string(data[0])
       ) {
-        db.updateCode(activeCodeFile?.id, { data }).then(() => {
-          const next = { ...activeCodeFile, data };
-          const files = codeFiles.slice();
-          files.splice(files.indexOf(activeCodeFile), 1, next);
-          setState({ activeCodeFile: next, codeFiles: files });
-          updateStyles(files);
-        });
+        const next = { ...activeCodeFile, data };
+        const nextFiles = codeFiles.slice();
+        nextFiles.splice(nextFiles.indexOf(activeCodeFile), 1, next);
+
+        const nextState = {
+          activeCodeFile: next,
+          codeFiles: nextFiles,
+        };
+        setState(nextState);
+        if (activeCodeFile.type === CodeType.Css) {
+          updateStyles(nextFiles);
+        }
+        db.updateCodeFile(activeCodeFile?.id, { data });
       }
     },
     [activeCodeFile, codeFiles]
@@ -106,7 +112,7 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
       .filter((code) => code.type === CodeType.Css)
       .map((code) => (code.data ? Node.string(code.data[0]) : ""))
       .join("\n");
-    const wrapped = generateCss(`#documenteditor{${css}}`);
+    const wrapped = generateCss(`${css}`);
     attachEditorStyle(wrapped, String(file.id));
   };
 

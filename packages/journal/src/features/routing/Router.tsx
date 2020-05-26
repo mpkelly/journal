@@ -15,6 +15,7 @@ export const Router = () => {
         <Route exact path={"/library/view/:fileId"} component={FilePage} />
         <Route exact path={"/code"} component={CodePage} />
         <Route exact path={"/templates"} component={TemplatePage} />
+        <Route exact path={"/templates/edit/:fileId"} component={FilePage} />
         <Route exact path={"/media/images"} component={MediaPage} />
         <Route exact path={"/media/videos"} component={MediaPage} />
         <Route exact path={"/settings/general"} component={SettingsPage} />

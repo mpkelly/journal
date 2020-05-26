@@ -7,6 +7,7 @@ import { Dialog } from "../../components/dialog/Dialog";
 import { Show } from "../../util/Show";
 import { TemplatePageCreateDialog } from "./TemplatePageCreateDialog";
 import { File } from "../file/File";
+import { PageTitle } from "../../components/page-title/PageTitle";
 
 export interface TemplatePageProps extends FlexProps {}
 
@@ -18,16 +19,15 @@ export const TemplatePage = (props: TemplatePageProps) => {
     handleConfirmCreate,
     handleCancelCreate,
     handleCreate,
+    handleDelete,
+    handleRename,
     substitutions,
   } = useTemplatePageState();
   return (
     <Fragment>
       <Page {...rest}>
         <Column size="100%" p="lg">
-          <Row gravity="center-start">
-            <Icon name={"template"} kind="large" mr="md" color="accent" />
-            <Text kind="large" labelKey="templates" />
-          </Row>
+          <PageTitle iconName="template" labelKey="templates" />
           <Row
             flexWrap="wrap"
             mt="xxl"
@@ -40,6 +40,8 @@ export const TemplatePage = (props: TemplatePageProps) => {
                 <TemplateCard
                   template={template}
                   onCreate={() => handleCreate(template)}
+                  onDelete={() => handleDelete(template.id)}
+                  onRename={(name) => handleRename(template.id, name)}
                   key={template.id}
                 />
               );

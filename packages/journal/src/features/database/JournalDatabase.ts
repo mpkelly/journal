@@ -79,24 +79,27 @@ export const JournalDatabase: Database = {
     return files.update(id, changes);
   },
 
-  getCode: async (id: string): Promise<CodeFile | undefined> => {
+  getCodeFile: async (id: string): Promise<CodeFile | undefined> => {
     return await code.get(id);
   },
-  getAllCodes: async (ids: string[]) => {
+  getAllCodeFiles: async (ids?: string[]) => {
+    if (!ids) {
+      return code.toArray();
+    }
     return code.bulkGet(ids);
   },
-  deleteCode: async (id: string): Promise<void> => {
+  deleteCodeFile: async (id: string): Promise<void> => {
     return await code.delete(id);
   },
 
-  addCode: async (item: CodeFile): Promise<void> => {
+  addCodeFile: async (item: CodeFile): Promise<void> => {
     if (!item.id) {
       item.id = newId();
     }
     return code.add(item, item.id);
   },
 
-  updateCode: async (
+  updateCodeFile: async (
     id: string,
     changes: Partial<CodeFile>
   ): Promise<number> => {

@@ -5,18 +5,19 @@ import { newId } from "../../util/Identity";
 import { useHistory } from "react-router-dom";
 import { Element, Node } from "@mpkelly/react-editor-kit";
 import { findPlaceholders } from "../placeholders/Placeholder";
+import useArray from "react-hanger/array/useArray";
 
 export type Substitution = { name: string; value: string };
 
 export const useTemplatePageState = () => {
   const db = useDatabase();
-  const [templates, setTemplates] = useState<File[]>([]);
+  const [templates, templateActions] = useArray<File>([]);
   const [newFile, setNewFile] = useState<File>();
   const [substitutions, setSubstitutions] = useState<Substitution[]>([]);
   const history = useHistory();
 
   useEffect(() => {
-    db.getTemplates().then(setTemplates);
+    db.getTemplates().then(templateActions.setValue);
   }, []);
 
   const handleCreate = (template: File) => {
@@ -42,6 +43,14 @@ export const useTemplatePageState = () => {
     [newFile]
   );
 
+  const handleRename = (id: any, name: string) => {
+    db.updateFile(id, { name });
+  };
+
+  const handleDelete = (id: any) => {
+    db.deleteFiles([id]).then(() => templateActions.removeById(id));
+  };
+
   return {
     templates,
     newFile,
@@ -49,6 +58,8 @@ export const useTemplatePageState = () => {
     handleCreate,
     handleCancelCreate,
     handleConfirmCreate,
+    handleDelete,
+    handleRename,
   };
 };
 

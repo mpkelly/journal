@@ -8,8 +8,6 @@ import {
   Input,
   Button,
 } from "@mpkelly/siam";
-import { useInput } from "react-hanger/useInput";
-import { useArray } from "react-hanger/useArray";
 import { File } from "../file/File";
 import { Substitution } from "./TemplatePageState";
 

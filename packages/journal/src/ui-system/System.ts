@@ -307,6 +307,9 @@ export const JournalSystem: System = {
           padding: 8,
           width: "100%",
         },
+        "si-menu": {
+          zIndex: "popup",
+        },
       },
     },
 

@@ -156,4 +156,8 @@ export const Icons: IconBundle = {
       </Text>
     ),
   },
+  edit: {
+    ligature: "create",
+    className,
+  },
 };

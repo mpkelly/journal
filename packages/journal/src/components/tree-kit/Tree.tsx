@@ -13,6 +13,8 @@ import {
   Node,
   findTreeNodeById,
   toFlatNodes,
+  TreeNodeSort,
+  sortTree,
 } from "./Node";
 import { TreeElement } from "./TreeElement";
 
@@ -20,6 +22,7 @@ export interface TreeProps {
   nodes: FlatNode[];
   handleChange(node: FlatNode, property: keyof FlatNode, value: any): void;
   renderElement(node: TreeNode, depth: number): JSX.Element;
+  sortFunction?: TreeNodeSort;
 }
 
 export interface TreeContextValue {
@@ -39,10 +42,13 @@ export const useTreeContext = () => {
 };
 
 export const Tree = (props: TreeProps) => {
-  const { nodes, renderElement, handleChange } = props;
+  const { nodes, renderElement, handleChange, sortFunction } = props;
   const [dragId, setDragId] = useState<NodeId>();
   const [overId, setOverId] = useState<NodeId>();
   const treeNodes = toTreeNodes(nodes);
+  if (sortFunction) {
+    sortTree(treeNodes, sortFunction);
+  }
 
   const handleDrop = (dropped: NodeId, target?: NodeId) => {
     if (target) {
