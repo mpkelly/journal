@@ -4,7 +4,7 @@ import { Router } from "./features/routing/Router";
 import { Style } from "./ui-system/Style";
 import { FileUpload } from "./features/upload/FileUpload";
 import { SettingsProvider } from "./features/settings/SettingsContext";
-import { JournalSystem } from "./ui-system/System";
+import { JournalSystem } from "./ui-system/JournalSystem";
 
 export const Journal = () => {
   return (

@@ -86,9 +86,25 @@ export const JournalDatabase: Database = {
     if (!ids) {
       return code.toArray();
     }
-    return code.bulkGet(ids);
+    const files = await code.bulkGet(ids);
+    const global = await code
+      .filter((code) => Boolean(code.global) && !files.includes(code.id))
+      .toArray();
+    return Promise.resolve(global.concat(files));
   },
   deleteCodeFile: async (id: string): Promise<void> => {
+    files
+      .filter((file) => {
+        if (file.linkedCode) {
+          return file.linkedCode.includes(id);
+        }
+        return false;
+      })
+      .modify((file) => {
+        if (file.linkedCode) {
+          file.linkedCode.splice(file.linkedCode.indexOf(id), 1);
+        }
+      });
     return await code.delete(id);
   },
 

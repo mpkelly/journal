@@ -5,6 +5,7 @@ import { TreeNode } from "../../components/tree-kit/Node";
 
 export interface DocumenTreeItemProps extends FlexProps {
   file: TreeNode;
+  onRename(name: string): void;
 }
 
 export const DocumenTreeItem = (props: DocumenTreeItemProps) => {

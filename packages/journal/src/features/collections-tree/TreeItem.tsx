@@ -1,5 +1,12 @@
 import React from "react";
-import { Text, Icon, FlexProps, Row, Optional } from "@mpkelly/siam";
+import {
+  Text,
+  Icon,
+  FlexProps,
+  Row,
+  Optional,
+  EditableText,
+} from "@mpkelly/siam";
 import { Link } from "../routing/Link";
 import { TreeNode } from "../../components/tree-kit/Node";
 import { CollapseToggle } from "../../components/tree-kit/CollapseToggle";
@@ -9,10 +16,11 @@ export interface TreeItemProps extends FlexProps {
   color: string;
   file: TreeNode;
   canExpand?: boolean;
+  onRename(name: string): void;
 }
 
 export const TreeItem = (props: TreeItemProps) => {
-  const { file, canExpand, icon, color, selected, ...rest } = props;
+  const { file, canExpand, icon, color, selected, onRename, ...rest } = props;
   const folderIcon = file.expanded ? "folder-open" : "folder-closed";
   return (
     <Row
@@ -43,14 +51,14 @@ export const TreeItem = (props: TreeItemProps) => {
         selectedColor={"primary.text"}
         selected={selected}
       />
-      <Link to={`/library/view/${file.id}`}>
-        <Text
+      <Link to={`/library/view/${file.id}`} flexGrow={1}>
+        <EditableText
           color="secondary.text"
           selectedColor={"primary.text"}
           selected={selected}
-        >
-          {file.name}
-        </Text>
+          value={file.name}
+          onSave={onRename}
+        />
       </Link>
     </Row>
   );

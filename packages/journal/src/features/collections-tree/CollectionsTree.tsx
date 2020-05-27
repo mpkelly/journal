@@ -35,6 +35,7 @@ export const CollectionsTreeView = (props: FlexProps) => {
       selected,
       file,
       pl: depth * 16,
+      onRename: (name: string) => handleChange(file, "name", name),
     };
     switch (file.type) {
       case FileType.Collection:

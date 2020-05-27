@@ -78,7 +78,7 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
   const handleUnlinkCode = useCallback(
     (code: CodeFile) => {
       db.transact(async () => {
-        const linkedCode = file.linkedCode.slice();
+        const linkedCode = (file.linkedCode as string[]).slice();
         linkedCode.splice(linkedCode.indexOf(code.id), 1);
         file.linkedCode = linkedCode;
         db.updateFile(file.id, { linkedCode });

@@ -6,6 +6,7 @@ export interface File extends FlatNode {
   data?: any;
   locked?: boolean;
   template?: boolean;
+  linkedCode?: string[];
 }
 
 export enum FileType {
