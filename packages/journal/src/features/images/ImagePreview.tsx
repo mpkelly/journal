@@ -59,6 +59,8 @@ export const ImagePreview = (props: ImagePreviewProps) => {
               name="edit"
               kind="button"
               ml="lg"
+              selected={settings.showImageProperties}
+              selectedColor="accent"
               onClick={handleToggleShow}
             />
           </Row>
