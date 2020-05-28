@@ -18,6 +18,7 @@ export const AddImageDialog = (props: AddImageDialogProps) => {
     images,
     image,
     onConfirm,
+    handleChange,
     page,
     hasNext,
     hasPrevious,
@@ -58,7 +59,12 @@ export const AddImageDialog = (props: AddImageDialogProps) => {
           flexShrink={0}
           borderLeft="1px solid dividers"
         >
-          <ImageProperties image={image} onClose={handleConfirm} p="md" />
+          <ImageProperties
+            image={image}
+            onChange={handleChange}
+            onClose={handleConfirm}
+            p="md"
+          />
           <Button
             labelKey="finished"
             mt="auto"

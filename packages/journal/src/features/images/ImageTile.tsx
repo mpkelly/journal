@@ -1,19 +1,15 @@
 import React, { Fragment } from "react";
 import scrollIntoView from "scroll-into-view-if-needed";
 import { Show } from "../../util/Show";
-import { Overlay } from "../../components/dialog/Overlay";
-import { stop } from "../../util/Events";
 import { GridImage } from "../../components/grid/GridImage";
-import { getStyles, styled, FlexProps, Row, Icon } from "@mpkelly/siam";
+import { FlexProps } from "@mpkelly/siam";
 import { Media } from "../media/Media";
-import { stopEvent } from "@mpkelly/react-editor-kit";
-import { getImageSize } from "./ImageSize";
 import { ImagePreview } from "./ImagePreview";
+import { useImagePageState } from "../image-page/ImagePageState";
 
 export interface ImageTileProps extends FlexProps {
   image: Media;
   onClose(): void;
-  onDelete(): void;
   showPreview: boolean;
 }
 

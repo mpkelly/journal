@@ -36,7 +36,7 @@ export const useImageState = () => {
     loadImages();
   };
 
-  const handleUpdate = async (media: Media) => {
+  const handleChange = async (media: Media) => {
     await db.update(media);
     loadImages();
   };
@@ -77,7 +77,7 @@ export const useImageState = () => {
     handleNext,
     handlePrevious,
     handleDelete,
-    handleUpdate,
+    handleChange,
     count: items.count,
     page: items.page + 1,
     totalPages,

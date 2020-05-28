@@ -48,7 +48,7 @@ export const NavItem = (props: NavItemProps) => {
           <Show when={rightContent}>{rightContent}</Show>
         </Row>
       </Link>
-      <Show when={isActive}>{children}</Show>
+      {children}
     </Fragment>
   );
 };

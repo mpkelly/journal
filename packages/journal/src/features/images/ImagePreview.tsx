@@ -1,12 +1,14 @@
 import React from "react";
-import { Icon, FlexProps, Row, styled, getStyles, Column } from "@mpkelly/siam";
+import { Icon, FlexProps, Row, styled, getStyles } from "@mpkelly/siam";
 import { stopEvent } from "@mpkelly/react-editor-kit";
+import useBoolean from "react-hanger/useBoolean";
 import { Media } from "../media/Media";
 import { getImageSource } from "./ImageTile";
 import { Overlay } from "../../components/dialog/Overlay";
 import { ImageProperties } from "./ImageProperties";
-import useBoolean from "react-hanger/useBoolean";
+
 import { Show } from "../../util/Show";
+import { useImagePageState } from "../image-page/ImagePageState";
 
 export interface ImagePreviewProps extends FlexProps {
   onClose(): void;
@@ -15,6 +17,7 @@ export interface ImagePreviewProps extends FlexProps {
 
 export const ImagePreview = (props: ImagePreviewProps) => {
   const { image, onClose } = props;
+  const { handleChange, handleDelete } = useImagePageState();
   const source = getImageSource(image);
   const edit = useBoolean(false);
   return (
@@ -35,7 +38,15 @@ export const ImagePreview = (props: ImagePreviewProps) => {
             onClick={stopEvent}
           >
             <Icon name="clear" kind="button" onClick={onClose} />
-            <Icon name="delete" kind="button" ml="auto" />
+            <Icon
+              name="delete"
+              kind="button"
+              ml="auto"
+              onClick={() => {
+                handleDelete(image);
+                onClose();
+              }}
+            />
             <Icon name="edit" kind="button" ml="lg" onClick={edit.toggle} />
           </Row>
           <Image
@@ -47,13 +58,14 @@ export const ImagePreview = (props: ImagePreviewProps) => {
         </Row>
         <Show when={edit.value}>
           <ImageProperties
-            image={image}
-            height="100%"
             p="lg"
+            width={280}
+            height="100%"
             onClick={stopEvent}
             onContextMenu={stopEvent}
-            width={280}
             borderLeft="1px solid dividers"
+            image={image}
+            onChange={handleChange}
           />
         </Show>
       </Row>

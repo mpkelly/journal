@@ -6,7 +6,7 @@ export interface Media {
   pageSource: string;
   time?: number;
   type: MediaType;
-  tags: number[];
+  tags: string[];
   [key: string]: any;
 }
 

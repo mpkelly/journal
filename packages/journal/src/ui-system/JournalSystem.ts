@@ -412,6 +412,7 @@ export const JournalSystem: System = {
         borderRadius: "sm",
         letterSpacing: 0.8,
         fontWeight: "bold",
+        color: "accent",
         backgroundColor: "accent-alpha15",
       },
       beta: {

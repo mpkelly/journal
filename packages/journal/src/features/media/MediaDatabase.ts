@@ -11,7 +11,7 @@ export interface MediaDatabase {
   delete(id: number): Promise<void>;
   loadMedia(
     type: MediaType,
-    tagIdss: number[],
+    tags: string[],
     pageNumber: number,
     pageSize: number
   ): Promise<PagedResult<Media>>;
@@ -24,16 +24,16 @@ export const useMediaDatabase = () => {
 export const IndexDBMediaDatabase: MediaDatabase = {
   loadMedia: async (
     type: MediaType,
-    tagIds: number[],
+    tags: string[],
     page: number,
     pageSize: number
   ) => {
     let result: Dexie.Table<Media, any> | Dexie.Collection<Media, any> = media;
     result = media.where("type").equals(type as string);
-    if (tagIds.length) {
+    if (tags.length) {
       result.filter((media) => {
         for (let tag of media.tags) {
-          if (tagIds.includes(tag)) {
+          if (tags.includes(tag)) {
             return true;
           }
         }

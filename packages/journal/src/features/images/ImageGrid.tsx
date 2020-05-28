@@ -6,71 +6,21 @@ import { Show } from "../../util/Show";
 import { NotFound } from "../media/NotFound";
 import { Grid } from "../../components/grid/Grid";
 import { ImageTile } from "./ImageTile";
+import { useImageGridState } from "./ImageGridState";
 
 export interface ImageGridProps {
   images: Media[];
 }
 
 export const ImageGrid = (props: ImageGridProps) => {
-  const { images } = props;
-  const [showing, setShowing] = useState<Media>();
-  const [selected, setSelected] = useState<Media>(images[0]);
-
+  const {
+    selected,
+    setSelected,
+    setShowing,
+    showing,
+    images,
+  } = useImageGridState(props);
   const noMedia = images.length === 0;
-
-  const next = useCallback(() => {
-    let index = images.indexOf(selected);
-    if (index + 1 >= images.length) {
-      index = 0;
-    } else {
-      index++;
-    }
-    const active = images[index];
-    setSelected(active);
-    if (showing) {
-      setShowing(active);
-    }
-  }, [images, showing, selected]);
-
-  const previous = useCallback(() => {
-    let index = images.indexOf(selected);
-    if (index - 1 < 0) {
-      index = images.length - 1;
-    } else {
-      index--;
-    }
-    const active = images[index];
-    setSelected(active);
-    if (showing) {
-      setShowing(active);
-    }
-  }, [images, showing, selected]);
-
-  useEffect(() => {
-    if (!selected) {
-      setSelected(images[0]);
-    }
-  }, [selected, images]);
-
-  useEffect(() => {
-    const handleKey = (event: KeyboardEvent) => {
-      if (isHotkey("ArrowRight")(event)) {
-        next();
-      }
-      if (isHotkey("ArrowLeft")(event)) {
-        previous();
-      }
-      if (isHotkey("space")(event)) {
-        event.preventDefault();
-        setShowing(selected);
-      }
-      if (isHotkey("escape")(event)) {
-        setShowing(undefined);
-      }
-    };
-    window.addEventListener("keydown", handleKey);
-    return () => window.removeEventListener("keydown", handleKey);
-  }, [showing, selected, next]);
 
   const togglePreview = (showing?: Media) => {
     if (showing) {
@@ -92,7 +42,6 @@ export const ImageGrid = (props: ImageGridProps) => {
               showPreview={isShowing}
               onClick={() => togglePreview(image)}
               onClose={togglePreview}
-              onDelete={console.log}
             />
           );
       }

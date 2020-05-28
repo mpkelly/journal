@@ -10,21 +10,27 @@ import {
 } from "@mpkelly/siam";
 import { Media } from "../media/Media";
 import { Divider } from "../../components/divider/Divider";
+import { useImagePropertiesState } from "./ImagePropertiesState";
 
 export interface ImagePropertiesProps extends FlexProps {
   image: Media;
+  onChange(image: Media): void;
 }
 
 export const ImageProperties = (props: ImagePropertiesProps) => {
-  const { image, ...rest } = props;
+  const { image, onChange, ...rest } = props;
+  const {
+    handleChange,
+    handleKey,
+    handleTagsChange,
+    tag,
+  } = useImagePropertiesState({
+    image,
+    onChange,
+  });
+
   return (
-    <Column
-      width={240}
-      flexShrink={0}
-      background="background"
-      height="100%"
-      {...rest}
-    >
+    <Column width={240} flexShrink={0} background="background" {...rest}>
       <Row gravity="center-start" mb="lg">
         <Icon name="info" mr="md" />
         <Text labelKey="Image Details" />
@@ -32,53 +38,23 @@ export const ImageProperties = (props: ImagePropertiesProps) => {
       <Input
         labelKey="name"
         value={image.name}
-        onChange={console.log}
+        onChange={(name: string) => handleChange({ name })}
         my={"md"}
       />
       <Input
-        labelKey="addNewTags"
-        value={""}
-        placeholder="add new tags here and hit enter"
-        onChange={console.log}
         my={"md"}
+        labelKey="addNewTags"
+        placeholder="tag1, tag2 etc enter to save"
+        {...tag.valueBind}
+        onKeyDown={handleKey}
+        onBlur={handleTagsChange}
       />
       <Row flexWrap="wrap">
-        <Label mr="md" mb="md">
-          sport
-        </Label>
-        <Label mr="md" mb="md">
-          economics
-        </Label>
-        <Label mr="md" mb="md">
-          things
-        </Label>
-        <Label mr="md" mb="md">
-          great
-        </Label>
-        <Label mr="md" mb="md">
-          stuff
-        </Label>
-        <Label mr="md" mb="md">
-          here
-        </Label>
-        <Label mr="md" mb="md">
-          sport
-        </Label>
-        <Label mr="md" mb="md">
-          economics
-        </Label>
-        <Label mr="md" mb="md">
-          things
-        </Label>
-        <Label mr="md" mb="md">
-          great
-        </Label>
-        <Label mr="md" mb="md">
-          stuff
-        </Label>
-        <Label mr="md" mb="md">
-          here
-        </Label>
+        {image.tags.map((tag) => (
+          <Label key={tag} mr="md" mb="md">
+            {tag}
+          </Label>
+        ))}
       </Row>
       <Divider my="sm" />
       <Text labelKey="properties" kind="label" mt="md" />
