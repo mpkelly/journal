@@ -1,8 +1,7 @@
 import React from "react";
 import { Column, FlexProps, Nav, Scope, Icon, Show } from "@mpkelly/siam";
 import { SettingsNav } from "../settings/SettingsNav";
-import { MediaNavItemsView } from "../media/MediaNavItemsView";
-
+import { MediaNavItems } from "../media/MediaNavItems";
 import { CollectionsPageNavItems } from "../collection-page/CollectionsPageNavItems";
 import { CodePageNavItem } from "../code-page/CodePageNavItem";
 import { CollectionsTreeStateProvider } from "../collection-page/CollectionsPageState";
@@ -36,7 +35,7 @@ export const Navigation = (props: NavigationProps) => {
             <CollectionsPageNavItems />
           </CollectionsTreeStateProvider>
           <CodePageNavItem />
-          <MediaNavItemsView />
+          <MediaNavItems />
           <SettingsNav mt="auto" />
         </Column>
         <Show when={collapsed.value}>

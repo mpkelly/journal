@@ -60,7 +60,7 @@ const PageContent = (props: TemplatePageProps) => {
           width={650}
           maxHeight={500}
           gravity="top-center"
-          p="xxl"
+          mt="xxl"
         >
           <TemplatePageCreateDialog />
         </Dialog>

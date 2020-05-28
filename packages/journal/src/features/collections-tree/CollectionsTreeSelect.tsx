@@ -56,8 +56,9 @@ const CollectionsTreeSelectItem = (props: CollectionsTreeSelectItemProps) => {
       my="lg"
       py="sm"
       borderRadius="sm"
-      selectedBackgroundColor="muted-alpha10"
-      hoverBackgroundColor="muted-alpha10"
+      selectedBackgroundColor="muted-alpha50"
+      hoverBackgroundColor="muted-alpha50"
+      cursor="pointer"
       {...rest}
     >
       <Icon name={iconName} color="muted" mr="md" />

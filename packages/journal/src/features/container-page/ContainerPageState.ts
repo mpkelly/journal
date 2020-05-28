@@ -30,6 +30,7 @@ const containerPageState = () => {
     hasPrevious,
     handleNext,
     handlePrevious,
+    totalPages,
   } = usePagerState<File>();
 
   useEffect(() => {
@@ -87,7 +88,7 @@ const containerPageState = () => {
     items: items.items,
     count: items.count,
     page: page + 1,
-    totalPages: items.count ? Math.ceil(items.count / items.pageSize) : 0,
+    totalPages,
     showDeleteConfirmation: Boolean(itemToDelete),
     handleDeleteFile: setItemToDelete,
     handleConfirmDelete,

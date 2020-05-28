@@ -57,6 +57,7 @@
     "react-dom": "^16.13.1",
     "react-hanger": "^2.2.1",
     "react-player": "^1.15.3",
+    "react-resize-aware": "^3.0.0",
     "react-router-dom": "^5.2.0",
     "scroll-into-view-if-needed": "^2.2.24",
     "shortid": "^2.2.15",

@@ -15,7 +15,7 @@ export const TemplatePageCreateDialogSubstitutionsTab = () => {
   return (
     <Fragment>
       <Text kind="label" labelKey="substitutions" mb="sm" />
-      <Column width="100%" overflowX="auto">
+      <Column width="100%" overflowY="auto">
         {substitutions.map((substitution, index) => (
           <TemplateSubstition
             {...substitution}

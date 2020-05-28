@@ -104,7 +104,7 @@ const applySubstitutions = (nodes: Node[], substitution: Substitution[]) => {
       substitution.forEach((substitution) => {
         node.text = node.text
           .split(`{${substitution.name}}`)
-          .join(substitution.value);
+          .join(substitution.value || `{${substitution.name}}`);
       });
     }
     if (node.children) {

@@ -42,7 +42,8 @@ import { System } from "@mpkelly/siam";
 import { createEditorStylePlugin } from "../editor-page/EditorPageStylePlugin";
 import { useEditorState } from "../editor/EditorState";
 import { File } from "../file/File";
-import { Toolbar } from "./Toolbar";
+import { WikiEditorToolbar } from "./WikiEditorToolbar";
+import { useSettings } from "../settings/SettingsContext";
 
 const plugins: Plugin[] = [
   BoldPlugin,
@@ -80,13 +81,14 @@ export interface WikiEditorProps {
 
 export const WikiEditor = (props: WikiEditorProps) => {
   const { system } = props;
-  const { value, handleToggleLocked, handleChange } = useEditorState({
+  const { value, handleToggleLocked, handleChange, readOnly } = useEditorState({
     file: props.file,
     defaultValue,
   });
+  const { settings, handleSettingsChange } = useSettings();
   const plugins = useMemo(() => createPlugins(system), []);
   return (
-    <EditorKit plugins={plugins} id="wikieditor">
+    <EditorKit plugins={plugins} id="wikieditor" readOnly={readOnly}>
       <div className="paper-header">
         <div className="right">
           <ReadOnlyButton
@@ -116,13 +118,12 @@ export const WikiEditor = (props: WikiEditorProps) => {
           <LinkButton className="material-icons-round" ligature="insert_link" />
         </SelectionToolbar>
         <Resizable
-          initialWidth={800}
-          onChange={console.log}
-          style={{ margin: 0 }}
+          initialWidth={settings.wikiPageWidth}
+          onChange={(wikiPageWidth) => handleSettingsChange({ wikiPageWidth })}
         >
           <Editor value={value} onChange={handleChange} />
         </Resizable>
-        <Toolbar />
+        <WikiEditorToolbar />
       </div>
     </EditorKit>
   );

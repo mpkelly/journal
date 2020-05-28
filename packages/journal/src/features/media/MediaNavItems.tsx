@@ -4,7 +4,7 @@ import { NavItemProps, NavItem } from "../navigation/NavItem";
 
 export interface MediaNavItemsProps extends FlexProps {}
 
-export const MediaNavItemsView = (props: MediaNavItemsProps) => {
+export const MediaNavItems = (props: MediaNavItemsProps) => {
   return <Column {...props}>{MediaItems.map(NavItem)}</Column>;
 };
 
@@ -14,11 +14,5 @@ export const MediaItems: NavItemProps[] = [
     labelKey: "images",
     path: "/media/images",
     type: "images",
-  },
-  {
-    icon: "images",
-    labelKey: "videos",
-    path: "/media/videos",
-    type: "videos",
   },
 ];

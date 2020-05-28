@@ -52,24 +52,32 @@ export const createCodeFile = (
   return { id, name, type, data, global };
 };
 
-export const DefaultCSS = `/**
+export const DefaultCSS = `
+/**
+ Global styles can be registered here. Just be careful not to break the Jounral UI! You can load fonts here like so:
 
-Styles you add below get applied to the #editor element. You can override print styles by wrapping your styles in @media print {...}
+ @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
 
-Need to load a font? You can do so like:
+ then below you could add:
 
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+ #documenteditor {
+    * {
+      font-family: 'Open Sans', sans-serif;
+    }
+ }
 
-* {
-  font-family:'Open Sans', sans-serif;
+ Note: these styles are only applied when you have the linked document open.  
+**/
+
+#documenteditor {
+  /** add your editor styles here **/
+
+  @media print {
+    /** add your print styles here **/
+  }
 }
 
-Want to centre the editor or restict the width? Try adding:
-
-max-width: 800px;
-margin: 0 auto;
-
-**/`;
+`;
 
 export const DefaultJS = `/**
 

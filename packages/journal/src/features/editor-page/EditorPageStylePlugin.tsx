@@ -42,6 +42,7 @@ const getStyle = (system: System) => {
 
     .rek-editor-toolbar {
       justify-content:flex-start;
+      padding: 2px 8px !important;
     }
 
     .rek-editor-toolbar-wrapper {
@@ -81,7 +82,7 @@ const getStyle = (system: System) => {
       overflow-y: auto !important;
       overflow-x: hidden !important;
       padding-top: 40px;
-      padding-bottom: 40px;
+      padding-bottom: 60px;
       width: 100%;
     }
 `;

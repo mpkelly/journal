@@ -1,5 +1,7 @@
 import db from "../database/Dexie";
 import Dexie from "dexie";
+import { PagedResult } from "../database/Database";
+import { Media, MediaType } from "./Media";
 
 const media = db.table<Media, any>("media");
 
@@ -12,7 +14,7 @@ export interface MediaDatabase {
     tagIdss: number[],
     pageNumber: number,
     pageSize: number
-  ): Promise<{ total: number; items: Media[] }>;
+  ): Promise<PagedResult<Media>>;
 }
 
 export const useMediaDatabase = () => {
@@ -23,13 +25,13 @@ export const IndexDBMediaDatabase: MediaDatabase = {
   loadMedia: async (
     type: MediaType,
     tagIds: number[],
-    pageNumber: number,
+    page: number,
     pageSize: number
   ) => {
     let result: Dexie.Table<Media, any> | Dexie.Collection<Media, any> = media;
     result = media.where("type").equals(type as string);
     if (tagIds.length) {
-      result.filter(media => {
+      result.filter((media) => {
         for (let tag of media.tags) {
           if (tagIds.includes(tag)) {
             return true;
@@ -38,12 +40,13 @@ export const IndexDBMediaDatabase: MediaDatabase = {
         return false;
       });
     }
-    const total = await result.count();
+    const count = await result.count();
     const items = await result
-      .offset(pageNumber * pageSize)
+      .offset(page * pageSize)
       .limit(pageSize)
+      .reverse()
       .toArray();
-    return { total, items };
+    return { items, count, page, pageSize };
   },
   add: async (_media: Media) => {
     _media.time = _media.time || Date.now();
@@ -53,25 +56,6 @@ export const IndexDBMediaDatabase: MediaDatabase = {
     return media.update(_media.id, _media);
   },
   delete: async (id: number) => {
-    console.log(id, typeof id === "number");
     return media.delete(id);
-  }
+  },
 };
-
-export interface Media {
-  id?: number;
-  name: string;
-  content?: string;
-  source: string;
-  pageSource: string;
-  time?: number;
-  type: MediaType;
-  tags: number[];
-}
-
-export enum MediaType {
-  Image = "image",
-  Video = "video",
-  Audio = "audio",
-  Text = "text"
-}

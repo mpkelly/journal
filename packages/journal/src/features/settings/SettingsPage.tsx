@@ -1,6 +1,6 @@
 import React, { memo } from "react";
 import { Page } from "../page/Page";
-import { Column, Text, Row, Button } from "@mpkelly/siam";
+import { Text, Row, Button } from "@mpkelly/siam";
 import { Panel } from "../../components/panel/Panel";
 import { Setting } from "./Setting";
 import { useSettings } from "./SettingsContext";
@@ -10,7 +10,7 @@ export interface SettingsPageProps {}
 export const SettingsPage = memo(() => {
   const {
     settings,
-    updateSettings,
+    handleSettingsChange: updateSettings,
     handleExport,
     handleImportRef,
     handleImport,
@@ -23,10 +23,10 @@ export const SettingsPage = memo(() => {
       <Row flexGrow={1}>
         <Panel flexGrow={1} height={"100%"} flexDirection={"column"}>
           <Setting
-            label="wikiName"
-            value={settings.wikiName}
-            onChange={(wikiName: string) => updateSettings({ wikiName })}
-            description={"wikiNameDescription"}
+            label="siteName"
+            value={settings.siteName}
+            onChange={(siteName: string) => updateSettings({ siteName })}
+            description={""}
           />
           <input
             type="file"

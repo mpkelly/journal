@@ -15,11 +15,12 @@ import {
   BlockquoteButton,
   TableButton,
   VideoButton,
+  TodoListButton,
 } from "@mpkelly/react-editor-kit";
 
 export interface ToolbarProps extends FlexProps {}
 
-export const Toolbar = (props: ToolbarProps) => {
+export const WikiEditorToolbar = (props: ToolbarProps) => {
   return (
     <EditorToolbar className="rek-element-toolbar ">
       <HeadingToggleButton
@@ -44,6 +45,10 @@ export const Toolbar = (props: ToolbarProps) => {
           text={"Insert by URL"}
         />
       </ImageButton>
+      <TableButton className="material-icons-round" ligature="border_all" />
+      <VideoButton className="material-icons-round" ligature="videocam" />
+      <Divider />
+      <TodoListButton className="material-icons-round" ligature="check_box" />
       <Divider />
       <TextAlignLeftButton
         className="material-icons-round"
@@ -67,14 +72,10 @@ export const Toolbar = (props: ToolbarProps) => {
         ligature="format_list_bulleted"
       />
       <Divider />
-
       <BlockquoteButton
         className="material-icons-round"
         ligature="format_quote"
       />
-      <Divider />
-      <TableButton className="material-icons-round" ligature="border_all" />
-      <VideoButton className="material-icons-round" ligature="videocam" />
     </EditorToolbar>
   );
 };

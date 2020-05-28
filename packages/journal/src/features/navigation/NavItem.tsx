@@ -29,8 +29,8 @@ export const NavItem = (props: NavItemProps) => {
           data-id={type}
           alignItems="center"
           selected={isActive}
-          selectedBackgroundColor={"muted-alpha10"}
-          hoverBackgroundColor={"muted-alpha10"}
+          selectedBackgroundColor={"muted-alpha50"}
+          hoverBackgroundColor={"muted-alpha50"}
         >
           <Icon
             name={icon}

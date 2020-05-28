@@ -27,7 +27,7 @@ export const LightTheme = {
 
 export const DarkTheme = {
   accent: "#22c3a7",
-  muted: "#ccc",
+  muted: "#50504a",
   content: "#222225",
   "primary.text": "rgba(255,255,255,.95)",
   "secondary.text": "rgba(255,255,255,.6)",
@@ -391,6 +391,17 @@ export const JournalSystem: System = {
         "si-input": {
           padding: 8,
           extends: ["text.regular"],
+        },
+      },
+      textarea: {
+        extends: ["components.input.primary"],
+        "si-input-wrapper": {
+          borderStyle: "solid",
+          borderColor: "muted",
+          borderWidth: 2,
+          focusBorderColor: "accent",
+          borderRadius: "sm",
+          height: "auto",
         },
       },
     },

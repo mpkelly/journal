@@ -23,8 +23,8 @@ export const CollectionsTreeItem = (props: TreeItemProps) => {
       gravity={4}
       borderRadius="sm"
       selected={selected}
-      selectedBackgroundColor="muted-alpha10"
-      hoverBackgroundColor="muted-alpha10"
+      selectedBackgroundColor="muted-alpha50"
+      hoverBackgroundColor="muted-alpha50"
       {...rest}
     >
       <Optional includeIf={canExpand}>

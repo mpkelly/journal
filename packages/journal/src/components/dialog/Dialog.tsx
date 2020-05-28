@@ -9,17 +9,17 @@ export interface DialogProps extends FlexProps {
 }
 
 export const Dialog: FC<DialogProps> = (props: DialogProps) => {
-  const { children, gravity, onClickOutside, p, ...rest } = props;
+  const { children, gravity, onClickOutside, ...rest } = props;
   return (
     <Portal>
-      <Overlay onClick={onClickOutside} gravity={gravity} p={p}>
+      <Overlay onClick={onClickOutside} gravity={gravity}>
         <Column
           p="lg"
           width={300}
           height={"auto"}
           zIndex={"dialogs"}
           backgroundColor="background-light1"
-          borderRadius="sm"
+          borderRadius="md"
           boxShadow="sm"
           onClick={stopEvent}
           onContextMenu={stopEvent}

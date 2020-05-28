@@ -13,7 +13,7 @@ import { downloadBlob } from "../../util/Urls";
 
 export interface SettingsContextValue {
   settings: JournalSettings;
-  updateSettings(change: SettingsChange): Promise<any>;
+  handleSettingsChange(change: SettingsChange): Promise<any>;
   handleExport(): void;
   handleImport(): void;
   handleImportRef(ref: HTMLInputElement | null): void;
@@ -46,7 +46,7 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
     });
   };
 
-  const updateSettings = async (change: SettingsChange) => {
+  const handleSettingsChange = async (change: SettingsChange) => {
     const next = { ...settings, ...change };
     setSettings(next);
     await db.updateSettings(next);
@@ -80,7 +80,7 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
 
   const value = {
     settings,
-    updateSettings,
+    handleSettingsChange,
     handleExport,
     handleImportRef,
     handleImport,

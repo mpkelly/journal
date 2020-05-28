@@ -23,7 +23,7 @@ export const useEditorState = (props: EditorPageProps) => {
 
   const handleToggleLocked = useCallback(() => {
     setLocked((locked) => !locked);
-    db.updateFile(file.id, { locked: !locked }).then(console.log);
+    db.updateFile(file.id, { locked: !locked });
   }, [locked]);
 
   const handleChange = (next: Element[]) => {

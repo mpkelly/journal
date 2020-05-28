@@ -1,6 +1,5 @@
 import { File as JFile } from "../file/File";
 import { JournalSettings } from "../settings/JournalSettings";
-import { Tag } from "../tags/Tag";
 import { CodeFile } from "../code-editor/CodeFile";
 import { Variable } from "../variables/Variable";
 
@@ -33,11 +32,6 @@ export interface Database {
 
   getSettings(): Promise<JournalSettings>;
   updateSettings(settings: JournalSettings): Promise<number>;
-
-  getTags(): Promise<Tag[]>;
-  addTag(): Promise<void>;
-  deleteTag(tag: Tag): Promise<void>;
-  updateTag(tag: Tag): Promise<number>;
 
   transact(work: UnitOfDBWork, tables: string[]): Promise<void>;
 

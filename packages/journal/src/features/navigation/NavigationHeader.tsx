@@ -21,7 +21,7 @@ export const NavigationHeader = (props: NavigationHeaderProps) => {
     >
       <Logo />
       <Text ml="md" kind="large">
-        {settings.wikiName}
+        {settings.siteName}
       </Text>
       <Label kind="beta" ml="md">
         BETA

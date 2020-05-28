@@ -6,4 +6,6 @@ export const Labels: I18NBundle = {
     "Due dates can be set like {36hours} or {2days} (followed by a space)",
   items: (count) => pluralize(count, "item", "items"),
   confirmDelete: "Confirm delete?",
+  addNewTags: "Add new tags",
+  finished: "I'm done",
 };

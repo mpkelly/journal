@@ -4,16 +4,17 @@ import {
   PagedResult,
 } from "../../features/database/Database";
 
-export const usePagerState = <T>(initialItems = emptyPagedResult()) => {
+export const usePagerState = <T>(
+  initialItems: PagedResult<T> = emptyPagedResult()
+) => {
   const [page, setPage] = useState(0);
   const [items, setItems] = useState<PagedResult<T>>(initialItems);
 
-  const hasNext = Boolean(
-    items && items.page + 1 < items.count / items.pageSize
-  );
+  const hasNext = Boolean(items && page + 1 < items.count / items.pageSize);
   const hasPrevious = page > 0;
   const handlePrevious = () => setPage((page) => page - 1);
   const handleNext = () => setPage((page) => page + 1);
+  const totalPages = items.count ? Math.ceil(items.count / items.pageSize) : 0;
 
   return {
     items,
@@ -24,5 +25,6 @@ export const usePagerState = <T>(initialItems = emptyPagedResult()) => {
     hasPrevious,
     handleNext,
     handlePrevious,
+    totalPages,
   };
 };

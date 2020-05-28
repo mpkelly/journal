@@ -160,4 +160,8 @@ export const Icons: IconBundle = {
     ligature: "create",
     className,
   },
+  info: {
+    ligature: "info",
+    className,
+  },
 };

@@ -27,7 +27,9 @@ export const TemplatePageCreateDialog = (
         <Icon name="template" />
         <Text kind="large" labelKey="createFile" ml="md" />
       </Row>
-      <Column mt="xl">{renderTab()}</Column>
+      <Column mt="xl" overflow="hidden">
+        {renderTab()}
+      </Column>
     </Fragment>
   );
 };

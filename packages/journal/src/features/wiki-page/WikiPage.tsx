@@ -12,7 +12,13 @@ export const WikiPage = (props: WikiPageProps) => {
   const { file, ...rest } = props;
   const { system } = useSiam();
   return (
-    <Page {...rest} position="relative" flexDirection="row" mx="auto">
+    <Page
+      {...rest}
+      position="relative"
+      width="100%"
+      flexDirection="row"
+      mx="auto"
+    >
       <WikiEditor system={system} file={file} />
     </Page>
   );

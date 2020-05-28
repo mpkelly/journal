@@ -2,7 +2,6 @@ import db from "./Dexie";
 import { Database, UnitOfDBWork } from "./Database";
 import { File as JFile, FileType } from "../file/File";
 import { JournalSettings, DefaultSettings } from "../settings/JournalSettings";
-import { Tag } from "../tags/Tag";
 import { importFromJsonFile, exportToJson } from "./DatabaseBackup";
 import { newId } from "../../util/Identity";
 import { CodeFile } from "../code-editor/CodeFile";
@@ -10,7 +9,6 @@ import { Variable } from "../variables/Variable";
 
 const files = db.table<JFile, any>("files");
 const settings = db.table<JournalSettings, any>("settings");
-const tags = db.table<Tag, any>("tags");
 const code = db.table<CodeFile, any>("code");
 const variables = db.table<Variable, any>("variables");
 
@@ -151,22 +149,6 @@ export const JournalDatabase: Database = {
 
   updateSettings: async (updated: JournalSettings) => {
     return settings.update(updated.id, updated);
-  },
-
-  getTags: (): Promise<Tag[]> => {
-    return tags.toArray();
-  },
-  addTag: () => {
-    return tags.add({
-      name: "My tag",
-      color: "mediumseagreen",
-    } as Tag);
-  },
-  deleteTag: (tag: Tag) => {
-    return tags.delete(tag.id);
-  },
-  updateTag: (tag: Tag) => {
-    return tags.update(tag.id, tag);
   },
 
   transact: (work: UnitOfDBWork, tables: string[]) => {
