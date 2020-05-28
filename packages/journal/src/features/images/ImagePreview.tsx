@@ -9,6 +9,7 @@ import { ImageProperties } from "./ImageProperties";
 
 import { Show } from "../../util/Show";
 import { useImagePageState } from "../image-page/ImagePageState";
+import { useSettings } from "../settings/SettingsContext";
 
 export interface ImagePreviewProps extends FlexProps {
   onClose(): void;
@@ -19,7 +20,14 @@ export const ImagePreview = (props: ImagePreviewProps) => {
   const { image, onClose } = props;
   const { handleChange, handleDelete } = useImagePageState();
   const source = getImageSource(image);
-  const edit = useBoolean(false);
+  const { settings, handleSettingsChange } = useSettings();
+
+  const handleToggleShow = () => {
+    handleSettingsChange({
+      showImageProperties: !settings.showImageProperties,
+    });
+  };
+
   return (
     <Overlay backgroundColor="background" onClick={onClose}>
       <Row size="100%">
@@ -47,7 +55,12 @@ export const ImagePreview = (props: ImagePreviewProps) => {
                 onClose();
               }}
             />
-            <Icon name="edit" kind="button" ml="lg" onClick={edit.toggle} />
+            <Icon
+              name="edit"
+              kind="button"
+              ml="lg"
+              onClick={handleToggleShow}
+            />
           </Row>
           <Image
             src={source}
@@ -56,7 +69,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
             boxShadow="sm"
           />
         </Row>
-        <Show when={edit.value}>
+        <Show when={settings.showImageProperties}>
           <ImageProperties
             p="lg"
             width={280}

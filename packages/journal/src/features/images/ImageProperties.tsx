@@ -1,16 +1,10 @@
 import React from "react";
-import {
-  Text,
-  Input,
-  Label,
-  Icon,
-  FlexProps,
-  Column,
-  Row,
-} from "@mpkelly/siam";
+import { Text, Input, Icon, FlexProps, Column, Row } from "@mpkelly/siam";
 import { Media } from "../media/Media";
 import { Divider } from "../../components/divider/Divider";
 import { useImagePropertiesState } from "./ImagePropertiesState";
+import { Label } from "../../components/label/Label";
+import { useSettings } from "../settings/SettingsContext";
 
 export interface ImagePropertiesProps extends FlexProps {
   image: Media;
@@ -23,12 +17,12 @@ export const ImageProperties = (props: ImagePropertiesProps) => {
     handleChange,
     handleKey,
     handleTagsChange,
+    handleDeleteTag,
     tag,
   } = useImagePropertiesState({
     image,
     onChange,
   });
-
   return (
     <Column width={240} flexShrink={0} background="background" {...rest}>
       <Row gravity="center-start" mb="lg">
@@ -51,7 +45,12 @@ export const ImageProperties = (props: ImagePropertiesProps) => {
       />
       <Row flexWrap="wrap">
         {image.tags.map((tag) => (
-          <Label key={tag} mr="md" mb="md">
+          <Label
+            key={tag}
+            mr="md"
+            mb="md"
+            onDelete={() => handleDeleteTag(tag)}
+          >
             {tag}
           </Label>
         ))}

@@ -184,6 +184,11 @@ export const JournalSystem: System = {
         fontSize: 20,
         size: 24,
       },
+      "xsmall.button": {
+        extends: ["components.icon.button"],
+        fontSize: 12,
+        size: 26,
+      },
     },
     button: {
       base: {
@@ -409,6 +414,7 @@ export const JournalSystem: System = {
       primary: {
         extends: ["text.small"],
         padding: 3,
+        display: "inline-flex",
         borderRadius: "sm",
         letterSpacing: 0.8,
         fontWeight: "bold",

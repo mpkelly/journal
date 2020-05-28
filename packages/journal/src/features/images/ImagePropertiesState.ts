@@ -12,7 +12,7 @@ export const useImagePropertiesState = (props: ImagePropertiesProps) => {
   const tag = useInput();
 
   const handleKey = (event: React.KeyboardEvent) => {
-    if (isHotkey("enter", event.nativeEvent) && tag.value.trim()) {
+    if (isHotkey("enter", event.nativeEvent)) {
       handleTagsChange();
     }
   };
@@ -22,12 +22,27 @@ export const useImagePropertiesState = (props: ImagePropertiesProps) => {
     const newTags = tag.value
       .split(",")
       .map((part) => part.trim())
-      .filter((tag) => !tags.includes(tag) && tag !== ",");
+      .filter((tag) => !tags.includes(tag) && tag && tag !== ",");
     if (newTags.length) {
       handleChange({ ...image, tags: newTags.concat(tags) });
       tag.clear();
     }
   }, [image, tag.value]);
 
-  return { image, handleChange, handleTagsChange, handleKey, tag };
+  const handleDeleteTag = useCallback(
+    (tag: string) => {
+      image.tags.splice(image.tags.indexOf(tag, 1));
+      handleChange({ ...image });
+    },
+    [image]
+  );
+
+  return {
+    image,
+    handleChange,
+    handleTagsChange,
+    handleDeleteTag,
+    handleKey,
+    tag,
+  };
 };

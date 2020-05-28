@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { FileUpload } from "../upload/Upload";
 import { fileToBase64 } from "../../util/Files";
 import { getImageSize } from "./ImageSize";
@@ -36,10 +36,15 @@ export const useImageState = () => {
     loadImages();
   };
 
-  const handleChange = async (media: Media) => {
-    await db.update(media);
-    loadImages();
-  };
+  const handleChange = useCallback(
+    async (media: Media) => {
+      const next = items.items.slice();
+      next.splice(next.indexOf(media), 1, media);
+      setItems((page) => ({ ...page, items: next }));
+      db.update(media);
+    },
+    [items]
+  );
 
   const handleUpload = async (upload: FileUpload) => {
     const media = await Promise.all(
