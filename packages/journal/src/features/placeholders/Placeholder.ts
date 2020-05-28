@@ -8,6 +8,5 @@ export const findPlaceholders = (text: string): string[] => {
     placeholders.set(match[1], null);
     match = PlaceholderPattern.exec(text);
   }
-  console.log(placeholders);
   return Array.from(placeholders.keys());
 };

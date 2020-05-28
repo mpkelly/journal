@@ -1,1 +1,1 @@
-export * from "./App";
+export { App as Journal } from "./App";

@@ -1,19 +1,8 @@
-import React, { useState } from "react";
-import {
-  Column,
-  Text,
-  FlexProps,
-  Nav,
-  Section,
-  Label,
-  Scope,
-  Icon,
-  Show,
-} from "@mpkelly/siam";
-import { Logo } from "../../components/logo/Logo";
+import React from "react";
+import { Column, FlexProps, Nav, Scope, Icon, Show } from "@mpkelly/siam";
 import { SettingsNav } from "../settings/SettingsNav";
 import { MediaNavItemsView } from "../media/MediaNavItemsView";
-import { useSettings } from "../settings/SettingsContext";
+
 import { CollectionsPageNavItems } from "../collection-page/CollectionsPageNavItems";
 import { CodePageNavItem } from "../code-page/CodePageNavItem";
 import { CollectionsTreeStateProvider } from "../collection-page/CollectionsPageState";

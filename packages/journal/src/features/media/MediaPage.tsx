@@ -13,13 +13,11 @@ export const MediaPage = withRouter((props: MediaPageProps) => {
   return (
     <TagProvider>
       <MediaProvider {...props}>
-        <Page>
-          <Column p="lg" flexGrow={1} overflowY={"hidden"}>
-            <Toolbar />
-            <Row flexGrow={1} overflowY={"hidden"} pl={3}>
-              <MediaGrid />
-            </Row>
-          </Column>
+        <Page p="lg" flexGrow={1} overflowY={"hidden"}>
+          <Toolbar />
+          <Row flexGrow={1} overflowY={"hidden"} pl={3}>
+            <MediaGrid />
+          </Row>
         </Page>
       </MediaProvider>
     </TagProvider>

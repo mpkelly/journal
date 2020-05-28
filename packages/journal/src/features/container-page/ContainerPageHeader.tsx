@@ -21,7 +21,7 @@ export const ContainerPageHeader = (props: ContainerPageHeaderProps) => {
   const { file, menuItems, icon } = props;
   const {
     addItem,
-    handleDeleteFile: handleDeleteItem,
+    handleDeleteFile,
     handleNameChanged,
   } = useContainerPageState();
   return (
@@ -39,7 +39,7 @@ export const ContainerPageHeader = (props: ContainerPageHeaderProps) => {
           name="delete"
           kind="button"
           mr="md"
-          onClick={() => handleDeleteItem(file.id)}
+          onClick={() => handleDeleteFile(file.id)}
         />
         <Select
           items={menuItems}

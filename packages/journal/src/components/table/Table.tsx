@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, FC } from "react";
 import { Text, FlexProps, styled, getStyles } from "@mpkelly/siam";
 
 export interface TableColumn {
@@ -36,6 +36,6 @@ export const Table = (props: TableProps) => {
   );
 };
 
-export const TableContainer = styled.table`
+export const TableContainer: FC<FlexProps> = styled.table`
   ${(props) => getStyles(props, "components.table")}
 `;

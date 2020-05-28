@@ -3,26 +3,21 @@ import { Icons } from "./Icons";
 import { Labels } from "./EnglishLabels";
 
 export const LightTheme = {
-  accent: "#4C5ADE",
+  accent: "#22c3a7",
   muted: "#ccc",
   content: "white",
-  "primary.text": "#2D2A4A",
-  "secondary.text": "#9e9e9e",
-  "light.text": "white",
+  "primary.text": "rgba(0,0,0,.95)",
+  "secondary.text": "rgba(0,0,0,.6)",
+  "light.text": "rgba(255,255,255,.95)",
   danger: "orangered",
   background: "#f1f1f1",
-  dividers: "rgba(0,0,0,.1)",
-  files: "orange",
-  folders: "mediumseagreen",
-  file: "#faff00",
-  folder: "mediumseagreen",
-  dialogs: {
-    "primary.text": "white",
-    background: "#2D2A4A",
-  },
+  dividers: "rgba(255,255,255,.4)",
+  collection: "#bfd664",
+  document: "#3c9cdb",
+  wikipage: "lightpink",
+  folder: "muted",
   nav: {
-    "primary.text": "white",
-    background: "#2D2A4A",
+    background: "background-light1",
   },
   toolbar: {
     muted: "accent",
@@ -89,6 +84,11 @@ export const JournalSystem: System = {
       color: "primary.text",
       fontSize: 36,
     },
+    label: {
+      extends: ["text.small"],
+      color: "secondary.text",
+      fontWeight: "bold",
+    },
   },
   icons: Icons,
   labels: Labels,
@@ -129,7 +129,9 @@ export const JournalSystem: System = {
         border: "2px solid transparent",
         focusBorder: "2px solid accent",
         hoverBackgroundColor: "muted-alpha10",
+        disabledBackgroundColor: "transparent",
       },
+      disabled: {},
     },
     icon: {
       base: {
@@ -383,8 +385,7 @@ export const JournalSystem: System = {
           height: 40,
         },
         "si-input-label": {
-          extends: ["text.small"],
-          fontWeight: "bold",
+          extends: ["text.label"],
           mb: "sm",
         },
         "si-input": {

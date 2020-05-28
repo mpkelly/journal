@@ -23,9 +23,7 @@ export const createAlphaNumericSort = (
   property: keyof TreeNode
 ): TreeNodeSort => {
   return (a: TreeNode, b: TreeNode) => {
-    const val = String(a[property]).localeCompare(String(b[property]));
-    console.log(val);
-    return val;
+    return String(a[property]).localeCompare(String(b[property]));
   };
 };
 

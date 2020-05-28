@@ -1,5 +1,5 @@
-import React, { memo } from "react";
-import { useParams } from "react-router-dom";
+import React, { FC } from "react";
+import { useHistory, useParams } from "react-router-dom";
 import { FlexProps, Column, styled, getStyles } from "@mpkelly/siam";
 import { FileType, File } from "../file/File";
 import { CollectionTreeItem } from "./CollectionTreeItem";
@@ -27,10 +27,15 @@ export const CollectionsTreeView = (props: FlexProps) => {
     updateFile(next as File);
   };
 
-  const { fileId } = useParams();
+  // Just to trigger a render
+  useParams();
+
+  const {
+    location: { pathname },
+  } = useHistory();
 
   const renderItem = (file: TreeNode, depth: number) => {
-    const selected = file.id === fileId;
+    const selected = pathname.endsWith(String(file.id));
     const props = {
       selected,
       file,
@@ -62,8 +67,8 @@ export const CollectionsTreeView = (props: FlexProps) => {
   );
 };
 
-const treeSortFunction = createAlphaNumericSort("name");
+export const treeSortFunction = createAlphaNumericSort("name");
 
-const TreeContainer = styled(Column)`
+export const TreeContainer: FC<FlexProps> = styled(Column)`
   ${(props) => getStyles(props, "components.tree")}
 `;

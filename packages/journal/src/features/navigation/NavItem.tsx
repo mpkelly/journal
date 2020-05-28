@@ -1,6 +1,7 @@
 import React, { ReactNode, Fragment } from "react";
 import { Row, Icon, Text, Show, ElementProps } from "@mpkelly/siam";
-import { Link } from "../routing/Link";
+import { Link } from "../../components/link/Link";
+import { useParams, useHistory } from "react-router-dom";
 
 export interface NavItemProps extends ElementProps<any> {
   icon: string;
@@ -13,21 +14,23 @@ export interface NavItemProps extends ElementProps<any> {
 
 export const NavItem = (props: NavItemProps) => {
   const { icon, labelKey, path, type, children, rightContent, ...rest } = props;
-  const { hash } = window.location;
-  const isActive = hash.startsWith(`#${path}`);
+  useParams();
+  const history = useHistory();
+  const { pathname } = history.location;
+  const isActive = pathname && pathname.startsWith(path);
   return (
     <Fragment>
       <Link to={path} {...rest}>
         <Row
-          alignItems="center"
-          selected={isActive}
-          selectedBackgroundColor={"muted-alpha10"}
-          hoverBackgroundColor={"muted-alpha10"}
           borderRadius="sm"
           p={10}
           my="md"
           mx="md"
           data-id={type}
+          alignItems="center"
+          selected={isActive}
+          selectedBackgroundColor={"muted-alpha10"}
+          hoverBackgroundColor={"muted-alpha10"}
         >
           <Icon
             name={icon}

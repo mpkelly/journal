@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexProps } from "@mpkelly/siam";
-import { TreeItem } from "./TreeItem";
+import { CollectionsTreeItem } from "./CollectionsTreeItem";
 import { TreeNode } from "../../components/tree-kit/Node";
 
 export interface CollectionTreeItemProps extends FlexProps {
@@ -10,6 +10,11 @@ export interface CollectionTreeItemProps extends FlexProps {
 
 export const CollectionTreeItem = (props: CollectionTreeItemProps) => {
   return (
-    <TreeItem icon={"collection"} color="collection" {...props} canExpand />
+    <CollectionsTreeItem
+      icon={"collection"}
+      color="collection"
+      {...props}
+      canExpand
+    />
   );
 };

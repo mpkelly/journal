@@ -29,7 +29,12 @@ export const useTreeElement = (props: TreeElementProps) => {
     handleDrag,
     handleOver,
     handleDrop,
+    readOnly,
   } = useTreeContext() as TreeContextValue;
+
+  if (readOnly) {
+    return {};
+  }
 
   let onDragStart: DragHandler | undefined = undefined;
 

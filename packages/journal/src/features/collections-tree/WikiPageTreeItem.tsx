@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexProps } from "@mpkelly/siam";
-import { TreeItem } from "./TreeItem";
+import { CollectionsTreeItem } from "./CollectionsTreeItem";
 import { TreeNode } from "../../components/tree-kit/Node";
 
 export interface WikiPageTreeItemProps extends FlexProps {
@@ -9,5 +9,5 @@ export interface WikiPageTreeItemProps extends FlexProps {
 }
 
 export const WikiPageTreeItem = (props: WikiPageTreeItemProps) => {
-  return <TreeItem icon={"wikipage"} color="wikipage" {...props} />;
+  return <CollectionsTreeItem icon={"wikipage"} color="wikipage" {...props} />;
 };

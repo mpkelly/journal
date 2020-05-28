@@ -1,13 +1,6 @@
 import React from "react";
-import {
-  Text,
-  Icon,
-  FlexProps,
-  Row,
-  Optional,
-  EditableText,
-} from "@mpkelly/siam";
-import { Link } from "../routing/Link";
+import { Icon, FlexProps, Row, Optional, EditableText } from "@mpkelly/siam";
+import { Link } from "../../components/link/Link";
 import { TreeNode } from "../../components/tree-kit/Node";
 import { CollapseToggle } from "../../components/tree-kit/CollapseToggle";
 
@@ -19,15 +12,16 @@ export interface TreeItemProps extends FlexProps {
   onRename(name: string): void;
 }
 
-export const TreeItem = (props: TreeItemProps) => {
+export const CollectionsTreeItem = (props: TreeItemProps) => {
   const { file, canExpand, icon, color, selected, onRename, ...rest } = props;
   const folderIcon = file.expanded ? "folder-open" : "folder-closed";
+
   return (
     <Row
       my="lg"
+      py="sm"
       gravity={4}
       borderRadius="sm"
-      py="sm"
       selected={selected}
       selectedBackgroundColor="muted-alpha10"
       hoverBackgroundColor="muted-alpha10"
@@ -43,9 +37,9 @@ export const TreeItem = (props: TreeItemProps) => {
         </CollapseToggle>
       </Optional>
       <Icon
-        name={icon}
         ml={!canExpand ? 9 : 0}
         mr="md"
+        name={icon}
         color="secondary.text"
         kind="small"
         selectedColor={"primary.text"}
@@ -58,6 +52,8 @@ export const TreeItem = (props: TreeItemProps) => {
           selected={selected}
           value={file.name}
           onSave={onRename}
+          disabled={!selected}
+          disabledKind="disabled"
         />
       </Link>
     </Row>

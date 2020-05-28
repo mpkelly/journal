@@ -1,7 +1,8 @@
-import { styled, Article } from "@mpkelly/siam";
+import { FC } from "react";
+import { styled, Article, FlexProps } from "@mpkelly/siam";
 
 //TODO this should be part of the default style-sheet;
-export const EditorContainer = styled(Article)`
+export const EditorContainer: FC<FlexProps> = styled(Article)`
   h1 {
     font-size: 36px;
     line-height: 1.5;

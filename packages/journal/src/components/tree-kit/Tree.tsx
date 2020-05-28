@@ -20,9 +20,10 @@ import { TreeElement } from "./TreeElement";
 
 export interface TreeProps {
   nodes: FlatNode[];
-  handleChange(node: FlatNode, property: keyof FlatNode, value: any): void;
+  handleChange?(node: FlatNode, property: keyof FlatNode, value: any): void;
   renderElement(node: TreeNode, depth: number): JSX.Element;
   sortFunction?: TreeNodeSort;
+  readOnly?: boolean;
 }
 
 export interface TreeContextValue {
@@ -31,6 +32,7 @@ export interface TreeContextValue {
   handleOver(id?: NodeId): void;
   handleDrop(dropped: NodeId, target?: NodeId): void;
   handleToggleCollapse(node: Node): void;
+  readOnly: boolean;
 }
 
 export const TreeContext = createContext<TreeContextValue | undefined>(
@@ -42,7 +44,7 @@ export const useTreeContext = () => {
 };
 
 export const Tree = (props: TreeProps) => {
-  const { nodes, renderElement, handleChange, sortFunction } = props;
+  const { nodes, renderElement, handleChange, sortFunction, readOnly } = props;
   const [dragId, setDragId] = useState<NodeId>();
   const [overId, setOverId] = useState<NodeId>();
   const treeNodes = toTreeNodes(nodes);
@@ -54,14 +56,14 @@ export const Tree = (props: TreeProps) => {
     if (target) {
       const node = nodes.find((node) => node.id === dropped);
       if (node && node?.parentId !== target) {
-        handleChange(node, "parentId", target);
+        handleChange && handleChange(node, "parentId", target);
       }
     }
     setOverId(undefined);
   };
 
   const handleToggleCollapse = (node: TreeNode) => {
-    handleChange(node, "expanded", !node.expanded);
+    handleChange && handleChange(node, "expanded", !node.expanded);
   };
 
   const handleOver = useCallback(
@@ -130,6 +132,7 @@ export const Tree = (props: TreeProps) => {
     handleOver,
     handleDrop,
     handleToggleCollapse,
+    readOnly: Boolean(readOnly),
   };
 
   return (

@@ -1,1 +1,1 @@
-export declare const Journal: () => JSX.Element;
+export declare const App: () => JSX.Element;

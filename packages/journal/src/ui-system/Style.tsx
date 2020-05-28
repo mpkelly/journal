@@ -1,6 +1,6 @@
 import { createGlobalStyle } from "@mpkelly/siam";
 
-export const Style = createGlobalStyle`
+export const Style: any = createGlobalStyle`
 html,
 body,
 #app {
