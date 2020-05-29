@@ -48,6 +48,7 @@ export type PagedResult<T> = {
   pageSize: number;
   page: number;
   items: T[];
+  search?: string;
 };
 
 export const emptyPagedResult = () => ({

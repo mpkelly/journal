@@ -5,6 +5,7 @@ import { Divider } from "../../components/divider/Divider";
 import { useImagePropertiesState } from "./ImagePropertiesState";
 import { Label } from "../../components/label/Label";
 import { useSettings } from "../settings/SettingsContext";
+import { Show } from "../../util/Show";
 
 export interface ImagePropertiesProps extends FlexProps {
   image: Media;
@@ -56,7 +57,32 @@ export const ImageProperties = (props: ImagePropertiesProps) => {
         ))}
       </Row>
       <Divider my="sm" />
-      <Text labelKey="properties" kind="label" mt="md" />
+      <ImageProperty labelKey="type" value={image.extension} mt="md" />
+      <Show when={image.width !== undefined}>
+        <ImageProperty labelKey="width" value={`${image.width}px`} />
+      </Show>
+      <Show when={image.height !== undefined}>
+        <ImageProperty labelKey="height" value={`${image.height}px`} />
+      </Show>
+      <ImageProperty labelKey="created" value={image.created} />
+      <ImageProperty labelKey="modified" value={image.modified} />
     </Column>
+  );
+};
+
+interface ImageProperty extends FlexProps {
+  labelKey: string;
+  value: any;
+}
+
+const ImageProperty = (props: ImageProperty) => {
+  const { labelKey, value, ...rest } = props;
+  return (
+    <Row gravity="center-start" mb="md" {...rest}>
+      <Text kind="label" mb={0} width={100} labelKey={labelKey} />
+      <Text kind="small" labelKey="" flexGrow={1} textAlign="right">
+        {value}
+      </Text>
+    </Row>
   );
 };

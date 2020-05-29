@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, IconBundle, ElementProps, IconProps } from "@mpkelly/siam";
+import { Text, IconBundle, IconProps } from "@mpkelly/siam";
 
 const className = "material-icons";
 
@@ -162,6 +162,10 @@ export const Icons: IconBundle = {
   },
   info: {
     ligature: "info",
+    className,
+  },
+  search: {
+    ligature: "search",
     className,
   },
 };

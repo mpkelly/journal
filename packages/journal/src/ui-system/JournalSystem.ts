@@ -398,6 +398,26 @@ export const JournalSystem: System = {
           extends: ["text.regular"],
         },
       },
+      search: {
+        focusFlexGrow: 1,
+        "si-input-wrapper": {
+          border: "none",
+          alignItems: "center",
+          height: 36,
+          borderBottom: "1px solid muted",
+          borderWidth: 1,
+          focusBorderColor: "accent",
+          borderRadius: "sm",
+          p: "sm",
+        },
+        "si-input-left": {
+          extends: ["components.icon.small"],
+          mr: "md",
+        },
+        "si-input": {
+          extends: ["text.regular"],
+        },
+      },
       textarea: {
         extends: ["components.input.primary"],
         "si-input-wrapper": {
