@@ -1,9 +1,10 @@
 import React from "react";
-import { Row, Icon, Text } from "@mpkelly/siam";
+import { Row, Icon } from "@mpkelly/siam";
 import { useUpload } from "../upload/Upload";
 import { useImagePageState } from "./ImagePageState";
 import { Pager } from "../../components/pager/Pager";
 import { SearchInput } from "../../components/search-input/SearchInput";
+import { PageTitle } from "../../components/page-title/PageTitle";
 
 export const ImagePageToolbar = () => {
   const {
@@ -22,10 +23,10 @@ export const ImagePageToolbar = () => {
 
   return (
     <Row alignItems="center" mb={"lg"}>
-      <Text kind="large" as="h1" labelKey="images" m={0} />
+      <PageTitle labelKey="images" iconName="images" />
       <SearchInput
         mx="xxl"
-        placeholder="Search by name or tag then hit enter"
+        placeholderLabelKey="searchByTagOrName"
         onSearch={handleSearch}
         resultCount={searchCount}
       />

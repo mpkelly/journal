@@ -43,9 +43,9 @@ export const SearchInput = (props: SearchInputProps) => {
         </Row>
       }
       kind="search"
+      flexGrow={value.value ? 1 : 0}
       {...rest}
       {...value.valueBind}
-      flexGrow={value.value ? 1 : 0}
       onKeyDown={handleKey}
     />
   );

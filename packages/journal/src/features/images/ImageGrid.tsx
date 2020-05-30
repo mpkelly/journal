@@ -1,9 +1,7 @@
-import React, { useState, useCallback, useEffect } from "react";
-import { isHotkey } from "@mpkelly/react-editor-kit";
+import React, { useCallback } from "react";
 import { Row } from "@mpkelly/siam";
 import { Media, MediaType } from "../media/Media";
-import { Show } from "../../util/Show";
-import { NotFound } from "../media/NotFound";
+import { EmptyView } from "../media/EmptyView";
 import { Grid } from "../../components/grid/Grid";
 import { ImageTile } from "./ImageTile";
 import { useImageGridState } from "./ImageGridState";
@@ -20,8 +18,9 @@ export const ImageGrid = (props: ImageGridProps) => {
     showing,
     images,
   } = useImageGridState(props);
-  const noMedia = images.length === 0;
-
+  if (images.length === 0) {
+    return <EmptyView icon={"images"} labelKey="noImagesFound" />;
+  }
   const togglePreview = (showing?: Media) => {
     if (showing) {
       setSelected(showing);
@@ -60,14 +59,9 @@ export const ImageGrid = (props: ImageGridProps) => {
       gravity="top-start"
       flexWrap={"wrap"}
     >
-      <Show when={noMedia}>
-        <NotFound icon={"image"} labelKey="noMediaFound" />
-      </Show>
-      <Show when={!noMedia}>
-        <Grid columnCount={3}>
-          {images.map((images) => renderMediaItem(images))}
-        </Grid>
-      </Show>
+      <Grid columnCount={3}>
+        {images.map((images) => renderMediaItem(images))}
+      </Grid>
     </Row>
   );
 };

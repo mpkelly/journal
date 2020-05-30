@@ -70,7 +70,8 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
   const handleImportFile = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files) {
       const file = event.currentTarget.files[0];
-      db.importDb(file);
+      await db.importDb(file);
+      window.location.reload();
     }
   };
 

@@ -4,6 +4,7 @@ import { Text, Row, Button } from "@mpkelly/siam";
 import { Panel } from "../../components/panel/Panel";
 import { Setting } from "./Setting";
 import { useSettings } from "./SettingsContext";
+import { PageTitle } from "../../components/page-title/PageTitle";
 
 export interface SettingsPageProps {}
 
@@ -18,8 +19,8 @@ export const SettingsPage = memo(() => {
   } = useSettings();
 
   return (
-    <Page p="lg" flexGrow={1}>
-      <Text as="h1" labelKey="settings" />
+    <Page flexGrow={1}>
+      <PageTitle labelKey="configure" iconName="settings" />
       <Row flexGrow={1}>
         <Panel flexGrow={1} height={"100%"} flexDirection={"column"}>
           <Setting

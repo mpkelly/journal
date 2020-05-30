@@ -3,16 +3,16 @@ import { FlexProps, Column, Row, Scope, Button } from "@mpkelly/siam";
 import { Dialog } from "../../components/dialog/Dialog";
 import { Media } from "../media/Media";
 import { Image } from "./ImagePreview";
-import { useAddImageDialogState } from "./AddImageDialogState";
+import { useImageAddDialogState } from "./ImageAddDialogState";
 import { Pager } from "../../components/pager/Pager";
 import { ImageProperties } from "./ImageProperties";
 
-export interface AddImageDialogProps extends FlexProps {
+export interface ImageAddDialogProps extends FlexProps {
   images: Media[];
   onConfirm(images: Media[]): void;
 }
 
-export const AddImageDialog = (props: AddImageDialogProps) => {
+export const ImageAddDialog = (props: ImageAddDialogProps) => {
   const {
     source,
     images,
@@ -25,7 +25,7 @@ export const AddImageDialog = (props: AddImageDialogProps) => {
     handleNext,
     handlePrevious,
     totalPages,
-  } = useAddImageDialogState(props);
+  } = useImageAddDialogState(props);
   const handleConfirm = () => onConfirm(images);
   const isLastPage = page === totalPages;
   return (

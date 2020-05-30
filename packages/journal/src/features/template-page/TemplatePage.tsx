@@ -1,8 +1,6 @@
 import React, { Fragment } from "react";
-import { FlexProps, Row } from "@mpkelly/siam";
+import { FlexProps } from "@mpkelly/siam";
 import { Page } from "../page/Page";
-import { useTemplatePageState } from "./TemplatePageState";
-import { TemplateCard } from "../template/TemplateCard";
 import { Dialog } from "../../components/dialog/Dialog";
 import { Show } from "../../util/Show";
 import { TemplatePageCreateDialog } from "./TemplatePageCreateDialog";
@@ -11,6 +9,7 @@ import {
   TemplatePageCreateDialogStateProvider,
   useTemplatePageCreateDialogState,
 } from "./TemplatePageCreateDialogState";
+import { TemplateGrid } from "./TemplateGrid";
 
 export interface TemplatePageProps extends FlexProps {}
 
@@ -24,7 +23,6 @@ export const TemplatePage = (props: TemplatePageProps) => {
 
 const PageContent = (props: TemplatePageProps) => {
   const { ...rest } = props;
-  const { templates, handleDelete, handleRename } = useTemplatePageState();
   const {
     newFile,
     handleCreate,
@@ -34,25 +32,7 @@ const PageContent = (props: TemplatePageProps) => {
     <Fragment>
       <Page size="100%" p="lg" {...rest}>
         <PageTitle iconName="template" labelKey="templates" />
-        <Row
-          flexWrap="wrap"
-          mt="xxl"
-          width="100%"
-          flexGrow={1}
-          alignContent="flex-start"
-        >
-          {templates.map((template) => {
-            return (
-              <TemplateCard
-                template={template}
-                onCreate={() => handleCreate(template)}
-                onDelete={() => handleDelete(template.id)}
-                onRename={(name) => handleRename(template.id, name)}
-                key={template.id}
-              />
-            );
-          })}
-        </Row>
+        <TemplateGrid onCreate={handleCreate} />
       </Page>
       <Show when={newFile}>
         <Dialog

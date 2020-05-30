@@ -1,5 +1,4 @@
 import Dexie from "dexie";
-
 const db = new Dexie("JournalDB");
 
 db.version(2).stores({

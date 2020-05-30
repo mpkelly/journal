@@ -4,7 +4,7 @@ import { Row, Show } from "@mpkelly/siam";
 import { ImagePageStateProvider, useImagePageState } from "./ImagePageState";
 import { ImagePageToolbar } from "./ImagePageToolbar";
 import { ImageGrid } from "../images/ImageGrid";
-import { AddImageDialog } from "../images/AddImageDialog";
+import { ImageAddDialog } from "../images/ImageAddDialog";
 
 export const ImagePage = () => {
   return (
@@ -25,7 +25,7 @@ export const ImagePageContent = () => {
         </Row>
       </Page>
       <Show when={Boolean(newImages.length)}>
-        <AddImageDialog images={newImages} onConfirm={handleAddMedia} />
+        <ImageAddDialog images={newImages} onConfirm={handleAddMedia} />
       </Show>
     </Fragment>
   );

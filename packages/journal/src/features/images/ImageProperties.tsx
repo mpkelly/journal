@@ -4,7 +4,6 @@ import { Media } from "../media/Media";
 import { Divider } from "../../components/divider/Divider";
 import { useImagePropertiesState } from "./ImagePropertiesState";
 import { Label } from "../../components/label/Label";
-import { useSettings } from "../settings/SettingsContext";
 import { Show } from "../../util/Show";
 
 export interface ImagePropertiesProps extends FlexProps {

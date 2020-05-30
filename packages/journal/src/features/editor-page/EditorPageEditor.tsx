@@ -39,10 +39,13 @@ import {
   createClearFormattingPlugin,
   LayoutPlugin,
   Plugin,
+  createInitialLetterPlugin,
 } from "@mpkelly/react-editor-kit";
 import { EditorContainer } from "./EditorContainer";
 import { ErrorBoundary } from "../errors/ErrorHandler";
 import { createEditorStylePlugin } from "./EditorPageStylePlugin";
+import { FormatContextMenuPlugin } from "../editor/EditorFormatContextMenuPlugin";
+import { InsertContextMenuPlugin } from "../editor/EditorInsertContextMenuPlugin";
 
 export interface EditorPageEditorProps extends FlexProps {
   children: ReactNode;
@@ -129,8 +132,8 @@ const plugins: Plugin[] = [
   TextAlignPlugin,
   DividerPlugin,
   createClearFormattingPlugin(),
-  //createInitialLetterPlugin(),
-  // FormatContextMenuPlugin,
-  // InsertContextMenuPlugin,
+  createInitialLetterPlugin(),
+  FormatContextMenuPlugin,
+  InsertContextMenuPlugin,
   LayoutPlugin,
 ];

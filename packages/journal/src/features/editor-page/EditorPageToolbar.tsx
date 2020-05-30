@@ -4,51 +4,68 @@ import { useEditorSideTabState } from "./EditorPageState";
 import { SideTab } from "./EditorSideTabState";
 
 export const EditorPageToolbar = (props: FlexProps) => {
-  const { handleSideTabChange } = useEditorSideTabState();
+  const { handleSideTabChange, sideTab } = useEditorSideTabState();
   return (
     <Column
-      py="md"
+      pt="md"
       gravity={"top-center"}
       backgroundColor="background"
       borderLeft="1px solid dividers"
       {...props}
     >
-      <Icon
-        name="outline"
-        kind="button"
-        onClick={() => handleSideTabChange(SideTab.Outline)}
-        my="md"
+      <SideTabIcon
+        selectedTab={sideTab}
+        sideTab={SideTab.Outline}
+        onClick={handleSideTabChange}
+        iconName="outline"
       />
-      <Icon
-        name="images"
-        kind="button"
-        onClick={() => handleSideTabChange(SideTab.Code)}
-        my="md"
+      <SideTabIcon
+        selectedTab={sideTab}
+        sideTab={SideTab.Image}
+        onClick={handleSideTabChange}
+        iconName="images"
       />
-      <Icon
-        name="code"
-        kind="button"
-        onClick={() => handleSideTabChange(SideTab.Code)}
-        my="md"
+      <SideTabIcon
+        selectedTab={sideTab}
+        sideTab={SideTab.Code}
+        onClick={handleSideTabChange}
+        iconName="code"
       />
-      <Icon
-        name="template"
-        kind="button"
-        onClick={() => handleSideTabChange(SideTab.Templates)}
-        my="md"
+      <SideTabIcon
+        selectedTab={sideTab}
+        sideTab={SideTab.Templates}
+        onClick={handleSideTabChange}
+        iconName="template"
       />
-      <Icon
-        name="variable"
-        kind="button"
-        onClick={() => handleSideTabChange(SideTab.Templates)}
-        my="md"
-      />
-      <Icon
+      <SideTabIcon
+        selectedTab={sideTab}
+        sideTab={SideTab.Code}
+        onClick={handleSideTabChange}
+        iconName="help"
         mt="auto"
-        name="help"
-        kind="button"
-        onClick={() => handleSideTabChange(SideTab.Code)}
       />
     </Column>
+  );
+};
+
+interface SideTabIconProps extends FlexProps {
+  onClick(sideTab: SideTab): void;
+  sideTab: SideTab;
+  selectedTab: SideTab | undefined;
+  iconName: string;
+}
+
+const SideTabIcon = (props: SideTabIconProps) => {
+  const { sideTab, selectedTab, onClick, iconName, ...rest } = props;
+  return (
+    <Icon
+      my="md"
+      selectedColor="accent"
+      selected={sideTab === selectedTab}
+      name={iconName}
+      kind="button"
+      onClick={() => onClick(sideTab)}
+      {...rest}
+    />
   );
 };

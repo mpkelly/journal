@@ -36,7 +36,7 @@ export interface Database {
   transact(work: UnitOfDBWork, tables: string[]): Promise<void>;
 
   exportDb(): Promise<Blob>;
-  importDb(file: File): Promise<void>;
+  importDb(file: File): Promise<any>;
 
   delete(): Promise<void>;
 }

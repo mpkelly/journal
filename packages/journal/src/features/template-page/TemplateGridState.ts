@@ -3,7 +3,7 @@ import { useDatabase } from "../database/DatabaseState";
 import { File } from "../file/File";
 import useArray from "react-hanger/array/useArray";
 
-export const useTemplatePageState = () => {
+export const useTemplateGridState = () => {
   const db = useDatabase();
   const [templates, templateActions] = useArray<File>([]);
 

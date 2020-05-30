@@ -1,8 +1,8 @@
 import db from "./Dexie";
+import * as DexieBackup from "dexie-export-import";
 import { Database, UnitOfDBWork } from "./Database";
 import { File as JFile, FileType } from "../file/File";
 import { JournalSettings, DefaultSettings } from "../settings/JournalSettings";
-import { importFromJsonFile, exportToJson } from "./DatabaseBackup";
 import { newId } from "../../util/Identity";
 import { CodeFile } from "../code-editor/CodeFile";
 import { Variable } from "../variables/Variable";
@@ -156,11 +156,11 @@ export const JournalDatabase: Database = {
   },
 
   exportDb: async () => {
-    const json = await exportToJson(db.backendDB());
-    return new Blob([json], { type: "application/json" });
+    return await DexieBackup.exportDB(db);
   },
-  importDb: (file: File) => {
-    return importFromJsonFile(db.backendDB(), file, true);
+  importDb: async (file: File) => {
+    await db.delete();
+    return DexieBackup.importDB(file);
   },
 
   delete: () => {

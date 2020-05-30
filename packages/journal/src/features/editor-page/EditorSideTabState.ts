@@ -9,6 +9,7 @@ export enum SideTab {
   Outline,
   Code,
   Templates,
+  Image,
 }
 
 export const useEditorSideTabState = (): EditorSideTabState => {

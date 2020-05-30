@@ -1,10 +1,10 @@
-import { AddImageDialogProps } from "./AddImageDialog";
+import { ImageAddDialogProps } from "./ImageAddDialog";
 import { usePagerState } from "../../components/pager/PagerState";
 import { Media } from "../media/Media";
 import { getImageSource } from "./ImageTile";
 import { useCallback } from "react";
 
-export const useAddImageDialogState = (props: AddImageDialogProps) => {
+export const useImageAddDialogState = (props: ImageAddDialogProps) => {
   const { images, onConfirm } = props;
 
   const {

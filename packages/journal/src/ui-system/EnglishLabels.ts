@@ -8,4 +8,5 @@ export const Labels: I18NBundle = {
   addNewTags: "Add new tags",
   finished: "I'm done",
   searchResults: (count) => pluralize(count, "result", "results"),
+  searchByTagOrName: "Search by name or tag then hit enter",
 };

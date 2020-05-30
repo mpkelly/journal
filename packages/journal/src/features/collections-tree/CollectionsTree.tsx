@@ -35,7 +35,7 @@ export const CollectionsTreeView = (props: FlexProps) => {
   } = useHistory();
 
   const renderItem = (file: TreeNode, depth: number) => {
-    const selected = pathname.endsWith(String(file.id));
+    const selected = (pathname || "").endsWith(String(file.id));
     const props = {
       selected,
       file,
