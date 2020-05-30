@@ -11,6 +11,7 @@ import { CodePage } from "./features/code-page/CodePage";
 import { TemplatePage } from "./features/template-page/TemplatePage";
 import { SettingsPage } from "./features/settings/SettingsPage";
 import { ImagePage } from "./features/image-page/ImagePage";
+import { LibraryPage } from "./features/library/LibraryPage";
 
 export const App = () => {
   return (
@@ -29,6 +30,7 @@ const AppContent = () => (
     <Row width="100vw" height="100vh">
       <Navigation width={280} height={"100vh"} maxHeight="100vh" />
       <Switch>
+        <Route exact path={"/library"} component={LibraryPage} />
         <Route exact path={"/library/view/:fileId"} component={FilePage} />
         <Route exact path={"/code"} component={CodePage} />
         <Route exact path={"/templates"} component={TemplatePage} />

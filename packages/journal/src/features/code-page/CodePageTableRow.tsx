@@ -6,10 +6,11 @@ import { stopEvent } from "@mpkelly/react-editor-kit";
 
 export interface CodePageTableRowProps extends FlexProps {
   codeFile: CodeFile;
+  icon: string;
 }
 
 export const CodePageTableRow = (props: CodePageTableRowProps) => {
-  const { codeFile } = props;
+  const { codeFile, icon } = props;
   //TODO use correct last modified date
   const {
     handleDeleteFile,
@@ -22,7 +23,7 @@ export const CodePageTableRow = (props: CodePageTableRowProps) => {
   return (
     <tr className="row" key={codeFile.id}>
       <td className="cell">
-        <Icon name={"code"} color={"muted"} />
+        <Icon name={icon} color={"muted"} />
       </td>
       <td className="cell">
         <Text

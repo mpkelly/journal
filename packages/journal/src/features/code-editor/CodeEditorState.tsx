@@ -3,6 +3,7 @@ import { Node, generateCss } from "@mpkelly/react-editor-kit";
 import { CodeFile, CodeType, createCodeFile } from "./CodeFile";
 import { useDatabase } from "../database/DatabaseState";
 import { File } from "../file/File";
+import useBoolean from "react-hanger/useBoolean";
 
 export interface CodeEditorStateProps {
   file: File;
@@ -13,11 +14,12 @@ let count = 1;
 export const useCodeEditorState = (props: CodeEditorStateProps) => {
   const { file } = props;
   const db = useDatabase();
+
   const [state, setState] = useState<{
     activeCodeFile?: CodeFile;
     codeFiles: CodeFile[];
   }>({ activeCodeFile: undefined, codeFiles: [] });
-
+  const showLinkCodeDialog = useBoolean(false);
   const { activeCodeFile, codeFiles } = state;
 
   useEffect(() => {
@@ -87,9 +89,28 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
       setState((state) => {
         const files = state.codeFiles.slice();
         files.splice(files.indexOf(code), 1);
-        return { activeCodeFile: code, codeFiles: files };
+        updateStyles(files);
+        return { activeCodeFile: files[0], codeFiles: files };
       });
     },
+    [file, codeFiles]
+  );
+
+  const handleLinkCode = useCallback(
+    (ids: string[]) => {
+      showLinkCodeDialog.toggle();
+      file.linkedCode = (file.linkedCode || []).concat(ids);
+      db.getAllCodeFiles(ids, false).then((files) => {
+        const next = codeFiles.concat(files);
+        setState((current) => ({
+          ...current,
+          codeFiles: next,
+        }));
+        updateStyles(next);
+      });
+      db.updateFile(file.id, { linkedCode: file.linkedCode });
+    },
+
     [file, codeFiles]
   );
 
@@ -124,6 +145,8 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
     handleSetActive,
     handleExecuteCode,
     handleUnlinkCode,
+    handleLinkCode,
+    showLinkCodeDialog,
   };
 };
 

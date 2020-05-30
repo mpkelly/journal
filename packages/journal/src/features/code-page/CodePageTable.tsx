@@ -5,8 +5,8 @@ import { useCodePageState } from "./CodePageState";
 import { CodePageTableRow } from "./CodePageTableRow";
 import { CodePageEditorDialog } from "./CodePageEditorDialog";
 import { Show } from "../../util/Show";
-import { ConfirmDialogView } from "../../components/dialog/ConfirmDialogView";
 import { DeleteDialog } from "../../components/dialog/DeleteDialog";
+import { CodeType } from "../code-editor/CodeFile";
 
 export interface CodePageTableProps extends FlexProps {}
 
@@ -22,9 +22,14 @@ export const CodePageTable = (props: CodePageTableProps) => {
   } = useCodePageState();
 
   const renderRows = () => {
-    return codeFiles.map((codeFile) => (
-      <CodePageTableRow codeFile={codeFile} />
-    ));
+    return codeFiles.map((codeFile) => {
+      switch (codeFile.type) {
+        case CodeType.Css:
+          return <CodePageTableRow codeFile={codeFile} icon={"style"} />;
+        case CodeType.JavaScript:
+          return <CodePageTableRow codeFile={codeFile} icon={"execute"} />;
+      }
+    });
   };
   return (
     <Fragment>

@@ -12,7 +12,7 @@ export interface Database {
   updateFile(id: any, changes: Partial<JFile>): Promise<number>;
 
   getCodeFile(id: any): Promise<CodeFile | undefined>;
-  getAllCodeFiles(ids?: any[]): Promise<CodeFile[]>;
+  getAllCodeFiles(ids?: any[], includeGlobal?: boolean): Promise<CodeFile[]>;
   addCodeFile(code: CodeFile): Promise<void>;
   deleteCodeFile(id: any): Promise<void>;
   updateCodeFile(id: any, changes: Partial<CodeFile>): Promise<number>;

@@ -238,6 +238,10 @@ export const JournalSystem: System = {
       base: {
         size: 20,
         borderRadius: "sm",
+        label: {
+          selector: "label",
+          height: 20,
+        },
         "si-checkbox": {
           borderStyle: "solid",
           borderRadius: "sm",

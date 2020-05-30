@@ -24,13 +24,23 @@ export const CodeEditorToolbar = (props: CodeEditorToolbarProps) => {
     handleSetActive,
     handleExecuteCode,
     handleUnlinkCode,
+    showLinkCodeDialog,
   } = useCodeEditorState();
   const isCodeActive = activeCode?.type === CodeType.JavaScript;
+
+  const handleMenuItemClicked = (item: MenuItemModel) => {
+    if (item.onClick) {
+      item.onClick();
+    } else {
+      handleCreate(item.codeType);
+    }
+  };
 
   const menuItems: MenuItemModel[] = [
     {
       iconName: "code",
       labelKey: "linkExisting",
+      onClick: showLinkCodeDialog.toggle,
     },
     {
       iconName: "style",
@@ -67,11 +77,7 @@ export const CodeEditorToolbar = (props: CodeEditorToolbarProps) => {
           <Icon kind="small" name="execute" />
         </Button>
       </Show>
-      <Select
-        items={menuItems}
-        ml="auto"
-        onItemClicked={(item: MenuItemModel) => handleCreate(item.codeType)}
-      >
+      <Select items={menuItems} ml="auto" onItemClicked={handleMenuItemClicked}>
         <Icon kind="button" name="add" />
       </Select>
     </Row>

@@ -80,11 +80,14 @@ export const JournalDatabase: Database = {
   getCodeFile: async (id: string): Promise<CodeFile | undefined> => {
     return await code.get(id);
   },
-  getAllCodeFiles: async (ids?: string[]) => {
+  getAllCodeFiles: async (ids?: string[], includeGlobal = true) => {
     if (!ids) {
       return code.toArray();
     }
     const files = await code.bulkGet(ids);
+    if (!includeGlobal) {
+      return files;
+    }
     const global = await code
       .filter((code) => Boolean(code.global) && !files.includes(code.id))
       .toArray();
