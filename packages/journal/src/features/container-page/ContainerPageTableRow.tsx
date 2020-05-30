@@ -14,7 +14,6 @@ export const ContainerPageTableRow = (props: ContainerPageTableRowProps) => {
   const { file, icon, color } = props;
   const { handleDeleteFile: handleDeleteItem } = useContainerPageState();
 
-  //TODO use correct last modified date
   return (
     <tr className="row" key={file.id}>
       <td className="cell">
@@ -26,7 +25,10 @@ export const ContainerPageTableRow = (props: ContainerPageTableRowProps) => {
         </Link>
       </td>
       <td className="cell">
-        <Text>2 days ago</Text>
+        <Text color="secondary.text"> {file.created}</Text>
+      </td>
+      <td className="cell">
+        <Text color="secondary.text">{file.modified}</Text>
       </td>
       <td className="cell">
         <Select

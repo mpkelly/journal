@@ -111,7 +111,7 @@ const Tab = (props: TabProps) => {
       <Text kind="small" color="inherit">
         {code.name}
       </Text>
-      <Show when={props.selected}>
+      <Show when={props.selected && !code.global}>
         <Icon
           name="clear"
           color="secondary.text"

@@ -27,7 +27,7 @@ export const ContainerPageHeader = (props: ContainerPageHeaderProps) => {
   return (
     <Header flexDirection="row" gravity={"center-start"}>
       <Row gravity="center-start">
-        <Icon name={icon} kind="large" mr="md" color="accent" />
+        <Icon name={icon} mr="md" />
         <EditableText
           kind="large"
           value={file.name}

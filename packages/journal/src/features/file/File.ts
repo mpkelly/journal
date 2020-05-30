@@ -6,6 +6,8 @@ export interface File extends FlatNode {
   data?: any;
   locked?: boolean;
   template?: boolean;
+  created: string;
+  modified: string;
   linkedCode?: string[];
 }
 
@@ -27,7 +29,19 @@ export const createFile = (
   expanded = true,
   parentId?: any
 ): File => {
-  return { id, name, type, expanded, parentId, data: contentForType(type) };
+  const now = fileDate();
+  let modified = now;
+  let created = now;
+  return {
+    id,
+    name,
+    type,
+    expanded,
+    parentId,
+    data: contentForType(type),
+    created,
+    modified,
+  };
 };
 
 const contentForType = (type: FileType) => {
@@ -40,3 +54,5 @@ const contentForType = (type: FileType) => {
       return null;
   }
 };
+
+export const fileDate = () => new Date().toLocaleString();

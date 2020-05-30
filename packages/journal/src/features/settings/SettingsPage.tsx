@@ -1,7 +1,6 @@
 import React, { memo } from "react";
 import { Page } from "../page/Page";
-import { Text, Row, Button } from "@mpkelly/siam";
-import { Panel } from "../../components/panel/Panel";
+import { Row, Button, Column } from "@mpkelly/siam";
 import { Setting } from "./Setting";
 import { useSettings } from "./SettingsContext";
 import { PageTitle } from "../../components/page-title/PageTitle";
@@ -20,32 +19,30 @@ export const SettingsPage = memo(() => {
 
   return (
     <Page flexGrow={1}>
-      <PageTitle labelKey="configure" iconName="settings" />
-      <Row flexGrow={1}>
-        <Panel flexGrow={1} height={"100%"} flexDirection={"column"}>
-          <Setting
-            label="siteName"
-            value={settings.siteName}
-            onChange={(siteName: string) => updateSettings({ siteName })}
-            description={""}
+      <PageTitle labelKey="settings" iconName="settings" />
+      <Column flexGrow={1} py="lg">
+        <Setting
+          label="siteName"
+          value={settings.siteName}
+          onChange={(siteName: string) => updateSettings({ siteName })}
+          description={""}
+        />
+        <input
+          type="file"
+          hidden
+          ref={handleImportRef}
+          onChange={handleImportFile}
+        />
+        <Row mt="xl">
+          <Button onClick={handleExport} labelKey="exportData" kind="muted" />
+          <Button
+            onClick={handleImport}
+            labelKey="importData"
+            ml="md"
+            kind="muted"
           />
-          <input
-            type="file"
-            hidden
-            ref={handleImportRef}
-            onChange={handleImportFile}
-          />
-          <Row mt="xl">
-            <Button onClick={handleExport} labelKey="exportData" kind="muted" />
-            <Button
-              onClick={handleImport}
-              labelKey="importData"
-              ml="md"
-              kind="muted"
-            />
-          </Row>
-        </Panel>
-      </Row>
+        </Row>
+      </Column>
     </Page>
   );
 });

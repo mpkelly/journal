@@ -12,6 +12,7 @@ import {
   toFlatNodes,
 } from "../../components/tree-kit/Node";
 import { usePagerState } from "../../components/pager/PagerState";
+import { CollectionChangedEvent } from "../collections-tree/CollectionsChangedEvent";
 
 //TODO make varaible
 export const PageSize = 10;
@@ -50,8 +51,9 @@ const containerPageState = () => {
         const name = `New item ${count++}`;
         const file = createFile(id, name, type, true, fileId);
         await db.addFile(file);
-        db.getChildren(fileId, 0, PageSize).then(setItems);
-        fireEvent("collectionschanged");
+        db.getChildren(fileId, 0, PageSize)
+          .then(setItems)
+          .then(CollectionChangedEvent);
       });
     },
     [fileId]

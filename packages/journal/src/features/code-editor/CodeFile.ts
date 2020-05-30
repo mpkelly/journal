@@ -1,5 +1,6 @@
 import { newId } from "../../util/Identity";
 import { Node } from "@mpkelly/react-editor-kit";
+import { fileDate } from "../file/File";
 
 export interface CodeFile {
   id?: any;
@@ -8,6 +9,8 @@ export interface CodeFile {
   data: any;
   //Called "default" in the UI
   global?: boolean;
+  modified: string;
+  created: string;
 }
 
 export enum CodeType {
@@ -22,6 +25,9 @@ export const createCodeFile = (
 ): CodeFile => {
   const id = newId();
   let data: Node[] = [];
+  const now = fileDate();
+  const created = now;
+  const modified = now;
 
   if (type === CodeType.Css) {
     data = [
@@ -49,7 +55,7 @@ export const createCodeFile = (
     ];
   }
 
-  return { id, name, type, data, global };
+  return { id, name, type, data, global, created, modified };
 };
 
 export const DefaultCSS = `

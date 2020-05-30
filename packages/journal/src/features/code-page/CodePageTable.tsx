@@ -68,6 +68,9 @@ const columns: TableColumn[] = [
     key: "name",
   },
   {
+    key: "created",
+  },
+  {
     key: "lastModified",
   },
   {

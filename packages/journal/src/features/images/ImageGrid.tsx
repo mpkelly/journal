@@ -18,9 +18,7 @@ export const ImageGrid = (props: ImageGridProps) => {
     showing,
     images,
   } = useImageGridState(props);
-  if (images.length === 0) {
-    return <EmptyView icon={"images"} labelKey="noImagesFound" />;
-  }
+
   const togglePreview = (showing?: Media) => {
     if (showing) {
       setSelected(showing);
@@ -48,6 +46,10 @@ export const ImageGrid = (props: ImageGridProps) => {
     },
     [showing, selected]
   );
+
+  if (images.length === 0) {
+    return <EmptyView icon={"images"} labelKey="noImagesFound" mt="xxl" />;
+  }
 
   return (
     <Row

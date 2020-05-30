@@ -35,7 +35,10 @@ export const CodePageTableRow = (props: CodePageTableRowProps) => {
         </Text>
       </td>
       <td className="cell">
-        <Text>2 days ago</Text>
+        <Text color="secondary.text">{codeFile.created}</Text>
+      </td>
+      <td className="cell">
+        <Text color="secondary.text">{codeFile.modified}</Text>
       </td>
       <td className="cell" onClick={stopEvent}>
         <Switch

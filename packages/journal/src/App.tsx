@@ -27,7 +27,7 @@ export const App = () => {
 
 const AppContent = () => (
   <HashRouter>
-    <Row width="100vw" height="100vh">
+    <Row width="100vw" height="100vh" background="background">
       <Navigation width={280} height={"100vh"} maxHeight="100vh" />
       <Switch>
         <Route exact path={"/library"} component={LibraryPage} />

@@ -1,7 +1,7 @@
 import db from "./Dexie";
 import * as DexieBackup from "dexie-export-import";
 import { Database, UnitOfDBWork } from "./Database";
-import { File as JFile, FileType } from "../file/File";
+import { File as JFile, FileType, fileDate } from "../file/File";
 import { JournalSettings, DefaultSettings } from "../settings/JournalSettings";
 import { newId } from "../../util/Identity";
 import { CodeFile } from "../code-editor/CodeFile";
@@ -74,6 +74,7 @@ export const JournalDatabase: Database = {
   },
 
   updateFile: async (id: string, changes: Partial<JFile>): Promise<number> => {
+    changes.modified = fileDate();
     return files.update(id, changes);
   },
 
@@ -113,6 +114,7 @@ export const JournalDatabase: Database = {
     if (!item.id) {
       item.id = newId();
     }
+    item.modified = fileDate();
     return code.add(item, item.id);
   },
 

@@ -8,7 +8,7 @@ export const SettingsNav = (props: SettingsNavProps) => {
   return (
     <NavItem
       icon={"settings"}
-      labelKey={"configure"}
+      labelKey={"settings"}
       path={"/settings/general"}
       type={"settings"}
       {...props}

@@ -4,7 +4,7 @@ import useBoolean from "react-hanger/useBoolean";
 import { File } from "../file/File";
 import { useTemplateState } from "./TemplateState";
 import { useDatabase } from "../database/DatabaseState";
-import { fireEvent } from "../../util/events/Events";
+import { CollectionChangedEvent } from "../collections-tree/CollectionsChangedEvent";
 
 export const useTemplateCreateDialogState = (initialFile: File) => {
   const { handleCreateTemplate } = useTemplateState();
@@ -17,15 +17,15 @@ export const useTemplateCreateDialogState = (initialFile: File) => {
     setFile((file) => ({ ...file, name }));
 
   const handleCreate = useCallback(() => {
-    handleCreateTemplate(file).then(() => {
-      if (deleteOriginal.value) {
-        db.deleteFiles([initialFile.id]).then(() =>
-          fireEvent("collectionschanged")
-        );
-      }
-      hisotry.push("/templates");
-    });
-  }, [file]);
+    handleCreateTemplate(file)
+      .then(() => {
+        if (deleteOriginal.value) {
+          db.deleteFiles([initialFile.id]);
+        }
+        hisotry.push("/templates");
+      })
+      .then(CollectionChangedEvent);
+  }, [file, deleteOriginal]);
 
   return { file, handleCreate, handleNameChange, deleteOriginal };
 };
