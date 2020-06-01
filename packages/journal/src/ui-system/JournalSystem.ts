@@ -140,7 +140,7 @@ export const JournalSystem: System = {
         fontFamily: "Material Icons Round",
         fontSize: 24,
         color: "primary.text",
-        borderRadius: "lg",
+        borderRadius: "round",
       },
       regular: {
         extends: ["components.icon.base"],
@@ -174,10 +174,10 @@ export const JournalSystem: System = {
       },
       button: {
         extends: ["components.icon.base"],
-        hoverBackgroundColor: "muted-alpha20",
+        hoverBackgroundColor: "muted-alpha30",
         hoverColor: "m",
         cursor: "pointer",
-        size: 32,
+        size: 40,
       },
       "small.button": {
         extends: ["components.icon.button"],

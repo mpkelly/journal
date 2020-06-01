@@ -83,6 +83,6 @@ const CollectionsSchema: Schema = {
     FileType.WikiPage,
   ],
   [FileType.Folder]: [FileType.Folder, FileType.Document, FileType.WikiPage],
-  [FileType.Document]: [FileType.Document],
-  [FileType.WikiPage]: [FileType.WikiPage],
+  [FileType.Document]: [],
+  [FileType.WikiPage]: [],
 };
