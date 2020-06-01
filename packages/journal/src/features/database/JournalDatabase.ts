@@ -26,15 +26,6 @@ export const JournalDatabase: Database = {
     await files.each((item) => {
       if (!item.template) {
         const { data, ...rest } = item;
-        if (item.type == FileType.Collection || item.type == FileType.Folder) {
-          rest.accepts = [
-            FileType.Folder,
-            FileType.Document,
-            FileType.WikiPage,
-          ];
-        } else {
-          rest.accepts = [];
-        }
         results.push(rest);
       }
     });

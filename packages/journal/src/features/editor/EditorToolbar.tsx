@@ -29,7 +29,6 @@ import {
   LayoutMenuItem,
   CustomLayoutMenuItem,
 } from "@mpkelly/react-editor-kit";
-import { ExtendedColors } from "../../components/color-picker/ColorPicker";
 
 export interface EditorToolbarProps extends FlexProps {
   saved: boolean;
@@ -189,4 +188,27 @@ const splitColors = (array: string[], size: number) => {
   return results;
 };
 
-const Colors = splitColors(ExtendedColors, 5);
+export const BaseColors = [
+  "#f6e58d",
+  "#ffbe76",
+  "#ff7979",
+  "#badc58",
+  "#ffffff",
+  "#f9ca24",
+  "#eb4d4b",
+  "#f0932b",
+  "#6ab04c",
+  "#b1b1b1",
+  "#7ed6df",
+  "#e056fd",
+  "#686de0",
+  "#95afc0",
+  "#22a6b3",
+  "#be2edd",
+  "#4834d4",
+  "#535c68",
+  "#4C5ADE",
+  "#130f40",
+];
+
+const Colors = splitColors(BaseColors, 5);

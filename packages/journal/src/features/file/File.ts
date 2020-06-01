@@ -1,4 +1,4 @@
-import { FlatNode } from "../../components/tree-kit/Node";
+import { FlatNode } from "@mpkelly/react-tree";
 
 export interface File extends FlatNode {
   name: string;

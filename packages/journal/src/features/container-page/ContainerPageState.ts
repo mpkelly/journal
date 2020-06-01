@@ -10,7 +10,7 @@ import {
   toTreeNodes,
   findTreeNodeById,
   toFlatNodes,
-} from "../../components/tree-kit/Node";
+} from "@mpkelly/react-tree";
 import { usePagerState } from "../../components/pager/PagerState";
 import { CollectionChangedEvent } from "../collections-tree/CollectionsChangedEvent";
 

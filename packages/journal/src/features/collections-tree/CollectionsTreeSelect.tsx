@@ -1,8 +1,7 @@
-import React, { useState } from "react";
+import React from "react";
 import { FlexProps, Row, Text, Icon } from "@mpkelly/siam";
-import { TreeNode, FlatNode, Node } from "../../components/tree-kit/Node";
 import { treeSortFunction, TreeContainer } from "./CollectionsTree";
-import { Tree } from "../../components/tree-kit/Tree";
+import { TreeNode, FlatNode, Tree } from "@mpkelly/react-tree";
 import { FileType } from "../file/File";
 
 export interface TreeSelectProps extends FlexProps {

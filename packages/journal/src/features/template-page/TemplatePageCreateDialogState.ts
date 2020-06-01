@@ -6,7 +6,7 @@ import { useDatabase } from "../database/DatabaseState";
 import { File, FileType } from "../file/File";
 import { newId } from "../../util/Identity";
 import { findPlaceholders } from "../placeholders/Placeholder";
-import { FlatNode } from "../../components/tree-kit/Node";
+import { FlatNode } from "@mpkelly/react-tree";
 
 export type Substitution = { name: string; value: string };
 
@@ -22,6 +22,7 @@ export const templatePageCreateDialogState = () => {
   const [substitutions, setSubstitutions] = useState<Substitution[]>([]);
   const [collections, setCollections] = useState<FlatNode[]>();
   const history = useHistory();
+  const hasNextTab = substitutions.length > 0;
 
   useEffect(() => {
     //TODO move filtering into DB
@@ -69,7 +70,13 @@ export const templatePageCreateDialogState = () => {
     }
   }, [newFile, substitutions]);
 
-  const handleNextTab = () => setTab((tab) => tab + 1);
+  const handleNextTab = () => {
+    if (hasNextTab) {
+      setTab((tab) => tab + 1);
+    } else {
+      handleConfirmCreate();
+    }
+  };
 
   return {
     tab,
@@ -81,6 +88,7 @@ export const templatePageCreateDialogState = () => {
     handleSubstitutionChange,
     handleUpdateNewFile,
     handleNextTab,
+    hasNextTab,
     collections,
   };
 };

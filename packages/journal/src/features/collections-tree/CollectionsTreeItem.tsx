@@ -1,8 +1,7 @@
 import React from "react";
 import { Icon, FlexProps, Row, Optional, EditableText } from "@mpkelly/siam";
 import { Link } from "../../components/link/Link";
-import { TreeNode } from "../../components/tree-kit/Node";
-import { CollapseToggle } from "../../components/tree-kit/CollapseToggle";
+import { TreeNode, CollapseToggle } from "@mpkelly/react-tree";
 
 export interface TreeItemProps extends FlexProps {
   icon: string;

@@ -1,7 +1,7 @@
 import React from "react";
 import { FlexProps } from "@mpkelly/siam";
 import { CollectionsTreeItem } from "./CollectionsTreeItem";
-import { TreeNode } from "../../components/tree-kit/Node";
+import { TreeNode } from "@mpkelly/react-tree";
 
 export interface DocumenTreeItemProps extends FlexProps {
   file: TreeNode;

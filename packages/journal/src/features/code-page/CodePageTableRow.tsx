@@ -11,7 +11,6 @@ export interface CodePageTableRowProps extends FlexProps {
 
 export const CodePageTableRow = (props: CodePageTableRowProps) => {
   const { codeFile, icon } = props;
-  //TODO use correct last modified date
   const {
     handleDeleteFile,
     handleEdit,
@@ -23,7 +22,7 @@ export const CodePageTableRow = (props: CodePageTableRowProps) => {
   return (
     <tr className="row" key={codeFile.id}>
       <td className="cell">
-        <Icon name={icon} color={"muted"} />
+        <Icon name={icon} color={"secondary.text"} />
       </td>
       <td className="cell">
         <Text

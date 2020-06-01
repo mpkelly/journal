@@ -2,8 +2,8 @@ import { useState, useEffect, useCallback } from "react";
 import constate from "constate/";
 import useArray from "react-hanger/array/useArray";
 import { useDatabase } from "../database/DatabaseState";
-import { NodeId } from "../../components/tree-kit/Node";
 import { CodeFile } from "../code-editor/CodeFile";
+import { NodeId } from "@mpkelly/react-tree";
 
 export const codePageState = () => {
   const [itemToDelete, setItemToDelete] = useState<NodeId>();

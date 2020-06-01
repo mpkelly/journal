@@ -128,7 +128,7 @@ export const JournalSystem: System = {
         outline: "none",
         border: "2px solid transparent",
         focusBorder: "2px solid accent",
-        hoverBackgroundColor: "muted-alpha10",
+        hoverBackgroundColor: "muted-alpha20",
         disabledBackgroundColor: "transparent",
       },
       disabled: {},
@@ -510,7 +510,7 @@ export const JournalSystem: System = {
           cellpadding: 0,
         },
         row: {
-          hoverBackgroundColor: "muted-alpha10",
+          hoverBackgroundColor: "muted-alpha20",
         },
         cell: {
           cellpadding: 0,
@@ -525,8 +525,8 @@ export const JournalSystem: System = {
     tree: {
       primary: {
         items: {
-          selector: "[data-rtk-drop-valid=true]",
-          backgroundColor: "muted-alpha10",
+          selector: "[data-rt-drop-valid=true]",
+          backgroundColor: "muted-alpha20",
         },
       },
     },

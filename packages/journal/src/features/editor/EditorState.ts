@@ -2,7 +2,7 @@ import { useEffect, useState, useRef, useCallback } from "react";
 import { Element } from "@mpkelly/react-editor-kit";
 import { EditorPageProps } from "../editor-page/EditorPage";
 import { useDatabase } from "../database/DatabaseState";
-import { NodeId } from "../../components/tree-kit/Node";
+import { NodeId } from "@mpkelly/react-tree";
 
 export const useEditorState = (props: EditorPageProps) => {
   const { file } = props;

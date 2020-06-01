@@ -25,29 +25,11 @@ export const ContainerPageTable = (props: ContainerPageTableProps) => {
     return items.map((item) => {
       switch (item.type) {
         case FileType.Document:
-          return (
-            <ContainerPageTableRow
-              icon={"document"}
-              color={"secondary.text"}
-              file={item}
-            />
-          );
+          return <ContainerPageTableRow icon={"document"} file={item} />;
         case FileType.WikiPage:
-          return (
-            <ContainerPageTableRow
-              icon={"wikipage"}
-              color={"secondary.text"}
-              file={item}
-            />
-          );
+          return <ContainerPageTableRow icon={"wikipage"} file={item} />;
         case FileType.Folder:
-          return (
-            <ContainerPageTableRow
-              icon={"folder"}
-              color={"folder"}
-              file={item}
-            />
-          );
+          return <ContainerPageTableRow icon={"folder"} file={item} />;
       }
     });
   };

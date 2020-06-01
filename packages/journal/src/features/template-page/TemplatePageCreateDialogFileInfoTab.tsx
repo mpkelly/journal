@@ -10,6 +10,7 @@ export const TemplatePageCreateDialogFileInfoTab = () => {
     handleCancelCreate,
     handleNextTab,
     collections,
+    hasNextTab,
   } = useTemplatePageCreateDialogState();
 
   if (!collections) {
@@ -19,8 +20,6 @@ export const TemplatePageCreateDialogFileInfoTab = () => {
   const destination =
     collections?.find((node) => node.id === newFile?.parentId) ||
     collections[0];
-
-  console.log("2", newFile?.parentId, destination);
 
   return (
     <Fragment>
@@ -45,7 +44,11 @@ export const TemplatePageCreateDialogFileInfoTab = () => {
       />
       <Row mt="xl">
         <Button kind="text" labelKey="cancel" onClick={handleCancelCreate} />
-        <Button labelKey="next" ml="auto" onClick={handleNextTab} />
+        <Button
+          labelKey={hasNextTab ? "next" : "create"}
+          ml="auto"
+          onClick={handleNextTab}
+        />
       </Row>
     </Fragment>
   );

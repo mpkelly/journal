@@ -10,8 +10,10 @@ import {
   TreeNode,
   FlatNode,
   createAlphaNumericSort,
-} from "../../components/tree-kit/Node";
-import { Tree } from "../../components/tree-kit/Tree";
+  Tree,
+  Schema,
+} from "@mpkelly/react-tree";
+
 import { useCollectionsTreeState } from "../collection-page/CollectionsPageState";
 
 export const CollectionsTreeView = (props: FlexProps) => {
@@ -60,8 +62,9 @@ export const CollectionsTreeView = (props: FlexProps) => {
       <Tree
         renderElement={renderItem}
         nodes={collections}
-        handleChange={handleChange}
+        onChange={handleChange}
         sortFunction={treeSortFunction}
+        schema={CollectionsSchema}
       />
     </TreeContainer>
   );
@@ -72,3 +75,14 @@ export const treeSortFunction = createAlphaNumericSort("name");
 export const TreeContainer: FC<FlexProps> = styled(Column)`
   ${(props) => getStyles(props, "components.tree")}
 `;
+
+const CollectionsSchema: Schema = {
+  [FileType.Collection]: [
+    FileType.Folder,
+    FileType.Document,
+    FileType.WikiPage,
+  ],
+  [FileType.Folder]: [FileType.Folder, FileType.Document, FileType.WikiPage],
+  [FileType.Document]: [FileType.Document],
+  [FileType.WikiPage]: [FileType.WikiPage],
+};

@@ -7,17 +7,16 @@ import { useContainerPageState } from "./ContainerPageState";
 export interface ContainerPageTableRowProps extends FlexProps {
   file: File;
   icon: string;
-  color: string;
 }
 
 export const ContainerPageTableRow = (props: ContainerPageTableRowProps) => {
-  const { file, icon, color } = props;
+  const { file, icon } = props;
   const { handleDeleteFile: handleDeleteItem } = useContainerPageState();
 
   return (
     <tr className="row" key={file.id}>
       <td className="cell">
-        <Icon name={icon} color={color} />
+        <Icon name={icon} color={"secondary.text"} />
       </td>
       <td className="cell">
         <Link to={`/library/view/${file.id}`}>
