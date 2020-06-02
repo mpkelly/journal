@@ -77,12 +77,14 @@ export const TreeContainer: FC<FlexProps> = styled(Column)`
 `;
 
 const CollectionsSchema: Schema = {
-  [FileType.Collection]: [
-    FileType.Folder,
-    FileType.Document,
-    FileType.WikiPage,
-  ],
-  [FileType.Folder]: [FileType.Folder, FileType.Document, FileType.WikiPage],
-  [FileType.Document]: [],
-  [FileType.WikiPage]: [],
+  rules: {
+    [FileType.Collection]: [
+      FileType.Folder,
+      FileType.Document,
+      FileType.WikiPage,
+    ],
+    [FileType.Folder]: [FileType.Folder, FileType.Document, FileType.WikiPage],
+    [FileType.Document]: [],
+    [FileType.WikiPage]: [],
+  },
 };

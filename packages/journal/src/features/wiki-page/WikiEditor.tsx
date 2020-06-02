@@ -44,6 +44,7 @@ import { useEditorState } from "../editor/EditorState";
 import { File } from "../file/File";
 import { WikiEditorToolbar } from "./WikiEditorToolbar";
 import { useSettings } from "../settings/SettingsContext";
+import { WikiPageHeader } from "./WikiPageHeader";
 
 const plugins: Plugin[] = [
   BoldPlugin,
@@ -89,17 +90,7 @@ export const WikiEditor = (props: WikiEditorProps) => {
   const plugins = useMemo(() => createPlugins(system), []);
   return (
     <EditorKit plugins={plugins} id="wikieditor" readOnly={readOnly}>
-      <div className="paper-header">
-        <div className="right">
-          <ReadOnlyButton
-            className="material-icons-round"
-            ligature="lock_open"
-            readOnlyClassName="material-icons-round"
-            readOnlyLigature="lock"
-            onMouseDown={handleToggleLocked}
-          />
-        </div>
-      </div>
+      <WikiPageHeader onToggleLocked={handleToggleLocked} />
       <div style={wrapperStyle}>
         <SelectionToolbar>
           <BoldButton className="material-icons-round" ligature="format_bold" />
