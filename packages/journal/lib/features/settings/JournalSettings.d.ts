@@ -1,9 +1,7 @@
 export interface JournalSettings {
     id: 1;
-    wikiName: string;
-    contentWidth: string | number;
-    logo: string;
-    logoScale: number;
-    borderRadius: number;
+    siteName: string;
+    wikiPageWidth: number | string;
+    showImageProperties: boolean;
 }
 export declare const DefaultSettings: JournalSettings;

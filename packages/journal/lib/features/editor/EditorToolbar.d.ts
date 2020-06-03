@@ -7,3 +7,4 @@ export interface EditorToolbarProps extends FlexProps {
     children?: JSX.Element | JSX.Element[];
 }
 export declare const EditorToolbar: (props: EditorToolbarProps) => JSX.Element;
+export declare const BaseColors: string[];

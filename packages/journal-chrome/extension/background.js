@@ -2,7 +2,7 @@ var _gaq = _gaq || [];
 _gaq.push(["_setAccount", "UA-160652049-1"]);
 _gaq.push(["_trackPageview"]);
 
-(function() {
+(function () {
   var ga = document.createElement("script");
   ga.type = "text/javascript";
   ga.async = true;
@@ -11,7 +11,7 @@ _gaq.push(["_trackPageview"]);
   s.parentNode.insertBefore(ga, s);
 })();
 
-chrome.browserAction.onClicked.addListener(function() {
+chrome.browserAction.onClicked.addListener(function () {
   chrome.browserAction.setBadgeText({ text: "" });
   localStorage.setItem("$journal_unread_count", "0");
   chrome.tabs.create({ url: chrome.runtime.getURL("index.html") });
@@ -22,10 +22,10 @@ const contextId = "journal-add-item";
 chrome.contextMenus.create({
   id: contextId,
   title: "Add to Journal",
-  contexts: ["selection", "image", "video", "audio"]
+  contexts: ["selection", "image", "video", "audio"],
 });
 
-chrome.contextMenus.onClicked.addListener(function(info, tab) {
+chrome.contextMenus.onClicked.addListener(function (info, tab) {
   if (info.menuItemId == contextId) {
     addMediaItem(info, tab);
   }
@@ -45,7 +45,7 @@ async function addMediaItem(info, tab) {
     source,
     pageSource,
     content,
-    tags
+    tags,
   });
   let current = localStorage.getItem("$journal_unread_count") || "0";
   const next = Number(current) + 1;
@@ -72,7 +72,7 @@ async function getContent(info, type) {
 }
 
 function getBase64Image(imgUrl) {
-  return new Promise(resolve => {
+  return new Promise((resolve) => {
     const img = new Image();
     img.src = imgUrl;
     img.setAttribute("crossOrigin", "anonymous");

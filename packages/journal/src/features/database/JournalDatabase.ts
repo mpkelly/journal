@@ -163,3 +163,19 @@ export const JournalDatabase: Database = {
     return db.delete();
   },
 };
+
+declare var process: {
+  env: {
+    NODE_ENV: string;
+  };
+};
+
+if (process.env.NODE_ENV === "development") {
+  (window as any).journalTest = {
+    db: JournalDatabase,
+    files,
+    settings,
+    code,
+    variables,
+  };
+}

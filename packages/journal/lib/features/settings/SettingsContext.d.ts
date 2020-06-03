@@ -2,7 +2,7 @@ import { ChangeEvent, ReactNode } from "react";
 import { JournalSettings } from "./JournalSettings";
 export interface SettingsContextValue {
     settings: JournalSettings;
-    updateSettings(change: SettingsChange): Promise<any>;
+    handleSettingsChange(change: SettingsChange): Promise<any>;
     handleExport(): void;
     handleImport(): void;
     handleImportRef(ref: HTMLInputElement | null): void;

@@ -1,5 +1,5 @@
 import { FlexProps } from "@mpkelly/siam";
-import { TreeNode } from "../../components/tree-kit/Node";
+import { TreeNode } from "@mpkelly/react-tree";
 export interface TreeItemProps extends FlexProps {
     icon: string;
     color: string;

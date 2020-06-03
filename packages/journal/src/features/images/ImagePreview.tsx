@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { Icon, FlexProps, Row, styled, getStyles } from "@mpkelly/siam";
 import { stopEvent } from "@mpkelly/react-editor-kit";
 import useBoolean from "react-hanger/useBoolean";
@@ -88,7 +88,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
   );
 };
 
-export const Image = styled.img<FlexProps>`
+export const Image: FC<FlexProps> = styled.img<FlexProps>`
   max-height: 80%;
   max-width: 80%;
   ${getStyles}

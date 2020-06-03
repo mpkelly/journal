@@ -1,11 +1,6 @@
 /// <reference types="react" />
 import { PagedResult } from "../../features/database/Database";
-export declare const usePagerState: <T>(initialItems?: {
-    count: number;
-    pageSize: number;
-    page: number;
-    items: any[];
-}) => {
+export declare const usePagerState: <T>(initialItems?: PagedResult<T>) => {
     items: PagedResult<T>;
     setItems: import("react").Dispatch<import("react").SetStateAction<PagedResult<T>>>;
     page: number;
@@ -14,4 +9,5 @@ export declare const usePagerState: <T>(initialItems?: {
     hasPrevious: boolean;
     handleNext: () => void;
     handlePrevious: () => void;
+    totalPages: number;
 };

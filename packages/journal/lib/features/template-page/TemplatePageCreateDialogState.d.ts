@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { File } from "../file/File";
-import { FlatNode } from "../../components/tree-kit/Node";
+import { FlatNode } from "@mpkelly/react-tree";
 export declare type Substitution = {
     name: string;
     value: string;
@@ -19,6 +19,7 @@ export declare const templatePageCreateDialogState: () => {
     handleSubstitutionChange: (index: number, value: string) => void;
     handleUpdateNewFile: (changes: Partial<File>) => void;
     handleNextTab: () => void;
+    hasNextTab: boolean;
     collections: FlatNode[];
 };
 export declare const TemplatePageCreateDialogStateProvider: import("react").FunctionComponent<unknown>, useTemplatePageCreateDialogState: import("constate/dist/ts/src/types").ContextHookFunction<{
@@ -31,5 +32,6 @@ export declare const TemplatePageCreateDialogStateProvider: import("react").Func
     handleSubstitutionChange: (index: number, value: string) => void;
     handleUpdateNewFile: (changes: Partial<File>) => void;
     handleNextTab: () => void;
+    hasNextTab: boolean;
     collections: FlatNode[];
 }>;

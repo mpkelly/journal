@@ -1,4 +1,5 @@
 const TerserPlugin = require("terser-webpack-plugin");
+const webpack = require("webpack");
 var HardSourceWebpackPlugin = require("hard-source-webpack-plugin");
 const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
@@ -40,6 +41,7 @@ var config = {
     rules: [{ test: /\.tsx?$/, loader: "awesome-typescript-loader" }],
   },
   plugins: [
+    new webpack.EnvironmentPlugin(["NODE_ENV"]),
     new CleanWebpackPlugin({
       cleanOnceBeforeBuildPatterns: ["**/bundle*.*js"],
     }),
@@ -66,6 +68,7 @@ var config = {
 
 module.exports = (env, argv) => {
   if (argv.mode === "development") {
+    process.env.NODE_ENV = "development";
     config.devtool = "eval";
   }
   return config;

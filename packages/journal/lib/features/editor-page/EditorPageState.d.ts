@@ -18,4 +18,6 @@ export declare const CodeEditorStateProvider: import("react").FunctionComponent<
     handleSetActive: (activeCode: import("../code-editor/CodeFile").CodeFile) => void;
     handleExecuteCode: () => void;
     handleUnlinkCode: (code: import("../code-editor/CodeFile").CodeFile) => void;
+    handleLinkCode: (ids: string[]) => void;
+    showLinkCodeDialog: import("react-hanger/useBoolean").UseBoolean;
 }>;

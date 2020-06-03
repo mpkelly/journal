@@ -12,4 +12,6 @@ export declare const useCodeEditorState: (props: CodeEditorStateProps) => {
     handleSetActive: (activeCode: CodeFile) => void;
     handleExecuteCode: () => void;
     handleUnlinkCode: (code: CodeFile) => void;
+    handleLinkCode: (ids: string[]) => void;
+    showLinkCodeDialog: import("react-hanger/useBoolean").UseBoolean;
 };

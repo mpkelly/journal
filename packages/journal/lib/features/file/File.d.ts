@@ -1,10 +1,12 @@
-import { FlatNode } from "../../components/tree-kit/Node";
+import { FlatNode } from "@mpkelly/react-tree";
 export interface File extends FlatNode {
     name: string;
     type: FileType;
     data?: any;
     locked?: boolean;
     template?: boolean;
+    created: string;
+    modified: string;
     linkedCode?: string[];
 }
 export declare enum FileType {
@@ -15,3 +17,4 @@ export declare enum FileType {
 }
 export declare const createCollectionFile: (id: string, name: string) => File;
 export declare const createFile: (id: string, name: string, type: FileType, expanded?: boolean, parentId?: any) => File;
+export declare const fileDate: () => string;
