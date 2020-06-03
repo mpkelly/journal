@@ -38,7 +38,6 @@
     "@babel/preset-react": "^7.9.4",
     "@babel/runtime": "^7.9.6",
     "@mpkelly/react-editor-kit": "file:../../../react-editor-kit/packages/editor-kit",
-    "@mpkelly/react-tree": "file:../../../react-tree/packages/react-tree",
     "@mpkelly/siam": "file:../../../siam/packages/siam",
     "@types/react": "^16.9.35",
     "@types/react-dom": "^16.9.8",
@@ -80,5 +79,7 @@
     "publish": "npm run dist && npm run media-dist",
     "udx": "npm install udx-core@latest udx-react@latest udx-icons@latest"
   },
-  "dependencies": {}
+  "dependencies": {
+    "@mpkelly/react-tree": "0.0.4"
+  }
 }
