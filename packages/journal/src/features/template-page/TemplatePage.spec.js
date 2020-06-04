@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import {ACollection, ADocument, ATemplate} from "../../../cypress/fixtures/Fixtures"
+import {ACollection, ATemplate} from "../../../cypress/fixtures/Fixtures"
 
 context("Collections", () => {
   beforeEach(() => {
@@ -27,15 +27,15 @@ context("Collections", () => {
   
 
   it("Delete a template", () => {
-    //Insert a simple template and go to templates page
+    //Insert a simple template then delete it
     cy.insertFiles([ACollection, ATemplate])
     cy.clickLink("Templates")    
     cy.clickButton("template-menu")
     cy.clickMenuItem( "Delete");    
     cy.get("div").contains("No Templates")
     
-    });
-  );
+  });
+);
 
 
   
