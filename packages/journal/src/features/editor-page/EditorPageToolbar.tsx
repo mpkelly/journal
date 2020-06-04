@@ -42,6 +42,7 @@ export const EditorPageToolbar = (props: FlexProps) => {
           sideTab={SideTab.Templates}
           onClick={handleSideTabChange}
           iconName="template"
+          data-test="template-tab"
         />
         <SideTabIcon
           selectedTab={sideTab}

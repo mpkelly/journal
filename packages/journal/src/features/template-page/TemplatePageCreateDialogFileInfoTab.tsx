@@ -28,6 +28,7 @@ export const TemplatePageCreateDialogFileInfoTab = () => {
         value={newFile?.name}
         onChange={(name: string) => handleUpdateNewFile({ name })}
         mb="lg"
+        autoFocus
       />
       <Text kind="label" labelKey="destination" mb="sm" />
       <CollectionsTreeSelect

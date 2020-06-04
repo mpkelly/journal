@@ -51,7 +51,7 @@ export const TemplateCreateDialog = (props: TemplateCreateDialogProps) => {
 
       <Row mt="auto">
         <Button kind="text" labelKey={"cancel"} onClick={onCancel} />
-        <Button labelKey={"comfirm"} onClick={handleCreate} ml="auto" />
+        <Button labelKey={"confirm"} onClick={handleCreate} ml="auto" />
       </Row>
     </Fragment>
   );

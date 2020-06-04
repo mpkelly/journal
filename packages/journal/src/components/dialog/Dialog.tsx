@@ -23,6 +23,7 @@ export const Dialog: FC<DialogProps> = (props: DialogProps) => {
           boxShadow="sm"
           onClick={stopEvent}
           onContextMenu={stopEvent}
+          data-test="dialog"
           {...rest}
         >
           {children}

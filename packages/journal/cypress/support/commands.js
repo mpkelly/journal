@@ -30,6 +30,12 @@ Cypress.Commands.add("clearFilesDb", (selector) => {
   });
 });
 
+Cypress.Commands.add("insertFiles", (files) => {
+  cy.window().then(async (window) => {
+    await Promise.all(files.map(async(file) => await window.journalTest.files.add(file, file.id));
+  });
+});
+
 Cypress.Commands.add("clickButton", (name) => {
   cy.get(`[data-test=${name}]`).click();
 });

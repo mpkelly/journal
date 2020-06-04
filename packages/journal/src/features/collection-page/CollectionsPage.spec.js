@@ -1,5 +1,7 @@
 /// <reference types="cypress" />
 
+import {ACollection, ADocument} from "../../../cypress/fixtures/Fixtures"
+
 context("Collections", () => {
   beforeEach(() => {
     cy.visit("./tests/index.html");
@@ -56,4 +58,23 @@ context("Collections", () => {
     cy.get("[data-rt-element-wrapper]").first().children().should('have.length', 1);
 
   });
+
+  it("Create a template ", () => {
+
+    //Load a document
+    cy.insertFiles([ACollection, ADocument])
+    cy.reload();
+  
+    //Open tem[late tab and press create
+    cy.clickLink("AFile", "[data-rt-element]");
+    cy.clickButton("template-tab");    
+    cy.get("button").contains("Create Template").click();
+
+    //Rename template, create and check count
+    cy.get("[data-test=dialog] input.si-input")
+      .type("{backspace}{backspace}{backspace}{backspace}Template")
+    cy.get("button").contains("Confirm").click();
+
+    cy.get("[data-test=template-card]").should("have.length", 1)
+  }));
 });

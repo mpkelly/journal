@@ -26,7 +26,12 @@ export const TemplatePageCreateDialogSubstitutionsTab = () => {
       </Column>
       <Row mt="xl">
         <Button kind="text" labelKey="cancel" onClick={handleCancelCreate} />
-        <Button labelKey="next" ml="auto" onClick={handleConfirmCreate} />
+        <Button
+          labelKey="create"
+          ml="auto"
+          onClick={handleConfirmCreate}
+          data-test="create-template"
+        />
       </Row>
     </Fragment>
   );

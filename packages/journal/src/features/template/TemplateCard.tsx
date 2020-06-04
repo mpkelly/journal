@@ -46,6 +46,7 @@ export const TemplateCard = (props: TemplateCardProps) => {
       background="background-light1"
       flexShrink={0}
       position="relative"
+      data-test="template-card"
       {...rest}
     >
       <EditableText
@@ -60,7 +61,7 @@ export const TemplateCard = (props: TemplateCardProps) => {
         position={"absolute"}
         right={8}
       >
-        <Icon name="more" kind="button" />
+        <Icon name="more" kind="button" data-test="template-menu" />
       </Select>
       <Row mt="auto" gravity="center-start">
         <Icon name="document" color="accent" />
