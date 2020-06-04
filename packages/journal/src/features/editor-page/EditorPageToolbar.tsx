@@ -49,6 +49,7 @@ export const EditorPageToolbar = (props: FlexProps) => {
           onClick={showHelp.toggle}
           iconName="help"
           mt="auto"
+          data-test="help-button"
         />
       </Column>
       <Show when={showHelp.value}>

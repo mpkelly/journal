@@ -39,13 +39,14 @@ export const ContainerPageHeader = (props: ContainerPageHeaderProps) => {
           name="delete"
           kind="button"
           mr="md"
+          data-test="delete-container-item"
           onClick={() => handleDeleteFile(file.id)}
         />
         <Select
           items={menuItems}
           onItemClicked={(item: MenuItemModel) => addItem(item.itemType)}
         >
-          <Icon name="add" kind="button" />
+          <Icon name="add" kind="button" data-test="add-item-to-container" />
         </Select>
       </Row>
     </Header>

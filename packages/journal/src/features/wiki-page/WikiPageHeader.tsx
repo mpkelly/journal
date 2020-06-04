@@ -15,7 +15,12 @@ export const WikiPageHeader = (props: WikiPageHeaderProps) => {
   return (
     <Fragment>
       <Row gravity="center-end" position="absolute" right={0} pr="md" {...rest}>
-        <Icon kind="button" name="help" onClick={showHelp.toggle} />
+        <Icon
+          kind="button"
+          name="help"
+          onClick={showHelp.toggle}
+          data-test="help-button"
+        />
         <ReadOnlyButton
           className="material-icons-round"
           ligature="lock_open"

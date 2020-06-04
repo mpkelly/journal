@@ -20,7 +20,7 @@ export const CollectionsPageNavItems = () => {
             size="small"
             ml="auto"
             onClick={addCollection}
-            data-id="add-collection"
+            data-test="add-collection"
           />
         }
       >

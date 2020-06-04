@@ -23,3 +23,21 @@
 //
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+
+Cypress.Commands.add("clearFilesDb", (selector) => {
+  cy.window().then(async (window) => {
+    await window.journalTest.files.clear();
+  });
+});
+
+Cypress.Commands.add("clickButton", (name) => {
+  cy.get(`[data-test=${name}]`).click();
+});
+
+Cypress.Commands.add("clickMenuItem", (text) => {
+  cy.get(".si-menu-item").contains(text).click();
+});
+
+Cypress.Commands.add("clickLink", (text, parent = "") => {
+  cy.get(`${parent} a`).contains(text).click();
+});

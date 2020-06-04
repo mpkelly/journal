@@ -20,9 +20,9 @@ export const ConfirmDialogView = (props: ConfirmDialogViewProps) => {
         </Text>
       </Row>
       <Row mt="auto">
-        <Button kind="text" labelKey={"cancel"} onClick={onCancel} />
+        <Button kind="text" labelKey={"cancel"} onClick={onCancel} autoFocus />
         <Button
-          labelKey={"comfirm"}
+          labelKey={"confirm"}
           onClick={onConfirm}
           ml="auto"
           kind={buttonKind}

@@ -1,4 +1,4 @@
 {
-  "integrationFolder": "tests",
-  "defaultCommandTimeout": 30000
+  "integrationFolder": "src",
+  "testFiles": "**/*.spec.js"
 }

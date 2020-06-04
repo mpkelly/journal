@@ -161,7 +161,12 @@ export const EditorToolbar = (props: EditorToolbarProps) => {
               <Text labelKey="saved" color="muted" />
             </Show>
             <Show when={!saved}>
-              <Icon kind="button" name={"save"} onClick={onSave} />
+              <Icon
+                kind="button"
+                name={"save"}
+                onClick={onSave}
+                data-test="editor-save"
+              />
             </Show>
           </Row>
           <Divider />
