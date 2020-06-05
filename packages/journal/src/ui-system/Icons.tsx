@@ -168,4 +168,8 @@ export const Icons: IconBundle = {
     ligature: "search",
     className,
   },
+  sort: {
+    ligature: "sort",
+    className,
+  },
 };

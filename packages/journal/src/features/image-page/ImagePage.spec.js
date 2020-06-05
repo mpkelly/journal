@@ -13,7 +13,8 @@ context("Image Page", () => {
     //Drop image on dropzone and add tag
     const image2 = "image2";
     cy.dropFile('image1.png', "[data-image-dropzone]")
-    cy.focused().type("tag1");
+    cy.get("[data-test=tag-input]")
+      .type("tag1")
     cy.contains("button", "I'm done")
       .click();
     

@@ -5,7 +5,6 @@ import { GridImage } from "../../components/grid/GridImage";
 import { FlexProps } from "@mpkelly/siam";
 import { Media } from "../media/Media";
 import { ImagePreview } from "./ImagePreview";
-import { useImagePageState } from "../image-page/ImagePageState";
 
 export interface ImageTileProps extends FlexProps {
   image: Media;

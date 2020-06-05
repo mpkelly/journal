@@ -8,7 +8,8 @@ import { PageTitle } from "../../components/page-title/PageTitle";
 
 export const ImagePageToolbar = () => {
   const {
-    refresh,
+    handleSort,
+    handleRefresh,
     handleUpload,
     hasPrevious,
     hasNext,
@@ -38,7 +39,8 @@ export const ImagePageToolbar = () => {
           data-test="upload-files"
           onClick={openFileBrowser}
         />
-        <Icon kind="button" name={"refresh"} onClick={refresh} mx="md" />
+        <Icon kind="button" name={"sort"} onClick={handleSort} ml="md" />
+        <Icon kind="button" name={"refresh"} onClick={handleRefresh} mx="md" />
         <Pager
           hasNext={hasNext}
           hasPrevious={hasPrevious}

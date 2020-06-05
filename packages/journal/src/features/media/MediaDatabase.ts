@@ -13,7 +13,8 @@ export interface MediaDatabase {
     type: MediaType,
     search: string,
     pageNumber: number,
-    pageSize: number
+    pageSize: number,
+    ascending: boolean
   ): Promise<PagedResult<Media>>;
 }
 
@@ -26,7 +27,8 @@ export const IndexDBMediaDatabase: MediaDatabase = {
     type: MediaType,
     search: string,
     page: number,
-    pageSize: number
+    pageSize: number,
+    ascending: boolean
   ) => {
     let result: Dexie.Table<Media, any> | Dexie.Collection<Media, any> = media;
     result = media.where("type").equals(type as string);
@@ -43,11 +45,11 @@ export const IndexDBMediaDatabase: MediaDatabase = {
       });
     }
     const count = await result.count();
-    const items = await result
-      .offset(page * pageSize)
-      .limit(pageSize)
-      .reverse()
-      .toArray();
+    const cursor = result.offset(page * pageSize).limit(pageSize);
+    if (!ascending) {
+      cursor.reverse();
+    }
+    const items = await cursor.toArray();
     return { items, count, page, pageSize, search };
   },
   add: async (_media: Media) => {

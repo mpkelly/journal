@@ -44,7 +44,6 @@ export const ImageProperties = (props: ImagePropertiesProps) => {
         onKeyDown={handleKey}
         onBlur={handleTagsChange}
         data-test="tag-input"
-        autoFocus
       />
       <Row flexWrap="wrap">
         {image.tags.map((tag) => (

@@ -37,10 +37,8 @@ export const useImageGridState = (props: ImageGridProps) => {
   }, [images, showing, selected]);
 
   useEffect(() => {
-    if (!selected) {
-      setSelected(images[0]);
-    }
-  }, [selected, images]);
+    setSelected(images[0]);
+  }, [images]);
 
   useEffect(() => {
     const handleKey = (event: KeyboardEvent) => {

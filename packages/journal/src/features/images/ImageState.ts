@@ -5,6 +5,8 @@ import { getImageSize } from "./ImageSize";
 import { usePagerState } from "../../components/pager/PagerState";
 import { useMediaDatabase } from "../media/MediaDatabase";
 import { Media, MediaType } from "../media/Media";
+import useBoolean from "react-hanger/useBoolean";
+import { emptyPagedResult } from "../database/Database";
 
 const pageSize = 24;
 
@@ -12,6 +14,8 @@ export const useImageState = () => {
   const db = useMediaDatabase();
   const [newImages, setNewImages] = useState<Media[]>([]);
   const [search, setSearch] = useState("");
+  const sort = useBoolean(false);
+
   const {
     items,
     setItems,
@@ -25,10 +29,17 @@ export const useImageState = () => {
 
   useEffect(() => {
     loadImages();
-  }, [MediaType.Image, search, page]);
+  }, [MediaType.Image, search, page, sort.value]);
 
   const loadImages = () => {
-    db.loadMedia(MediaType.Image, search, page, pageSize).then(setItems);
+    db.loadMedia(MediaType.Image, search, page, pageSize, sort.value).then(
+      setItems
+    );
+  };
+
+  const handleSort = () => {
+    setItems(emptyPagedResult());
+    sort.toggle();
   };
 
   const handleDelete = async (media: Media) => {
@@ -70,7 +81,6 @@ export const useImageState = () => {
   };
 
   const handleFiles = (files: File[]) => {
-    console.log(files);
     handleUpload({ images: files, text: [], docs: [] });
   };
 
@@ -96,7 +106,8 @@ export const useImageState = () => {
     page: items.page + 1,
     searchCount: items.search ? items.count : "",
     totalPages,
-    refresh: loadImages,
+    handleSort,
+    handleRefresh: loadImages,
     handleUpload,
     newImages,
     handleAddMedia,

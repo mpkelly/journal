@@ -15,7 +15,7 @@ import { usePagerState } from "../../components/pager/PagerState";
 import { CollectionChangedEvent } from "../collections-tree/CollectionsChangedEvent";
 
 //TODO make varaible
-export const PageSize = 10;
+export const PageSize = 20;
 let count = 1;
 
 const containerPageState = () => {
