@@ -24,6 +24,8 @@
 // -- This will overwrite an existing command --
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 
+
+
 Cypress.Commands.add("clearFilesDb", (selector) => {
   cy.window().then(async (window) => {
     await window.journalTest.files.clear();
@@ -33,6 +35,42 @@ Cypress.Commands.add("clearFilesDb", (selector) => {
 Cypress.Commands.add("insertFiles", (files) => {
   cy.window().then(async (window) => {
     await Promise.all(files.map(async(file) => await window.journalTest.files.add(file, file.id));
+  });
+});
+
+Cypress.Commands.add("clearCodeDb", (selector) => {
+  cy.window().then(async (window) => {
+    await window.journalTest.code.clear();
+  });
+});
+
+Cypress.Commands.add("clearMediaDb", (selector) => {
+  cy.window().then(async (window) => {
+    await window.journalTest.media.clear();
+  });
+});
+
+Cypress.Commands.add("resetSettings", (selector) => {
+  cy.window().then(async (window) => {
+    await window.journalTest.settings.update(1, {
+      id: 1,
+      siteName: "Journal",
+      wikiPageWidth: 800,
+      showImageProperties: false,
+    })
+  });
+});
+
+Cypress.Commands.add("clearDb", (selector) => {
+  cy.clearFilesDb();
+  cy.clearCodeDb();
+  cy.clearMediaDb();
+  cy.resetSettings();
+});
+
+Cypress.Commands.add("insertCode", (code) => {
+  cy.window().then(async (window) => {
+    await window.journalTest.code.add(code, code.id)
   });
 });
 
@@ -47,3 +85,29 @@ Cypress.Commands.add("clickMenuItem", (text) => {
 Cypress.Commands.add("clickLink", (text, parent = "") => {
   cy.get(`${parent} a`).contains(text).click();
 });
+
+Cypress.Commands.add("dropFile", (fixture, selector, type = "image/png") => {
+  const dropEvent = {
+    dataTransfer: {
+        files: [
+        ],
+    },
+  };
+  cy.fixture(fixture).then((file) => {
+    if (type === "image/png") {
+      return Cypress.Blob.base64StringToBlob(file, type).then((blob) => {
+        dropEvent.dataTransfer.files.push(blob);
+      });
+    } else {
+      return Cypress.Blob.binaryStringToBlob(file, type).then((blob) => {
+        dropEvent.dataTransfer.files.push(blob);
+    });
+    }
+    
+  });
+  
+  cy.get(selector).trigger('drop', dropEvent);
+})
+
+
+

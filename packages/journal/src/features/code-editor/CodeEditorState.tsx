@@ -23,14 +23,12 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
   const { activeCodeFile, codeFiles } = state;
 
   useEffect(() => {
-    if (file.linkedCode) {
-      db.getAllCodeFiles(file.linkedCode).then((codeFiles) => {
-        if (codeFiles.length) {
-          setState({ activeCodeFile: codeFiles[0], codeFiles });
-          updateStyles(codeFiles);
-        }
-      });
-    }
+    db.getAllCodeFiles(file.linkedCode || []).then((codeFiles) => {
+      if (codeFiles.length) {
+        setState({ activeCodeFile: codeFiles[0], codeFiles });
+        updateStyles(codeFiles);
+      }
+    });
   }, [file]);
 
   const handleCreate = useCallback(

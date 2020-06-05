@@ -6,6 +6,7 @@ import { JournalSettings, DefaultSettings } from "../settings/JournalSettings";
 import { newId } from "../../util/Identity";
 import { CodeFile } from "../code-editor/CodeFile";
 import { Variable } from "../variables/Variable";
+import { media } from "../media/MediaDatabase";
 
 const files = db.table<JFile, any>("files");
 const settings = db.table<JournalSettings, any>("settings");
@@ -177,5 +178,6 @@ if (process.env.NODE_ENV === "development") {
     settings,
     code,
     variables,
+    media,
   };
 }

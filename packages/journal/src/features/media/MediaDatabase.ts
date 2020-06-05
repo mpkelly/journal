@@ -3,7 +3,7 @@ import Dexie from "dexie";
 import { PagedResult } from "../database/Database";
 import { Media, MediaType } from "./Media";
 
-const media = db.table<Media, any>("media");
+export const media = db.table<Media, any>("media");
 
 export interface MediaDatabase {
   add(media: Media): Promise<void>;

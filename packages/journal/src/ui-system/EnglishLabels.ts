@@ -9,4 +9,6 @@ export const Labels: I18NBundle = {
   finished: "I'm done",
   searchResults: (count) => pluralize(count, "result", "results"),
   searchByTagOrName: "Search by name or tag then hit enter",
+  confirmImportDb: "Replace existing data?",
+  uploadOrDropJbf: "Upload or drop a .jbf file to restore to backup version",
 };

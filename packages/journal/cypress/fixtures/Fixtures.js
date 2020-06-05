@@ -28,7 +28,22 @@ export const ADocument = {
   parentId: "Y35F3LaOV",
   type: 0,
 };
+
 export const ATemplate = {
   ...ADocument,
   template: true,
+};
+
+export const ADefaultCssCodeFile = {
+  data: [
+    {
+      type: "code",
+      lang: "CSS",
+      children: [{ text: "#documenteditor * { font-size:66px;}" }],
+    },
+  ],
+  global: true,
+  id: "2_FJ0Djx8",
+  name: "Default.css",
+  type: 0,
 };

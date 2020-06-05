@@ -37,6 +37,7 @@ export const SearchInput = (props: SearchInputProps) => {
               kind="small.button"
               color="secondary.text"
               ml="md"
+              data-test="clear-button"
               onClick={handleClear}
             />
           </Show>

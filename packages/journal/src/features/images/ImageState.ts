@@ -54,7 +54,7 @@ export const useImageState = () => {
         const size = await getImageSize(image);
         return {
           type: MediaType.Image,
-          name: image.name,
+          name: image.name || "unnamed image",
           content,
           source: "uploaded",
           pageSource: "",
@@ -67,6 +67,11 @@ export const useImageState = () => {
       })
     );
     setNewImages(media);
+  };
+
+  const handleFiles = (files: File[]) => {
+    console.log(files);
+    handleUpload({ images: files, text: [], docs: [] });
   };
 
   const handleAddMedia = async (media: Media[]) => {
@@ -96,5 +101,6 @@ export const useImageState = () => {
     newImages,
     handleAddMedia,
     handleSearch: setSearch,
+    handleFiles,
   };
 };

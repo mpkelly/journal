@@ -2,7 +2,7 @@
 
 import {ACollection, ADocument} from "../../../cypress/fixtures/Fixtures"
 
-context("Collections", () => {
+context("Collections Page", () => {
   beforeEach(() => {
     cy.visit("./tests/index.html");
     cy.clearFilesDb();
@@ -47,14 +47,14 @@ context("Collections", () => {
     cy.reload();
 
     //Verify new items were persisted
-    cy.get("body").contains("New collection A");
-    cy.get("body").contains("New item A");    
+    cy.contains("body", "New collection A");
+    cy.contains("body", "New item A");    
     cy.get("[data-rt-element-wrapper]").first().children().should('have.length', 2);
 
     //Delete some items and verify removed
     cy.clickLink("New item 1", "[data-rt-element]");
     cy.clickButton("delete-container-item");
-    cy.get("button").contains("Confirm").click();
+    cy.contains("button", "Confirm").click();
     cy.get("[data-rt-element-wrapper]").first().children().should('have.length', 1);
 
   });
@@ -68,12 +68,12 @@ context("Collections", () => {
     //Open tem[late tab and press create
     cy.clickLink("AFile", "[data-rt-element]");
     cy.clickButton("template-tab");    
-    cy.get("button").contains("Create Template").click();
+    cy.contains("button", "Create Template").click();
 
     //Rename template, create and check count
     cy.get("[data-test=dialog] input.si-input")
       .type("{backspace}{backspace}{backspace}{backspace}Template")
-    cy.get("button").contains("Confirm").click();
+    cy.contains("button", "Confirm").click();
 
     cy.get("[data-test=template-card]").should("have.length", 1)
   }));

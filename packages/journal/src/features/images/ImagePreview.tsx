@@ -45,11 +45,17 @@ export const ImagePreview = (props: ImagePreviewProps) => {
             top={12}
             onClick={stopEvent}
           >
-            <Icon name="clear" kind="button" onClick={onClose} />
+            <Icon
+              name="clear"
+              kind="button"
+              onClick={onClose}
+              data-test="close-preview"
+            />
             <Icon
               name="delete"
               kind="button"
               ml="auto"
+              data-test="delete-image"
               onClick={() => {
                 handleDelete(image);
                 onClose();
@@ -62,6 +68,7 @@ export const ImagePreview = (props: ImagePreviewProps) => {
               selected={settings.showImageProperties}
               selectedColor="accent"
               onClick={handleToggleShow}
+              data-test="edit-image"
             />
           </Row>
           <Image

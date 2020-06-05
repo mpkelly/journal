@@ -6,6 +6,7 @@ import React, {
   useRef,
   ChangeEvent,
   ReactNode,
+  useCallback,
 } from "react";
 import { JournalSettings } from "./JournalSettings";
 import { useDatabase } from "../database/DatabaseState";
@@ -18,6 +19,10 @@ export interface SettingsContextValue {
   handleImport(): void;
   handleImportRef(ref: HTMLInputElement | null): void;
   handleImportFile(event: ChangeEvent<HTMLInputElement>): void;
+  handleFile(file: File): void;
+  handleConfirmImport(): void;
+  handleCancelImport(): void;
+  showImportDialog: boolean;
 }
 
 type keys = keyof JournalSettings;
@@ -37,7 +42,11 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
   const [settings, setSettings] = useState<JournalSettings>(
     (null as unknown) as JournalSettings
   );
+  const [showImportDialog, setShowImportDialog] = useState(false);
+
   const importRef = useRef<HTMLInputElement | null>(null);
+  const fileRef = useRef<File | null>(null);
+
   const db = useDatabase();
 
   const loadSettings = () => {
@@ -70,9 +79,23 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
   const handleImportFile = async (event: ChangeEvent<HTMLInputElement>) => {
     if (event.currentTarget.files) {
       const file = event.currentTarget.files[0];
-      await db.importDb(file);
-      window.location.reload();
+      handleFile(file);
     }
+  };
+
+  const handleFile = async (file: File) => {
+    fileRef.current = file;
+    setShowImportDialog(true);
+  };
+
+  const handleConfirmImport = useCallback(async () => {
+    await db.importDb(fileRef.current as File);
+    window.location.reload();
+  }, [fileRef.current]);
+
+  const handleCancelImport = () => {
+    fileRef.current = null;
+    setShowImportDialog(false);
   };
 
   useEffect(() => {
@@ -86,6 +109,10 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
     handleImportRef,
     handleImport,
     handleImportFile,
+    handleFile,
+    handleConfirmImport,
+    showImportDialog,
+    handleCancelImport,
   };
 
   if (!settings) {

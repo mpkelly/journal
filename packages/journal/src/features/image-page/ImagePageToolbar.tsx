@@ -29,9 +29,15 @@ export const ImagePageToolbar = () => {
         placeholderLabelKey="searchByTagOrName"
         onSearch={handleSearch}
         resultCount={searchCount}
+        data-test="image-search"
       />
       <Row alignItems="center" ml="auto">
-        <Icon kind="button" name={"upload"} onClick={openFileBrowser} />
+        <Icon
+          kind="button"
+          name={"upload"}
+          data-test="upload-files"
+          onClick={openFileBrowser}
+        />
         <Icon kind="button" name={"refresh"} onClick={refresh} mx="md" />
         <Pager
           hasNext={hasNext}

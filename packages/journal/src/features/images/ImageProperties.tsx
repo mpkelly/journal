@@ -32,6 +32,7 @@ export const ImageProperties = (props: ImagePropertiesProps) => {
       <Input
         labelKey="name"
         value={image.name}
+        data-test="name-input"
         onChange={(name: string) => handleChange({ name })}
         my={"md"}
       />
@@ -42,6 +43,8 @@ export const ImageProperties = (props: ImagePropertiesProps) => {
         {...tag.valueBind}
         onKeyDown={handleKey}
         onBlur={handleTagsChange}
+        data-test="tag-input"
+        autoFocus
       />
       <Row flexWrap="wrap">
         {image.tags.map((tag) => (

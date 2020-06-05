@@ -1,10 +1,11 @@
 import React, { Fragment } from "react";
 import { Page } from "../page/Page";
-import { Row, Show } from "@mpkelly/siam";
+import { Show } from "@mpkelly/siam";
 import { ImagePageStateProvider, useImagePageState } from "./ImagePageState";
 import { ImagePageToolbar } from "./ImagePageToolbar";
 import { ImageGrid } from "../images/ImageGrid";
 import { ImageAddDialog } from "../images/ImageAddDialog";
+import { Dropzone } from "../../components/dropzone/Dropzone";
 
 export const ImagePage = () => {
   return (
@@ -15,14 +16,25 @@ export const ImagePage = () => {
 };
 
 export const ImagePageContent = () => {
-  const { images, newImages, handleAddMedia } = useImagePageState();
+  const {
+    images,
+    newImages,
+    handleFiles,
+    handleAddMedia,
+  } = useImagePageState();
   return (
     <Fragment>
       <Page p="lg" flexGrow={1} overflowY={"hidden"}>
         <ImagePageToolbar />
-        <Row flexGrow={1} overflowY={"hidden"}>
+        {/* <JournalHelp /> */}
+        <Dropzone
+          flexGrow={1}
+          overflowY={"hidden"}
+          handleFiles={handleFiles}
+          data-image-dropzone
+        >
           <ImageGrid images={images} />
-        </Row>
+        </Dropzone>
       </Page>
       <Show when={Boolean(newImages.length)}>
         <ImageAddDialog images={newImages} onConfirm={handleAddMedia} />

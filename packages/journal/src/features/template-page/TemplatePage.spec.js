@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 import {ACollection, ATemplate} from "../../../cypress/fixtures/Fixtures"
 
-context("Collections", () => {
+context("Templates Page", () => {
   beforeEach(() => {
     cy.visit("./tests/index.html");
     cy.clearFilesDb();    
@@ -11,7 +11,7 @@ context("Collections", () => {
     //Insert a simple template and go to templates page
     cy.insertFiles([ACollection, ATemplate])
     cy.clickLink("Templates")    
-    cy.get("button").contains("Create").click();
+    cy.contains("button", "Create").click();
 
     //Rename and add basic substitutions
     cy.get("[data-test=dialog] input").click().type("A")
@@ -32,7 +32,7 @@ context("Collections", () => {
     cy.clickLink("Templates")    
     cy.clickButton("template-menu")
     cy.clickMenuItem( "Delete");    
-    cy.get("div").contains("No Templates")
+    cy.contains("div", "No Templates");
     
   });
 );
