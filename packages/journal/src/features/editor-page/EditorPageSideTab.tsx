@@ -36,7 +36,7 @@ export const EditorPageSideTab = () => {
   };
   const { width, content } = renderTab();
   return (
-    <Row height="100%" maxWidth="50vw" width={width} transition="width .2s">
+    <Row height="100%" maxWidth="50%" width={width} transition="width .2s">
       {content}
     </Row>
   );

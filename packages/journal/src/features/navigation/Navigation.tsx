@@ -23,7 +23,7 @@ export const Navigation = (props: NavigationProps) => {
         position="relative"
         flexShrink={0}
         ml={collapsed.value ? -280 : 0}
-        transition="all .4s"
+        transition="all .2s"
         {...rest}
       >
         <NavigationHeader
@@ -43,7 +43,7 @@ export const Navigation = (props: NavigationProps) => {
             kind="button"
             name="menu"
             position="absolute"
-            right={-40}
+            right={-50}
             bottom={16}
             onClick={collapsed.toggle}
             backgroundColor="background"
