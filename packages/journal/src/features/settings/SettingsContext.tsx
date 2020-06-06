@@ -11,6 +11,7 @@ import React, {
 import { JournalSettings } from "./JournalSettings";
 import { useDatabase } from "../database/DatabaseState";
 import { downloadBlob } from "../../util/Urls";
+import { insertDefaultDbContent } from "../database/JournalDatabase";
 
 export interface SettingsContextValue {
   settings: JournalSettings;
@@ -42,12 +43,22 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
   const [settings, setSettings] = useState<JournalSettings>(
     (null as unknown) as JournalSettings
   );
+
   const [showImportDialog, setShowImportDialog] = useState(false);
 
   const importRef = useRef<HTMLInputElement | null>(null);
   const fileRef = useRef<File | null>(null);
 
   const db = useDatabase();
+
+  useEffect(() => {
+    db.getSettings().then((settings) => {
+      if (!settings.defaultsCreated) {
+        insertDefaultDbContent();
+        db.updateSettings({ ...settings, defaultsCreated: true });
+      }
+    });
+  }, []);
 
   const loadSettings = () => {
     return db.getSettings().then((settings) => {

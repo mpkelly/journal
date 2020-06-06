@@ -10,7 +10,6 @@ import {
   CodeEditorStateProvider,
 } from "./EditorPageState";
 import { EditorPageSideTab } from "./EditorPageSideTab";
-import { JournalHelp } from "../help/Help";
 
 export interface EditorPageProps {
   file: File;
@@ -39,7 +38,6 @@ export const EditorPage = (props: EditorPageProps) => {
           </EditorPageEditor>
         </EditorStateProvider>
       </Page>
-      {/* <JournalHelp /> */}
     </Fragment>
   );
 };

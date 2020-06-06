@@ -1,0 +1,15 @@
+/* noto-sans-tc-regular - latin */
+@font-face {
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 400;
+  src: url("./noto-sans-tc-v10-latin-regular.woff2") format("woff2");
+}
+
+/* noto-sans-tc-700 - latin */
+@font-face {
+  font-family: "Noto Sans TC";
+  font-style: normal;
+  font-weight: 700;
+  src: url("./noto-sans-tc-v10-latin-700.woff2") format("woff2");
+}

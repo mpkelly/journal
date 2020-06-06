@@ -55,6 +55,7 @@ const EditorContainer = styled(Column)`
       overflow-y: auto;
       margin: 0 !important;
       background-color: rgba(0, 0, 0, 0.1);
+      font-size: 14px;
     }
 
     .rek-code-property {

@@ -1,11 +1,12 @@
 import React, { memo } from "react";
 import { Page } from "../page/Page";
-import { Row, Button, Show, Text } from "@mpkelly/siam";
+import { Row, Button, Show, Text, Icon } from "@mpkelly/siam";
 import { Setting } from "./Setting";
 import { useSettings } from "./SettingsContext";
 import { PageTitle } from "../../components/page-title/PageTitle";
 import { Dropzone } from "../../components/dropzone/Dropzone";
 import { SettingsConfirmImportDialog } from "./SettingsConfirmImportDialog";
+import { Link } from "../../components/link/Link";
 
 export interface SettingsPageProps {}
 
@@ -33,8 +34,18 @@ export const SettingsPage = memo(() => {
       data-backup-dropzone
     >
       <Page flexGrow={1}>
-        <PageTitle labelKey="settings" iconName="settings" />
+        <Row gravity="center-start">
+          <PageTitle labelKey="settings" iconName="settings" mr="auto" />
+          <a
+            href={"https://github.com/mpkelly/Journal/wiki"}
+            target="_blank"
+            style={{ textDecoration: "none" }}
+          >
+            <Icon name="help" kind="button" />
+          </a>
+        </Row>
         <Setting
+          mt="lg"
           label="siteName"
           value={settings.siteName}
           onChange={(siteName: string) => updateSettings({ siteName })}

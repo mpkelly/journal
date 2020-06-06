@@ -21,7 +21,8 @@ export enum CodeType {
 export const createCodeFile = (
   type: CodeType,
   name: string,
-  global = false
+  global = false,
+  content = ""
 ): CodeFile => {
   const id = newId();
   let data: Node[] = [];
@@ -36,7 +37,7 @@ export const createCodeFile = (
         lang: "CSS",
         children: [
           {
-            text: DefaultCSS,
+            text: content || DefaultCSS,
           },
         ],
       },
@@ -48,7 +49,7 @@ export const createCodeFile = (
         lang: "JavaScript",
         children: [
           {
-            text: DefaultJS,
+            text: content || DefaultJS,
           },
         ],
       },
@@ -93,6 +94,7 @@ Execute a script against the current editor data model which is passed as contex
 
 (context) => {
  
+  // nodes in JS Object Array based on Slate's data format
   let nodes = context.nodes;
 
   console.log(nodes);

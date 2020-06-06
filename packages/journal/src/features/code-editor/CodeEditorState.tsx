@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { Node, generateCss } from "@mpkelly/react-editor-kit";
 import { CodeFile, CodeType, createCodeFile } from "./CodeFile";
 import { useDatabase } from "../database/DatabaseState";
@@ -14,19 +14,22 @@ let count = 1;
 export const useCodeEditorState = (props: CodeEditorStateProps) => {
   const { file } = props;
   const db = useDatabase();
-
   const [state, setState] = useState<{
     activeCodeFile?: CodeFile;
     codeFiles: CodeFile[];
   }>({ activeCodeFile: undefined, codeFiles: [] });
   const showLinkCodeDialog = useBoolean(false);
   const { activeCodeFile, codeFiles } = state;
+  const updateTimeout = useRef<any>();
 
   useEffect(() => {
     db.getAllCodeFiles(file.linkedCode || []).then((codeFiles) => {
       if (codeFiles.length) {
+        codeFiles.sort((a, b) => {
+          return a.global === b.global ? 0 : a.global ? 1 : -1;
+        });
         setState({ activeCodeFile: codeFiles[0], codeFiles });
-        updateStyles(codeFiles);
+        updateStyles(codeFiles, false);
       }
     });
   }, [file]);
@@ -126,13 +129,20 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
     setState((current) => ({ ...current, activeCodeFile: activeCode }));
   };
 
-  const updateStyles = (codeFiles: CodeFile[]) => {
+  const updateStyles = (codeFiles: CodeFile[], debounce = true) => {
     const css = codeFiles
       .filter((code) => code.type === CodeType.Css)
       .map((code) => (code.data ? Node.string(code.data[0]) : ""))
       .join("\n");
     const wrapped = generateCss(`${css}`);
-    attachEditorStyle(wrapped, String(file.id));
+    clearTimeout(updateTimeout.current);
+
+    const update = () => attachEditorStyle(wrapped, String(file.id));
+    if (debounce) {
+      updateTimeout.current = setTimeout(update, 1500);
+    } else {
+      update();
+    }
   };
 
   return {
@@ -150,7 +160,7 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
 
 const attachEditorStyle = (css: string, id: string) => {
   const style = document.createElement("style");
-  const styleId = `journal-styles-${id}`;
+  const styleId = "journal-editor-style";
   const existing = document.getElementById(styleId);
   if (existing) {
     existing.parentElement?.removeChild(existing);

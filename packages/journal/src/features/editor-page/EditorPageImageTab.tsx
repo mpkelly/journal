@@ -25,7 +25,7 @@ export const EditorPageImageTab = (props: EditorPageImageTabProps) => {
     <Column {...rest} p="md" overflowY="hidden" borderLeft="1px solid dividers">
       <Row gravity="center-start" mb="lg">
         <SearchInput
-          placeholder="Search by name or tag then hit enter"
+          placeholder="Search by name or tag"
           onSearch={handleSearch}
           resultCount={searchCount}
           flexGrow={1}

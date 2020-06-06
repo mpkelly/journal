@@ -1,6 +1,6 @@
 /// <reference types="react" />
 import { FileType, File } from "../file/File";
-export declare const PageSize = 10;
+export declare const PageSize = 20;
 export declare const ContainerPageStateProvider: import("react").FunctionComponent<unknown>, useContainerPageState: import("constate/dist/ts/src/types").ContextHookFunction<{
     addItem: (type: FileType) => void;
     handleNameChanged: (name: string) => Promise<void>;

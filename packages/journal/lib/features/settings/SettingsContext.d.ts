@@ -7,6 +7,10 @@ export interface SettingsContextValue {
     handleImport(): void;
     handleImportRef(ref: HTMLInputElement | null): void;
     handleImportFile(event: ChangeEvent<HTMLInputElement>): void;
+    handleFile(file: File): void;
+    handleConfirmImport(): void;
+    handleCancelImport(): void;
+    showImportDialog: boolean;
 }
 declare type keys = keyof JournalSettings;
 declare type SettingsChange = {

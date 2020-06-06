@@ -11,9 +11,11 @@ export declare const ImagePageStateProvider: import("react").FunctionComponent<u
     page: number;
     searchCount: string | number;
     totalPages: number;
-    refresh: () => void;
+    handleSort: () => void;
+    handleRefresh: () => void;
     handleUpload: (upload: import("../upload/Upload").FileUpload) => Promise<void>;
     newImages: import("../media/Media").Media[];
     handleAddMedia: (media: import("../media/Media").Media[]) => Promise<void>;
     handleSearch: import("react").Dispatch<import("react").SetStateAction<string>>;
+    handleFiles: (files: File[]) => void;
 }>;

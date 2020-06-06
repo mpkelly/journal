@@ -13,9 +13,11 @@ export declare const useImageState: () => {
     page: number;
     searchCount: string | number;
     totalPages: number;
-    refresh: () => void;
+    handleSort: () => void;
+    handleRefresh: () => void;
     handleUpload: (upload: FileUpload) => Promise<void>;
     newImages: Media[];
     handleAddMedia: (media: Media[]) => Promise<void>;
     handleSearch: import("react").Dispatch<import("react").SetStateAction<string>>;
+    handleFiles: (files: File[]) => void;
 };

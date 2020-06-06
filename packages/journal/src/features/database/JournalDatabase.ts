@@ -7,6 +7,7 @@ import { newId } from "../../util/Identity";
 import { CodeFile } from "../code-editor/CodeFile";
 import { Variable } from "../variables/Variable";
 import { media } from "../media/MediaDatabase";
+import { DefaultCssFile, DefaultScriptFile } from "../code-editor/CodeDefaults";
 
 const files = db.table<JFile, any>("files");
 const settings = db.table<JournalSettings, any>("settings");
@@ -181,3 +182,8 @@ if (process.env.NODE_ENV === "development") {
     media,
   };
 }
+
+export const insertDefaultDbContent = () => {
+  code.add(DefaultCssFile, DefaultCssFile.id);
+  code.add(DefaultScriptFile, DefaultScriptFile.id);
+};

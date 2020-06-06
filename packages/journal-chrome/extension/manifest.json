@@ -11,6 +11,9 @@
     "128": "icons/icon.png"
   },
   "permissions": ["contextMenus", "http://*/", "https://*/"],
+  "sandbox": {
+    "pages": ["sandbox.html"]
+  },
   "background": {
     "scripts": [
       "media-store.js",
@@ -37,6 +40,6 @@
       "38": "icons/icon.png"
     }
   },
-  "content_security_policy": "script-src 'self' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://ssl.google-analytics.com/ga.js; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://ssl.google-analytics.com/ga.js; object-src 'self'",
   "offline_enabled": true
 }

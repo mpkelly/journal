@@ -3,6 +3,7 @@ export interface JournalSettings {
   siteName: string;
   wikiPageWidth: number | string;
   showImageProperties: boolean;
+  defaultsCreated: boolean;
 }
 
 export const DefaultSettings: JournalSettings = {
@@ -10,4 +11,5 @@ export const DefaultSettings: JournalSettings = {
   siteName: "Journal",
   wikiPageWidth: 800,
   showImageProperties: false,
+  defaultsCreated: false,
 };
