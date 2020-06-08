@@ -27,7 +27,7 @@ export const LightTheme = {
 
 export const DarkTheme = {
   //accent: "#22c3a7",
-  accent: "rgb(41, 208, 116)",
+  accent: "rgb(226, 191, 20)",
   muted: "#50504a",
   content: "#272a31",
   "primary.text": "rgba(255,255,255,.95)",
@@ -509,6 +509,7 @@ export const JournalSystem: System = {
         "header-row": {},
         "header-cell": {
           cellpadding: 0,
+          pb: "md",
         },
         row: {
           hoverBackgroundColor: "muted-alpha20",

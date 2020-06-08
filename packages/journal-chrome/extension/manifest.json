@@ -40,6 +40,6 @@
       "38": "icons/icon.png"
     }
   },
-  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://ssl.google-analytics.com/ga.js; object-src 'self'",
+  "content_security_policy": "script-src 'self' 'unsafe-eval' 'sha256-0hPpcK6hhu99ltiXzNZdfbnhsOmjAtisOjnpyV1v/5s=' https://ssl.google-analytics.com/ga.js https://unpkg.com ; object-src 'self'",
   "offline_enabled": true
 }

@@ -97,11 +97,11 @@ const ElementOutline = (props: EditorPageOutlineTabProps) => {
       Transforms.setNodes(
         editor,
         { id },
-        { at: ReactEditor.findPath(editor, over as Node) }
+        { at: ReactEditor.findPath(editor, editing as Node) }
       );
       setEditing(undefined);
     },
-    [over]
+    [editing]
   );
 
   const menuItems: MenuItemModel[] = [
@@ -149,9 +149,11 @@ const ElementOutline = (props: EditorPageOutlineTabProps) => {
                 entry.node === over || editing === entry.node || entry.node.id
               }
             >
+              <Text fontSize={12} color="accent" ml="md">
+                #
+              </Text>
               <EditableText
                 fontSize={12}
-                ml="md"
                 color="accent"
                 value={entry.node.id || "click to add id"}
                 onEditStart={() => setEditing(entry.node)}

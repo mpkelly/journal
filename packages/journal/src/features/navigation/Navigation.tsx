@@ -38,16 +38,18 @@ export const Navigation = (props: NavigationProps) => {
         <SettingsNav mt="auto" />
       </Column>
       <Show when={collapsed.value}>
-        <Icon
-          kind="button"
-          name="menu"
-          position="absolute"
-          right={-50}
-          bottom={16}
-          onClick={collapsed.toggle}
-          backgroundColor="background"
-          zIndex="dialogs"
-        />
+        <Scope value="dark">
+          <Icon
+            kind="button"
+            name="menu"
+            position="absolute"
+            right={-50}
+            bottom={16}
+            onClick={collapsed.toggle}
+            backgroundColor="background"
+            zIndex="dialogs"
+          />
+        </Scope>
       </Show>
     </Nav>
   );

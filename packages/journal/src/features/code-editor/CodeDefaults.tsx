@@ -96,7 +96,7 @@ export const LoadExternalLibScript = `
 
 /**
 
-Example of loading an external library
+Example of loading an external library. Only https://unpkg.com is allowed for now in a Chrome extension. 
 
 **/
 

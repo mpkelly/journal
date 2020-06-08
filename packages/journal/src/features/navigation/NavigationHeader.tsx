@@ -24,7 +24,7 @@ export const NavigationHeader = (props: NavigationHeaderProps) => {
         {settings.siteName}
       </Text>
       <Label kind="beta" ml="md">
-        BETA
+        PREVIEW
       </Label>
       <Show when={!collapsed}>
         <Icon
