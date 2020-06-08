@@ -1,12 +1,17 @@
-//Kudos https://stackoverflow.com/questions/12728128/regular-expression-to-match-single-bracket-pairs-but-not-double-bracket-pairs
+import { SubstitutionType, Substitution } from "../substitution/Substitution";
+
 const PlaceholderPattern = /(?:^|[^{])\{([^{}]*)(?=\}(?!\}))/g;
 
-export const findPlaceholders = (text: string): string[] => {
+export const findPlaceholders = (text: string): Substitution[] => {
   var match = PlaceholderPattern.exec(text);
   const placeholders = new Map<string, any>();
   while (match != null) {
-    placeholders.set(match[1], null);
+    placeholders.set(`{${match[1]}}`, null);
     match = PlaceholderPattern.exec(text);
   }
-  return Array.from(placeholders.keys());
+  return Array.from(placeholders.keys()).map((name) => ({
+    name,
+    value: "",
+    type: SubstitutionType.Placeholder,
+  }));
 };

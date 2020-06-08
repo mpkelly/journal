@@ -6,7 +6,8 @@ import { useSettings } from "./SettingsContext";
 import { PageTitle } from "../../components/page-title/PageTitle";
 import { Dropzone } from "../../components/dropzone/Dropzone";
 import { SettingsConfirmImportDialog } from "./SettingsConfirmImportDialog";
-import { Link } from "../../components/link/Link";
+import { VariableTableStateProvider } from "../variables/VariableTableState";
+import { SettingsVariableTable } from "./SettingsVariableTable";
 
 export interface SettingsPageProps {}
 
@@ -46,18 +47,23 @@ export const SettingsPage = memo(() => {
         </Row>
         <Setting
           mt="lg"
-          label="siteName"
+          label="appName"
           value={settings.siteName}
           onChange={(siteName: string) => updateSettings({ siteName })}
           description={""}
         />
+        <VariableTableStateProvider>
+          <SettingsVariableTable />
+        </VariableTableStateProvider>
+
         <input
           type="file"
           hidden
           ref={handleImportRef}
           onChange={handleImportFile}
         />
-        <Row mt="xl">
+        <Row my="lg" borderTop="1px solid dividers" minHeight={1} />
+        <Row>
           <Button onClick={handleExport} labelKey="exportData" kind="muted" />
           <Button
             onClick={handleImport}

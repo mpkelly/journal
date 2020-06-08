@@ -35,9 +35,6 @@ export declare const DarkTheme: {
     document: string;
     wikipage: string;
     folder: string;
-    nav: {
-        background: string;
-    };
     toolbar: {
         muted: string;
         "primary.text": string;

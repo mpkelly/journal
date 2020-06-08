@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { Icon, FlexProps, Row } from "@mpkelly/siam";
+import { Icon, FlexProps, Row, Header } from "@mpkelly/siam";
 import { ReadOnlyButton } from "@mpkelly/react-editor-kit";
 import useBoolean from "react-hanger/useBoolean";
 import { Show } from "../../util/Show";
@@ -14,7 +14,14 @@ export const WikiPageHeader = (props: WikiPageHeaderProps) => {
   const showHelp = useBoolean(false);
   return (
     <Fragment>
-      <Row gravity="center-end" position="absolute" right={0} pr="md" {...rest}>
+      <Header
+        flexDirection="row"
+        gravity="center-end"
+        position="absolute"
+        right={0}
+        pr="md"
+        {...rest}
+      >
         <Icon
           kind="button"
           name="help"
@@ -28,7 +35,7 @@ export const WikiPageHeader = (props: WikiPageHeaderProps) => {
           readOnlyLigature="lock"
           onMouseDown={onToggleLocked}
         />
-      </Row>
+      </Header>
       <Show when={showHelp.value}>
         <WikiPageHelpKeyShortcutDialog onClose={showHelp.toggle} />
       </Show>

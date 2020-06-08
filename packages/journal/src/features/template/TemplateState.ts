@@ -7,9 +7,9 @@ export const useTemplateState = () => {
   const db = useDatabase();
 
   const handleCreateTemplate = (file: File) => {
-    file.id = newId();
-    file.template = true;
-    return db.addFile(file).then(() => fireEvent("templateschanged"));
+    const template = { ...file, template: true };
+    template.id = newId();
+    return db.addFile(template).then(() => fireEvent("templateschanged"));
   };
 
   return { handleCreateTemplate };

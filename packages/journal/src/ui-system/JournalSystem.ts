@@ -28,20 +28,17 @@ export const LightTheme = {
 export const DarkTheme = {
   accent: "#22c3a7",
   muted: "#50504a",
-  content: "#222225",
+  content: "#272a31",
   "primary.text": "rgba(255,255,255,.95)",
   "secondary.text": "rgba(255,255,255,.6)",
   "light.text": "rgba(255,255,255,.95)",
   danger: "orangered",
-  background: "#222225",
+  background: "#272a31",
   dividers: "rgba(0,0,0,.4)",
   collection: "#bfd664",
   document: "#3c9cdb",
   wikipage: "lightpink",
   folder: "muted",
-  nav: {
-    background: "background-light1",
-  },
   toolbar: {
     muted: "accent",
     "primary.text": "white",
@@ -515,6 +512,11 @@ export const JournalSystem: System = {
         cell: {
           cellpadding: 0,
           py: "md",
+          height: 40,
+        },
+        firstcell: {
+          selector: "tr td:first-child",
+          pl: "sm",
         },
         lastcell: {
           selector: ".cell:last-child",

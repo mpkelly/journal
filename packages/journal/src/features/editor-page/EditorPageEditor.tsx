@@ -32,7 +32,6 @@ import {
   DividerPlugin,
   HistoryPlugin,
   ConstraintsPlugin,
-  SelectionToolbarPlugin,
   EditorToolbarPlugin,
   ImagePlugin,
   TextAlignPlugin,
@@ -44,8 +43,6 @@ import {
 import { EditorContainer } from "./EditorContainer";
 import { ErrorBoundary } from "../errors/ErrorHandler";
 import { createEditorStylePlugin } from "./EditorPageStylePlugin";
-import { FormatContextMenuPlugin } from "../editor/EditorFormatContextMenuPlugin";
-import { InsertContextMenuPlugin } from "../editor/EditorInsertContextMenuPlugin";
 
 export interface EditorPageEditorProps extends FlexProps {
   children: ReactNode;
@@ -64,6 +61,7 @@ export const EditorPageEditor = (props: EditorPageEditorProps) => {
   } = useEditorState();
   const { system } = useSiam();
   const plugins = useMemo(() => createPlugins(system), []);
+
   return (
     <EditorKit plugins={plugins} readOnly={readOnly} id="documenteditor">
       <EditorToolbar
@@ -132,7 +130,5 @@ const plugins: Plugin[] = [
   DividerPlugin,
   createClearFormattingPlugin(),
   LayoutPlugin,
-  // createInitialLetterPlugin(),
-  // FormatContextMenuPlugin,
-  // InsertContextMenuPlugin,
+  createInitialLetterPlugin(),
 ];

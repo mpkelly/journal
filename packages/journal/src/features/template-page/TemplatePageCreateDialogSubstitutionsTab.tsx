@@ -20,6 +20,7 @@ export const TemplatePageCreateDialogSubstitutionsTab = () => {
           <TemplateSubstition
             {...substitution}
             key={substitution.name}
+            focus={index == 0}
             onChange={(value) => handleSubstitutionChange(index, value)}
           />
         ))}
@@ -41,13 +42,14 @@ export interface TemplateSubstitionProps {
   name: string;
   value: string;
   onChange(value: string): void;
+  focus?: boolean;
 }
 
 export const TemplateSubstition = (props: TemplateSubstitionProps) => {
-  const { name, value, onChange } = props;
+  const { name, value, onChange, focus } = props;
   return (
     <Row gravity="center-start" my="sm">
-      <Text width={150}>
+      <Text width={180}>
         <code>{name}</code>
       </Text>
       <Input
@@ -55,6 +57,7 @@ export const TemplateSubstition = (props: TemplateSubstitionProps) => {
         value={value}
         flexGrow={1}
         onChange={onChange}
+        autoFocus={focus}
       />
     </Row>
   );

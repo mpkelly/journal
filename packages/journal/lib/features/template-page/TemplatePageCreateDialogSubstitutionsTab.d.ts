@@ -6,5 +6,6 @@ export interface TemplateSubstitionProps {
     name: string;
     value: string;
     onChange(value: string): void;
+    focus?: boolean;
 }
 export declare const TemplateSubstition: (props: TemplateSubstitionProps) => JSX.Element;

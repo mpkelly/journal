@@ -28,6 +28,7 @@ import {
   LayoutButton,
   LayoutMenuItem,
   CustomLayoutMenuItem,
+  InitialLetterButton,
 } from "@mpkelly/react-editor-kit";
 
 export interface EditorToolbarProps extends FlexProps {
@@ -137,16 +138,25 @@ export const EditorToolbar = (props: EditorToolbarProps) => {
               ligature="format_list_bulleted"
             />
             <Divider />
+            <InitialLetterButton
+              className="material-icons-round"
+              ligature="text_fields"
+              tooltipText={"Toggle initial letter"}
+              tooltipOffsets={{ v: 8 }}
+            />
+
             <BlockquoteButton
               className="material-icons-round"
               ligature="format_quote"
             />
 
             <Divider />
+
             <SpellCheckButton
               className="material-icons-round"
               ligature="spellcheck"
             />
+
             <ClearFormattingButton
               className="material-icons-round"
               ligature="format_clear"
@@ -158,7 +168,7 @@ export const EditorToolbar = (props: EditorToolbarProps) => {
         <Scope value="toolbar">
           <Row minWidth={50}>
             <Show when={saved}>
-              <Text labelKey="saved" color="muted" />
+              <Text labelKey="saved" color="muted" textTransform="uppercase" />
             </Show>
             <Show when={!saved}>
               <Icon
@@ -213,7 +223,6 @@ export const BaseColors = [
   "#4834d4",
   "#535c68",
   "#4C5ADE",
-  "#130f40",
 ];
 
 const Colors = splitColors(BaseColors, 5);

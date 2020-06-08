@@ -26,6 +26,7 @@ export const EditorPage = (props: EditorPageProps) => {
         flexGrow={1}
         backgroundColor="content"
         overflow="hidden"
+        key={file.id}
       >
         <EditorStateProvider {...props}>
           <EditorPageEditor>

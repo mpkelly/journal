@@ -1,14 +1,20 @@
 import { useState, useEffect, useCallback } from "react";
 import { useHistory } from "react-router-dom";
 import constate from "constate";
+import { FlatNode } from "@mpkelly/react-tree";
 import { Element, Node } from "@mpkelly/react-editor-kit";
 import { useDatabase } from "../database/DatabaseState";
 import { File, FileType } from "../file/File";
 import { newId } from "../../util/Identity";
-import { findPlaceholders } from "../placeholders/Placeholder";
-import { FlatNode } from "@mpkelly/react-tree";
 
-export type Substitution = { name: string; value: string };
+import {
+  Substitution,
+  findSubstitutions,
+  applySubstitutions,
+} from "../substitution/Substitution";
+import { VariableType } from "../variables/Variable";
+import { Database } from "../database/Database";
+import { CollectionChangedEvent } from "../collections-tree/CollectionsChangedEvent";
 
 export enum Tabs {
   FileInfo = 0,
@@ -37,10 +43,14 @@ export const templatePageCreateDialogState = () => {
     );
   }, []);
 
-  const handleCreate = (template: File) => {
+  const handleCreate = async (template: File) => {
     const id = newId();
     const file = { ...template, template: false, id };
-    setSubstitutions(findSubstitutions((file.data as Element[]) || []));
+    const variables = await db.getVariables();
+    setSubstitutions(
+      findSubstitutions((file.data as Element[]) || [], variables)
+    );
+
     setNewFile(file);
   };
 
@@ -64,9 +74,12 @@ export const templatePageCreateDialogState = () => {
   const handleConfirmCreate = useCallback(() => {
     if (newFile) {
       applySubstitutions((newFile.data as Node[]) || [], substitutions);
-      db.addFile(newFile).then(() => {
-        history.push(`/library/view/${newFile.id}`);
-      });
+      incrementCounters(substitutions, db);
+      db.addFile(newFile)
+        .then(CollectionChangedEvent)
+        .then(() => {
+          history.push(`/library/view/${newFile.id}`);
+        });
     }
   }, [newFile, substitutions]);
 
@@ -93,32 +106,17 @@ export const templatePageCreateDialogState = () => {
   };
 };
 
-const findSubstitutions = (elements: Element[]) => {
-  const result: Substitution[] = [];
-  elements.forEach((element) => {
-    const text = Node.string(element);
-    findPlaceholders(text).forEach((name) => {
-      if (!result.find((substitution) => substitution.name === name)) {
-        result.push({ name, value: "" });
-      }
+const incrementCounters = (substitutions: Substitution[], db: Database) => {
+  substitutions
+    .filter(
+      (substitution) =>
+        substitution.variable &&
+        substitution.variable.type == VariableType.Counter
+    )
+    .map((substitution) => substitution.variable)
+    .forEach((counter) => {
+      counter && db.incrementCount(counter.id as string);
     });
-  });
-  return result;
-};
-
-const applySubstitutions = (nodes: Node[], substitution: Substitution[]) => {
-  nodes.forEach((node) => {
-    if (node.text) {
-      substitution.forEach((substitution) => {
-        node.text = node.text
-          .split(`{${substitution.name}}`)
-          .join(substitution.value || `{${substitution.name}}`);
-      });
-    }
-    if (node.children) {
-      applySubstitutions(node.children, substitution);
-    }
-  });
 };
 
 export const [

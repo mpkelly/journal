@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, Label, Icon, FlexProps, Section, Show } from "@mpkelly/siam";
+import { Text, Label, Icon, FlexProps, Show, Header } from "@mpkelly/siam";
 import { Logo } from "../../components/logo/Logo";
 import { useSettings } from "../settings/SettingsContext";
 
@@ -12,7 +12,7 @@ export const NavigationHeader = (props: NavigationHeaderProps) => {
   const { collapsed, onToggleCollapsed } = props;
   const { settings } = useSettings();
   return (
-    <Section
+    <Header
       flexDirection="row"
       mb="md"
       px="lg"
@@ -35,6 +35,6 @@ export const NavigationHeader = (props: NavigationHeaderProps) => {
           onClick={onToggleCollapsed}
         />
       </Show>
-    </Section>
+    </Header>
   );
 };

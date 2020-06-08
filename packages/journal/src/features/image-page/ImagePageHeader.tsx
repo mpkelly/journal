@@ -1,12 +1,12 @@
 import React from "react";
-import { Row, Icon } from "@mpkelly/siam";
+import { Row, Icon, Header } from "@mpkelly/siam";
 import { useUpload } from "../upload/Upload";
 import { useImagePageState } from "./ImagePageState";
 import { Pager } from "../../components/pager/Pager";
 import { SearchInput } from "../../components/search-input/SearchInput";
 import { PageTitle } from "../../components/page-title/PageTitle";
 
-export const ImagePageToolbar = () => {
+export const ImagePageHeader = () => {
   const {
     handleSort,
     handleRefresh,
@@ -23,7 +23,7 @@ export const ImagePageToolbar = () => {
   const { openFileBrowser } = useUpload(handleUpload);
 
   return (
-    <Row alignItems="center" mb={"lg"}>
+    <Header flexDirection="row" alignItems="center" mb={"lg"}>
       <PageTitle labelKey="images" iconName="images" />
       <SearchInput
         mx="xxl"
@@ -50,6 +50,6 @@ export const ImagePageToolbar = () => {
           page={page}
         />
       </Row>
-    </Row>
+    </Header>
   );
 };

@@ -25,7 +25,7 @@ export const EditorPageSideTab = () => {
         };
       case SideTab.Code:
         return {
-          width: 600,
+          width: 500,
           content: <EditorPageCodeTab flex="1 1 0" width="100%" />,
         };
       case SideTab.Image:

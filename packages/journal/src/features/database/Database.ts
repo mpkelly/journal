@@ -19,7 +19,8 @@ export interface Database {
 
   getTemplates(): Promise<JFile[]>;
 
-  incrementCount(id: string): Promise<number>;
+  getVariables(): Promise<Variable[]>;
+  incrementCount(id: string): Promise<void>;
   addVariable(variable: Variable): Promise<void>;
   updateVariable(id: any, changes: Partial<Variable>): Promise<number>;
   deleteVariable(id: any): Promise<void>;

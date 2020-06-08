@@ -1,5 +1,16 @@
 import React, { useRef, useState, useCallback } from "react";
-import { Text, FlexProps, Nav, Scope, Row, EditableText } from "@mpkelly/siam";
+import useBoolean from "react-hanger/useBoolean";
+import {
+  Text,
+  FlexProps,
+  Nav,
+  Scope,
+  Row,
+  EditableText,
+  Select,
+  MenuItemModel,
+  Icon,
+} from "@mpkelly/siam";
 import {
   Node,
   createOutline,
@@ -10,7 +21,6 @@ import {
   Transforms,
 } from "@mpkelly/react-editor-kit";
 import { Show } from "../../util/Show";
-import useBoolean from "react-hanger/array/useBoolean";
 
 const FontSize = 20;
 
@@ -61,7 +71,8 @@ const ElementOutline = (props: EditorPageOutlineTabProps) => {
   const { editor } = useEditorKit();
   const [over, setOver] = useState<Node>();
   const [editing, setEditing] = useState<Node>();
-  const outline = createElementOutline(value);
+  const hideEmpty = useBoolean(true);
+  const outline = createElementOutline(value, hideEmpty.value);
   const previousOutline = useRef<string>();
 
   const handleEnter = (node: Node) => {
@@ -93,8 +104,35 @@ const ElementOutline = (props: EditorPageOutlineTabProps) => {
     [over]
   );
 
+  const menuItems: MenuItemModel[] = [
+    {
+      iconName: hideEmpty.value ? "check" : undefined,
+      labelKey: "hideEmpty",
+      onClick: hideEmpty.toggle,
+    },
+  ];
+
   return (
     <Nav {...rest} overflowY="auto" p="lg" backgroundColor="background">
+      <Row gravity="center-start" mb="md">
+        <Text
+          labelKey="documentOutline"
+          mr="auto"
+          kind="small"
+          color="secondary.text"
+        />
+        <Select
+          items={menuItems}
+          onItemClicked={(item: MenuItemModel) => item.onClick()}
+        >
+          <Icon
+            name="settings"
+            kind="small.button"
+            color="secondary.text"
+            data-test="add-item-to-container"
+          />
+        </Select>
+      </Row>
       {outline.map((entry) => {
         return (
           <Row
@@ -114,7 +152,7 @@ const ElementOutline = (props: EditorPageOutlineTabProps) => {
               <EditableText
                 fontSize={12}
                 ml="md"
-                color="secondary.text"
+                color="accent"
                 value={entry.node.id || "click to add id"}
                 onEditStart={() => setEditing(entry.node)}
                 onEditStop={() => setEditing(undefined)}
@@ -130,11 +168,15 @@ const ElementOutline = (props: EditorPageOutlineTabProps) => {
 
 export const createElementOutline = (
   nodes: Node[],
+  hideEmpty: boolean,
   depth = 0
 ): OutlineEntry[] => {
   let outline: OutlineEntry[] = [];
   nodes.forEach((node) => {
     if (node.type) {
+      if (hideEmpty && Node.string(node).trim().length === 0) {
+        return;
+      }
       outline.push({
         content: Node.string(node),
         depth,
@@ -142,7 +184,9 @@ export const createElementOutline = (
       });
     }
     if (node.children) {
-      outline = outline.concat(createElementOutline(node.children, depth + 1));
+      outline = outline.concat(
+        createElementOutline(node.children, hideEmpty, depth + 1)
+      );
     }
   });
   return outline;

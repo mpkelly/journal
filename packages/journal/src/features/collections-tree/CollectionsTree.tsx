@@ -1,11 +1,5 @@
 import React, { FC } from "react";
 import { useHistory, useParams } from "react-router-dom";
-import { FlexProps, Column, styled, getStyles } from "@mpkelly/siam";
-import { FileType, File } from "../file/File";
-import { CollectionTreeItem } from "./CollectionTreeItem";
-import { FolderTreeItem } from "./FolderTreeItem";
-import { DocumenTreeItem } from "./DocumenTreeItem";
-import { WikiPageTreeItem } from "./WikiPageTreeItem";
 import {
   TreeNode,
   FlatNode,
@@ -13,6 +7,12 @@ import {
   Tree,
   Schema,
 } from "@mpkelly/react-tree";
+import { FlexProps, Column, styled, getStyles } from "@mpkelly/siam";
+import { FileType, File } from "../file/File";
+import { CollectionTreeItem } from "./CollectionTreeItem";
+import { FolderTreeItem } from "./FolderTreeItem";
+import { DocumenTreeItem } from "./DocumenTreeItem";
+import { WikiPageTreeItem } from "./WikiPageTreeItem";
 
 import { useCollectionsTreeState } from "../collection-page/CollectionsPageState";
 

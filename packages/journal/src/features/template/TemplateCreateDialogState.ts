@@ -18,13 +18,13 @@ export const useTemplateCreateDialogState = (initialFile: File) => {
 
   const handleCreate = useCallback(() => {
     handleCreateTemplate(file)
+      .then(CollectionChangedEvent)
       .then(() => {
         if (deleteOriginal.value) {
           db.deleteFiles([initialFile.id]);
         }
         hisotry.push("/templates");
-      })
-      .then(CollectionChangedEvent);
+      });
   }, [file, deleteOriginal]);
 
   return { file, handleCreate, handleNameChange, deleteOriginal };

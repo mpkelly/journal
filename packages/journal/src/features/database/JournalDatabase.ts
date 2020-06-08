@@ -7,7 +7,13 @@ import { newId } from "../../util/Identity";
 import { CodeFile } from "../code-editor/CodeFile";
 import { Variable } from "../variables/Variable";
 import { media } from "../media/MediaDatabase";
-import { DefaultCssFile, DefaultScriptFile } from "../code-editor/CodeDefaults";
+import {
+  DefaultCssPrintFile,
+  DefaultScriptFile,
+  A4PageCssFile,
+  DefaultCodeFiles,
+} from "../code-editor/CodeDefaults";
+import { VariableDefaults } from "../variables/VariableDefaults";
 
 const files = db.table<JFile, any>("files");
 const settings = db.table<JournalSettings, any>("settings");
@@ -33,8 +39,16 @@ export const JournalDatabase: Database = {
     });
     return results;
   },
-  incrementCount: (id: any) => {
-    return Promise.resolve(1);
+  getVariables: () => {
+    return variables.toArray();
+  },
+  incrementCount: async (id: any) => {
+    const variable = await variables.get(id);
+    if (variable) {
+      variable.count = (variable.count || 0) + 1;
+      variables.put(variable, variable.id);
+    }
+    return Promise.resolve();
   },
   addVariable: (variable: Variable) => {
     return variables.add(variable, variable.id);
@@ -184,6 +198,6 @@ if (process.env.NODE_ENV === "development") {
 }
 
 export const insertDefaultDbContent = () => {
-  code.add(DefaultCssFile, DefaultCssFile.id);
-  code.add(DefaultScriptFile, DefaultScriptFile.id);
+  DefaultCodeFiles.forEach((codeFile) => code.add(codeFile, codeFile.id));
+  VariableDefaults.forEach((variable) => variables.add(variable, variable.id));
 };

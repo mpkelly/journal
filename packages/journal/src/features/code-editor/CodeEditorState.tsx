@@ -120,6 +120,7 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
       const func = eval(Node.string(activeCodeFile.data[0]));
       const context = {
         nodes: file.data,
+        loadJs: loadJs,
       };
       func(context);
     }
@@ -133,6 +134,7 @@ export const useCodeEditorState = (props: CodeEditorStateProps) => {
     const css = codeFiles
       .filter((code) => code.type === CodeType.Css)
       .map((code) => (code.data ? Node.string(code.data[0]) : ""))
+      .reverse()
       .join("\n");
     const wrapped = generateCss(`${css}`);
     clearTimeout(updateTimeout.current);
@@ -168,4 +170,29 @@ const attachEditorStyle = (css: string, id: string) => {
   style.id = styleId;
   style.innerText = css;
   document.head.appendChild(style);
+};
+
+const loadJs = async (files: string[], done: Function) => {
+  const scripts = Array.from(document.querySelectorAll("script"));
+  const urls = files.filter(
+    (url) => !scripts.find((script) => script.src === url)
+  );
+
+  await Promise.all(
+    urls.map(
+      (url) =>
+        new Promise(function (resolve, reject) {
+          var script = document.createElement("script");
+          script.onload = function () {
+            resolve();
+          };
+          script.onerror = function () {
+            reject();
+          };
+          script.src = url;
+          document.head.appendChild(script);
+        })
+    )
+  );
+  done();
 };

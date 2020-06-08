@@ -1,10 +1,7 @@
 /// <reference types="react" />
-import { File } from "../file/File";
 import { FlatNode } from "@mpkelly/react-tree";
-export declare type Substitution = {
-    name: string;
-    value: string;
-};
+import { File } from "../file/File";
+import { Substitution } from "../substitution/Substitution";
 export declare enum Tabs {
     FileInfo = 0,
     Substitutions = 1
@@ -13,7 +10,7 @@ export declare const templatePageCreateDialogState: () => {
     tab: Tabs;
     newFile: File;
     substitutions: Substitution[];
-    handleCreate: (template: File) => void;
+    handleCreate: (template: File) => Promise<void>;
     handleCancelCreate: () => void;
     handleConfirmCreate: () => void;
     handleSubstitutionChange: (index: number, value: string) => void;
@@ -26,7 +23,7 @@ export declare const TemplatePageCreateDialogStateProvider: import("react").Func
     tab: Tabs;
     newFile: File;
     substitutions: Substitution[];
-    handleCreate: (template: File) => void;
+    handleCreate: (template: File) => Promise<void>;
     handleCancelCreate: () => void;
     handleConfirmCreate: () => void;
     handleSubstitutionChange: (index: number, value: string) => void;

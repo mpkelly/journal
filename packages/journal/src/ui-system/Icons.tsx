@@ -172,4 +172,8 @@ export const Icons: IconBundle = {
     ligature: "sort",
     className,
   },
+  check: {
+    ligature: "check",
+    className,
+  },
 };

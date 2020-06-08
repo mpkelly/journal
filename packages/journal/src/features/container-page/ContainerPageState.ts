@@ -15,7 +15,7 @@ import { usePagerState } from "../../components/pager/PagerState";
 import { CollectionChangedEvent } from "../collections-tree/CollectionsChangedEvent";
 
 //TODO make varaible
-export const PageSize = 20;
+export const PageSize = 12;
 let count = 1;
 
 const containerPageState = () => {
@@ -70,8 +70,8 @@ const containerPageState = () => {
         const ids = toFlatNodes([result.node]).map((node) => node.id);
         db.deleteFiles(ids)
           .then(handleCancelDelete)
+          .then(CollectionChangedEvent)
           .then(() => {
-            fireEvent("collectionschanged");
             db.getChildren(fileId, 0, PageSize).then(setItems);
           });
       }

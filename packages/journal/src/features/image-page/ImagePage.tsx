@@ -2,7 +2,7 @@ import React, { Fragment } from "react";
 import { Page } from "../page/Page";
 import { Show } from "@mpkelly/siam";
 import { ImagePageStateProvider, useImagePageState } from "./ImagePageState";
-import { ImagePageToolbar } from "./ImagePageToolbar";
+import { ImagePageHeader } from "./ImagePageHeader";
 import { ImageGrid } from "../images/ImageGrid";
 import { ImageAddDialog } from "../images/ImageAddDialog";
 import { Dropzone } from "../../components/dropzone/Dropzone";
@@ -25,7 +25,7 @@ export const ImagePageContent = () => {
   return (
     <Fragment>
       <Page p="lg" flexGrow={1} overflowY={"hidden"}>
-        <ImagePageToolbar />
+        <ImagePageHeader />
         {/* <JournalHelp /> */}
         <Dropzone
           flexGrow={1}
