@@ -29,7 +29,7 @@ export const ImageAddDialog = (props: ImageAddDialogProps) => {
   const handleConfirm = () => onConfirm(images);
   const isLastPage = page === totalPages;
   return (
-    <Scope value="nav">
+    <Scope value="dark">
       <Dialog
         width={800}
         height={600}

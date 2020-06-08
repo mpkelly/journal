@@ -18,7 +18,7 @@ export const SettingsVariableTable = () => {
           ml="auto"
         />
       </Row>
-      <Scope value="nav">
+      <Scope value="dark">
         <Column background="background" p="md">
           <VariableTable />
         </Column>

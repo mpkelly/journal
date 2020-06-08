@@ -26,7 +26,8 @@ export const LightTheme = {
 };
 
 export const DarkTheme = {
-  accent: "#22c3a7",
+  //accent: "#22c3a7",
+  accent: "rgb(41, 208, 116)",
   muted: "#50504a",
   content: "#272a31",
   "primary.text": "rgba(255,255,255,.95)",
@@ -39,6 +40,9 @@ export const DarkTheme = {
   document: "#3c9cdb",
   wikipage: "lightpink",
   folder: "muted",
+  dark: {
+    background: "rgb(35, 36, 39)",
+  },
   toolbar: {
     muted: "accent",
     "primary.text": "white",

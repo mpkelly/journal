@@ -30,7 +30,7 @@ export interface EditorPageOutlineTabProps extends FlexProps {
 
 export const EditorPageOutlineTab = (props: EditorPageOutlineTabProps) => {
   return (
-    <Scope value="nav">
+    <Scope value="dark">
       {/* <TocOutline {...props} /> */}
       <ElementOutline {...props} />
     </Scope>
@@ -126,7 +126,7 @@ const ElementOutline = (props: EditorPageOutlineTabProps) => {
           onItemClicked={(item: MenuItemModel) => item.onClick()}
         >
           <Icon
-            name="settings"
+            name="more"
             kind="small.button"
             color="secondary.text"
             data-test="add-item-to-container"

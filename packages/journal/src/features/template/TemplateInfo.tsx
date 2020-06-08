@@ -18,11 +18,11 @@ export const CreateTemplateInfo = (props: CreateTemplateInfoProps) => {
         the template.
       </Text>
       <Text as="paragraph" mt="lg" color="secondary.text">
-        Variables work like placeholders but you need to use a dollar sign
-        before the left bracket e.g. <code>$&#123;invoice-number&#125;</code>.
-        Just make sure you have first defined a Journal variable or are using a
-        built-in varaible like <code>$&#123;today-short&#125;</code> for today's
-        date in short format.
+        Variables work like placeholders but you need to use double brackets
+        e.g. <code>&#123;&#123;invoice-number&#125;&#125;</code>. Just make sure
+        you have first defined a Journal variable on the Settings page or are
+        using a built-in varaible, like
+        <code>&#123;&#123;date-today&#125;&#125;</code>, for today's date.
       </Text>
     </Fragment>
   );

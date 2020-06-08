@@ -18,7 +18,16 @@ export const VariableTable = (props: VariableTableProps) => {
 
   return (
     <Row width="100%" flexGrow={1} pb="lg" overflowY="auto" {...rest}>
-      <Table columns={columns} width="100%" flexGrow={1}>
+      <Table
+        columns={columns}
+        width="100%"
+        flexGrow={1}
+        styles={{
+          cell: {
+            height: 50,
+          },
+        }}
+      >
         {renderRows()}
       </Table>
     </Row>
