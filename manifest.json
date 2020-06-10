@@ -1,0 +1,13 @@
+{
+  "short_name": "Journal",
+  "name": "Journal",
+  "icons": [
+    {
+      "src": "/images/icons.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone"
+}
