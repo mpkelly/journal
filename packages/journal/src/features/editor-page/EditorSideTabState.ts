@@ -10,6 +10,7 @@ export enum SideTab {
   Code,
   Templates,
   Image,
+  Help,
 }
 
 export const useEditorSideTabState = (): EditorSideTabState => {

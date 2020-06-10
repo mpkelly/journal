@@ -46,8 +46,8 @@ export const EditorPageToolbar = (props: FlexProps) => {
           data-test="template-tab"
         />
         <SideTabIcon
-          selectedTab={sideTab}
-          sideTab={SideTab.Code}
+          selectedTab={showHelp.value ? SideTab.Help : undefined}
+          sideTab={SideTab.Help}
           onClick={showHelp.toggle}
           iconName="help"
           mt="auto"

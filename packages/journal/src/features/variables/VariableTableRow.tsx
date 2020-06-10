@@ -31,6 +31,7 @@ export const VariableTableRow = (props: VariableTableRowProps) => {
           <Icon
             kind="small.button"
             name="delete"
+            color="secondary.text"
             onClick={() => handleDelete(variable)}
           />
         </Show>

@@ -31,7 +31,7 @@ export const EditorPageHelpKeyShortcutDialog = (
         <KeyShortcut labelKey="Strikethrough" shortcut="⌘+T" />
 
         <Text kind="small" mt="md">
-          Most markdown syntax is also supported
+          Some markdown syntax is also supported
         </Text>
       </Column>
     </HelpKeyShortcutDialog>
