@@ -1,5 +1,12 @@
 var CACHE_NAME = "journal-pwa";
-var urlsToCache = ["/"];
+var urlsToCache = [
+  "./manifest.json",
+  "./fonts/noto-sans-tc.css",
+  "./icons/material-round.css",
+  "./lib/react.production.min.js",
+  "./lib/react-dom.production.min.js",
+  "./journal.js",
+];
 
 // Install a service worker
 self.addEventListener("install", (event) => {
