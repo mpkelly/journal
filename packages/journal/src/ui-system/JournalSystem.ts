@@ -449,7 +449,7 @@ export const JournalSystem: System = {
       beta: {
         extends: ["components.label.primary"],
         backgroundColor: "orange",
-        color: "light.text",
+        color: "background",
         fontSize: 9,
         padding: 2,
       },
