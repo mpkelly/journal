@@ -1,5 +1,5 @@
 {
-  "name": "journal-wiki",
+  "name": "@mpkelly/journal",
   "version": "0.0.1",
   "description": "Journal as a standalone wiki and media store built using React JS. It's also available as a brower extension for Chrome.",
   "keywords": [

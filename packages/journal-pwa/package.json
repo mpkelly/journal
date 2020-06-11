@@ -1,29 +1,24 @@
 {
-  "name": "examples",
+  "name": "journal-pwa",
   "version": "0.0.1",
-  "description": "ReactJS Examples ",
+  "description": "A PWA based on the Journal package. ",
   "keywords": [
-    "react",
-    "examples",
     "journal",
-    "wiki"
+    "editor",
+    "react",
+    "wiki",
+    "pwa"
   ],
-  "author": "mpkelly <kikemelly@gmail.com>",
-  "license": "ISC",
+  "author": "mkelly <kikemelly@gmail.com>",
+  "homepage": "https://github.com/mpkelly/Journal#readme",
+  "license": "MIT",
   "main": "dist/index.js",
-  "directories": {
-    "lib": "lib",
-    "test": "__tests__"
-  },
-  "files": [
-    "lib"
-  ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/mpkelly/siam-wiki.git"
+    "url": "git+https://github.com/mpkelly/Journal.git"
   },
   "bugs": {
-    "url": "https://github.com/mpkelly/siam-wiki/issues"
+    "url": "https://github.com/mpkelly/Journal/issues"
   },
   "devDependencies": {
     "@babel/core": "^7.7.2",
@@ -33,15 +28,16 @@
     "@babel/preset-env": "^7.7.1",
     "@babel/preset-react": "^7.7.0",
     "@babel/runtime": "^7.7.2",
+    "@mpkelly/journal": "*",
     "awesome-typescript-loader": "^5.2.1",
     "clean-webpack-plugin": "*",
+    "gh-pages": "^3.0.0",
     "hard-source-webpack-plugin": "^0.13.1",
     "history": "^4.10.1",
     "html-webpack-plugin": "*",
     "react": "16.8.5",
     "react-dom": "^16.8.5",
     "react-router-dom": "^5.1.2",
-    "@mpkelly/journal": "*",
     "source-map-loader": "^0.2.4",
     "terser-webpack-plugin": "^2.2.1",
     "typescript": "^3.7.2",
@@ -51,6 +47,9 @@
     "webpack-glob": "^2.0.2"
   },
   "scripts": {
-    "watch": "webpack -w --mode=development"
+    "watch": "webpack -w --mode=development",
+    "dist": "webpack  --mode=production",
+    "predeploy": "npm run dist",
+    "deploy": "gh-pages -d dist"
   }
 }
