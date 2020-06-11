@@ -1,16 +1,17 @@
 var CACHE_NAME = "journal-pwa";
 var urlsToCache = [
-  "./fonts/noto-sans-tc-v10-latin-700.woff2",
-  "./fonts/noto-sans-tc-v10-latin-regular.woff2",
-  "./fonts/noto-sans-tc.css",
-  "./icons/icon.png",
-  "./icons/material-round.css",
-  "./icons/MaterialRoundIconFont.woff2",
-  "./lib/react.production.min.js",
-  "./lib/react-dom.production.min.js",
-  "./journal.js",
+  "./public/fonts/noto-sans-tc-v10-latin-700.woff2",
+  "./public/fonts/noto-sans-tc-v10-latin-regular.woff2",
+  "./public/fonts/noto-sans-tc.css",
+  "./public/icons/icon.png",
+  "./public/icons/material-round.css",
+  "./public/icons/MaterialRoundIconFont.woff2",
+  "./public/lib/react.production.min.js",
+  "./public/lib/react-dom.production.min.js",
+  "./public/journal.js",
+  "./public/manifest.json",
   "./worker.js",
-  "../index.html",
+  "./index.html",
 ];
 
 // Install a service worker
