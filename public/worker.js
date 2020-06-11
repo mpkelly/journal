@@ -1,11 +1,17 @@
 var CACHE_NAME = "journal-pwa";
 var urlsToCache = [
   "./manifest.json",
+  "./fonts/noto-sans-tc-v10-latin-700.woff2",
+  "./fonts/noto-sans-tc-v10-latin-regular.woff2",
   "./fonts/noto-sans-tc.css",
+  "./icons/icon.png",
   "./icons/material-round.css",
+  "./icons/MaterialRoundIconFont.woff2",
   "./lib/react.production.min.js",
   "./lib/react-dom.production.min.js",
   "./journal.js",
+  "./worker.js",
+  "./index.html",
 ];
 
 // Install a service worker
