@@ -3,7 +3,7 @@
   "name": "Journal",
   "icons": [
     {
-      "src": "./icons/icon.png",
+      "src": "./public/icons/icon.png",
       "type": "image/png",
       "sizes": "256x256"
     }
