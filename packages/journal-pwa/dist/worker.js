@@ -19,33 +19,22 @@ self.addEventListener("install", (event) => {
   // Perform install steps
   event.waitUntil(
     caches.open(CACHE_NAME).then(function (cache) {
-      console.log("Opened cache");
       return cache.addAll(urlsToCache);
     })
   );
 });
 
-// Cache and return requests
 self.addEventListener("fetch", (event) => {
   if (event.request.mode == "navigate") {
-    console.log("Handling fetch event for", event.request.url);
-    console.log(event.request);
     event.respondWith(
       fetch(event.request).catch(function (exception) {
-        // The `catch` is only triggered if `fetch()` throws an exception,
-        // which most likely happens due to the server being unreachable.
-        console.error(
-          "Fetch failed; returning offline page instead.",
-          exception
-        );
+        //Assume error is due to being offline and try to load page from cacge
         return caches.open(CACHE_NAME).then(function (cache) {
           return cache.match("./index.html");
         });
       })
     );
   } else {
-    // It’s not a request for an HTML document, but rather for a CSS or SVG
-    // file or whatever…
     event.respondWith(
       caches.match(event.request).then(function (response) {
         return response || fetch(event.request);
@@ -54,7 +43,6 @@ self.addEventListener("fetch", (event) => {
   }
 });
 
-// Update a service worker
 self.addEventListener("activate", (event) => {
   var cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
@@ -62,7 +50,6 @@ self.addEventListener("activate", (event) => {
       return Promise.all(
         cacheNames.map((cacheName) => {
           if (cacheWhitelist.indexOf(cacheName) === -1) {
-            console.log("Deleting cache", cacheName);
             return caches.delete(cacheName);
           }
         })
