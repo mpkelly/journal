@@ -1,11 +1,11 @@
 var CACHE_NAME = "journal-pwa";
 var urlsToCache = [
-  "./public/fonts/noto-sans-tc-v10-latin-700.woff2",
-  "./public/fonts/noto-sans-tc-v10-latin-regular.woff2",
-  "./public/fonts/noto-sans-tc.css",
+  // "./public/fonts/noto-sans-tc-v10-latin-700.woff2",
+  // "./public/fonts/noto-sans-tc-v10-latin-regular.woff2",
+  // "./public/fonts/noto-sans-tc.css",
   "./public/icons/icon.png",
-  "./public/icons/material-round.css",
-  "./public/icons/MaterialRoundIconFont.woff2",
+  // "./public/icons/material-round.css",
+  // "./public/icons/MaterialRoundIconFont.woff2",
   "./public/lib/react.production.min.js",
   "./public/lib/react-dom.production.min.js",
   "./public/journal.js",
@@ -27,13 +27,15 @@ self.addEventListener("install", (event) => {
 
 // Cache and return requests
 self.addEventListener("fetch", (event) => {
-  console.log("fetch", event.request);
   event.respondWith(
     caches.match(event.request).then(function (response) {
       // Cache hit - return response
+
       if (response) {
+        console.log("Hit", event.request, caches);
         return response;
       }
+      console.log("Miss", event.request, caches);
       return fetch(event.request);
     })
   );
