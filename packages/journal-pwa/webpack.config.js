@@ -10,9 +10,9 @@ var config = {
     app: "./src/Index.tsx",
   },
   output: {
-    path: path.join(__dirname, "dist/public/"),
+    path: path.join(__dirname, "dist"),
     filename: "journal.js",
-    publicPath: "./dist/public",
+    publicPath: "./dist",
   },
   resolve: {
     extensions: [".ts", ".tsx", ".js", ".jsx", ".json"],

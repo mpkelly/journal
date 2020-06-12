@@ -1,32 +1,19 @@
 import db from "./Dexie";
 import * as DexieBackup from "dexie-export-import";
 import { Database, UnitOfDBWork } from "./Database";
-import { File as JFile, FileType, fileDate } from "../file/File";
+import { File as JFile, fileDate } from "../file/File";
 import { JournalSettings, DefaultSettings } from "../settings/JournalSettings";
 import { newId } from "../../util/Identity";
 import { CodeFile } from "../code-editor/CodeFile";
 import { Variable } from "../variables/Variable";
 import { media } from "../media/MediaDatabase";
-import {
-  DefaultCssPrintFile,
-  DefaultScriptFile,
-  A4PageCssFile,
-  DefaultCodeFiles,
-} from "../code-editor/CodeDefaults";
+import { DefaultCodeFiles } from "../code-editor/CodeDefaults";
 import { VariableDefaults } from "../variables/VariableDefaults";
 
 const files = db.table<JFile, any>("files");
 const settings = db.table<JournalSettings, any>("settings");
 const code = db.table<CodeFile, any>("code");
 const variables = db.table<Variable, any>("variables");
-
-const ensureSettings = async () => {
-  const records = await settings.toArray();
-  if (records.length == 0) {
-    await settings.add(DefaultSettings);
-  }
-};
-ensureSettings();
 
 export const JournalDatabase: Database = {
   getCollections: async () => {
@@ -197,7 +184,23 @@ if (process.env.NODE_ENV === "development") {
   };
 }
 
-export const insertDefaultDbContent = () => {
-  DefaultCodeFiles.forEach((codeFile) => code.add(codeFile, codeFile.id));
-  VariableDefaults.forEach((variable) => variables.add(variable, variable.id));
+const ensureSettings = async () => {
+  const records = await settings.toArray();
+  if (records.length == 0) {
+    await settings.add(DefaultSettings);
+  }
+};
+
+export const insertDefaultDbContent = async () => {
+  await ensureSettings();
+  const journalSettings = await settings.get(1);
+  if (!journalSettings?.defaultsCreated) {
+    await Promise.all(
+      DefaultCodeFiles.map((codeFile) => code.add(codeFile, codeFile.id))
+    );
+    await Promise.all(
+      VariableDefaults.map((variable) => variables.add(variable, variable.id))
+    );
+    await settings.update(1, { defaultsCreated: true });
+  }
 };

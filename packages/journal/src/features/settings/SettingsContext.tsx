@@ -51,15 +51,6 @@ export const SettingsProvider = (props: SettingsProviderProps) => {
 
   const db = useDatabase();
 
-  useEffect(() => {
-    db.getSettings().then((settings) => {
-      if (!settings.defaultsCreated) {
-        insertDefaultDbContent();
-        db.updateSettings({ ...settings, defaultsCreated: true });
-      }
-    });
-  }, []);
-
   const loadSettings = () => {
     return db.getSettings().then((settings) => {
       setSettings(settings);

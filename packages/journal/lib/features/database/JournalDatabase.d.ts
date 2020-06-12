@@ -1,3 +1,3 @@
 import { Database } from "./Database";
 export declare const JournalDatabase: Database;
-export declare const insertDefaultDbContent: () => void;
+export declare const insertDefaultDbContent: () => Promise<void>;

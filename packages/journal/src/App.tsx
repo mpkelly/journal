@@ -1,6 +1,6 @@
-import * as React from "react";
-import { Siam, Row } from "@mpkelly/siam";
+import React, { useState, useEffect } from "react";
 import { HashRouter, Redirect, Switch, Route } from "react-router-dom";
+import { Siam, Row } from "@mpkelly/siam";
 import { Style } from "./ui-system/Style";
 import { JournalSystem } from "./ui-system/JournalSystem";
 import { FileUpload } from "./features/upload/FileUpload";
@@ -12,8 +12,23 @@ import { TemplatePage } from "./features/template-page/TemplatePage";
 import { SettingsPage } from "./features/settings/SettingsPage";
 import { ImagePage } from "./features/image-page/ImagePage";
 import { LibraryPage } from "./features/library/LibraryPage";
+import db from "./features/database/Dexie";
+import { insertDefaultDbContent } from "./features/database/JournalDatabase";
 
 export const App = () => {
+  const [ready, setReady] = useState(false);
+
+  useEffect(() => {
+    db.open().then(async () => {
+      await insertDefaultDbContent();
+      setReady(true);
+    });
+  }, []);
+
+  if (!ready) {
+    return null;
+  }
+
   return (
     <Siam system={JournalSystem}>
       <SettingsProvider>
