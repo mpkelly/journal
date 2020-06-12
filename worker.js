@@ -9,7 +9,7 @@ var urlsToCache = [
   "./public/lib/react.production.min.js",
   "./public/lib/react-dom.production.min.js",
   "./public/journal.js",
-  "./public/manifest.json",
+  "./manifest.json",
   "./worker.js",
   "./index.html",
 ];
