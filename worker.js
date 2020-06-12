@@ -8,7 +8,7 @@ var urlsToCache = [
   "./public/icons/MaterialRoundIconFont.woff2",
   "./public/lib/react.production.min.js",
   "./public/lib/react-dom.production.min.js",
-  "./public/journal.js",
+  "./journal.js",
   "./manifest.json",
   "./worker.js",
   "./index.html",
