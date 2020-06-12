@@ -39,7 +39,7 @@ self.addEventListener("fetch", (event) => {
           exception
         );
         return caches.open(CACHE_NAME).then(function (cache) {
-          return cache.match("/");
+          return cache.match("./index.html");
         });
       })
     );
