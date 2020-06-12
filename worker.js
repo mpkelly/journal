@@ -1,11 +1,11 @@
 var CACHE_NAME = "journal-pwa";
 var urlsToCache = [
-  // "./public/fonts/noto-sans-tc-v10-latin-700.woff2",
-  // "./public/fonts/noto-sans-tc-v10-latin-regular.woff2",
-  // "./public/fonts/noto-sans-tc.css",
+  "./public/fonts/noto-sans-tc-v10-latin-700.woff2",
+  "./public/fonts/noto-sans-tc-v10-latin-regular.woff2",
+  "./public/fonts/noto-sans-tc.css",
   "./public/icons/icon.png",
-  // "./public/icons/material-round.css",
-  // "./public/icons/MaterialRoundIconFont.woff2",
+  "./public/icons/material-round.css",
+  "./public/icons/MaterialRoundIconFont.woff2",
   "./public/lib/react.production.min.js",
   "./public/lib/react-dom.production.min.js",
   "./public/journal.js",
@@ -27,23 +27,36 @@ self.addEventListener("install", (event) => {
 
 // Cache and return requests
 self.addEventListener("fetch", (event) => {
-  event.respondWith(
-    caches.match(event.request).then(function (response) {
-      // Cache hit - return response
-
-      if (response) {
-        console.log("Hit", event.request, caches);
-        return response;
-      }
-      console.log("Miss", event.request, caches);
-      return fetch(event.request);
-    })
-  );
+  if (event.request.mode == "navigate") {
+    console.log("Handling fetch event for", event.request.url);
+    console.log(event.request);
+    event.respondWith(
+      fetch(event.request).catch(function (exception) {
+        // The `catch` is only triggered if `fetch()` throws an exception,
+        // which most likely happens due to the server being unreachable.
+        console.error(
+          "Fetch failed; returning offline page instead.",
+          exception
+        );
+        return caches.open(CACHE_NAME).then(function (cache) {
+          return cache.match("/");
+        });
+      })
+    );
+  } else {
+    // It’s not a request for an HTML document, but rather for a CSS or SVG
+    // file or whatever…
+    event.respondWith(
+      caches.match(event.request).then(function (response) {
+        return response || fetch(event.request);
+      })
+    );
+  }
 });
 
 // Update a service worker
 self.addEventListener("activate", (event) => {
-  var cacheWhitelist = ["journal-pwa"];
+  var cacheWhitelist = [CACHE_NAME];
   event.waitUntil(
     caches.keys().then((cacheNames) => {
       return Promise.all(
