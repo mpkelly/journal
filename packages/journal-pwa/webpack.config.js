@@ -39,7 +39,7 @@ var config = {
       cleanOnceBeforeBuildPatterns: ["**/bundle*.*js"],
     }),
     //new HardSourceWebpackPlugin()
-    // new BundleAnalyzerPlugin()
+    //new BundleAnalyzerPlugin(),
   ],
   externals: {
     react: "React",
