@@ -4,6 +4,7 @@ export interface JournalSettings {
   wikiPageWidth: number | string;
   showImageProperties: boolean;
   defaultsCreated: boolean;
+  showHelp: boolean;
 }
 
 export const DefaultSettings: JournalSettings = {
@@ -12,4 +13,5 @@ export const DefaultSettings: JournalSettings = {
   wikiPageWidth: 800,
   showImageProperties: false,
   defaultsCreated: false,
+  showHelp: true,
 };

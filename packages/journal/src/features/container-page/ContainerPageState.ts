@@ -73,6 +73,7 @@ const containerPageState = () => {
           .then(CollectionChangedEvent)
           .then(() => {
             db.getChildren(fileId, 0, PageSize).then(setItems);
+            setItemToDelete(undefined);
           });
       }
     });

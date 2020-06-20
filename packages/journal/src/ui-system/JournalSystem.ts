@@ -206,6 +206,7 @@ export const JournalSystem: System = {
       },
       primary: {
         extends: ["components.button.base"],
+        color: "background",
         default: true,
         backgroundColor: "accent",
         hoverBackgroundColor: "accent-alpha50",

@@ -8,6 +8,7 @@ import { Dropzone } from "../../components/dropzone/Dropzone";
 import { SettingsConfirmImportDialog } from "./SettingsConfirmImportDialog";
 import { VariableTableStateProvider } from "../variables/VariableTableState";
 import { SettingsVariableTable } from "./SettingsVariableTable";
+import { SettingsPageHeader } from "./SettingsPageHeader";
 
 export interface SettingsPageProps {}
 
@@ -35,16 +36,7 @@ export const SettingsPage = memo(() => {
       data-backup-dropzone
     >
       <Page flexGrow={1}>
-        <Row gravity="center-start">
-          <PageTitle labelKey="settings" iconName="settings" mr="auto" />
-          <a
-            href={"https://github.com/mpkelly/Journal/wiki"}
-            target="_blank"
-            style={{ textDecoration: "none" }}
-          >
-            <Icon name="help" kind="button" />
-          </a>
-        </Row>
+        <SettingsPageHeader />
         <Setting
           mt="lg"
           label="appName"

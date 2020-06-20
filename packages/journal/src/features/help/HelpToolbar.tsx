@@ -1,6 +1,9 @@
 import React from "react";
 import { Button, Row, Show } from "@mpkelly/siam";
-import { HelpState, useHelpState } from "../../components/help/HelpProvider";
+import {
+  VideoIntroState,
+  useVideoIntroState,
+} from "@mpkelly/react-video-intro";
 
 export const HelpToolbar = () => {
   const {
@@ -9,9 +12,9 @@ export const HelpToolbar = () => {
     hasNext,
     hasPrevious,
     handlePrevious,
-  } = useHelpState() as HelpState;
+  } = useVideoIntroState() as VideoIntroState;
   return (
-    <Row mt="lg">
+    <Row mt="auto">
       <Button kind="text" labelKey="skip" onClick={handleSkip} />
       <Row gravity="center-start" ml="auto">
         <Show when={hasPrevious}>

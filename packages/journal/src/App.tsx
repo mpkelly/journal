@@ -12,8 +12,9 @@ import { TemplatePage } from "./features/template-page/TemplatePage";
 import { SettingsPage } from "./features/settings/SettingsPage";
 import { ImagePage } from "./features/image-page/ImagePage";
 import { LibraryPage } from "./features/library/LibraryPage";
-import db from "./features/database/Dexie";
 import { insertDefaultDbContent } from "./features/database/JournalDatabase";
+import db from "./features/database/Dexie";
+import { JournalHelp } from "./features/help/Help";
 
 export const App = () => {
   const [ready, setReady] = useState(false);

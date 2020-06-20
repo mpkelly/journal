@@ -1,5 +1,6 @@
 import React from "react";
 import { Row, FlexProps, Main } from "@mpkelly/siam";
+import { JournalHelp } from "../help/Help";
 
 export interface PageProps extends FlexProps {}
 
@@ -16,6 +17,7 @@ export const Page = (props: PageProps) => {
       {...rest}
     >
       {children}
+      <JournalHelp />
     </Main>
   );
 };

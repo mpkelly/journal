@@ -3,12 +3,14 @@ import { useDatabase } from "../database/DatabaseState";
 import { newId } from "../../util/Identity";
 import { createCollectionFile, File } from "../file/File";
 import { useEventListener } from "../../util/events/Events";
+import { useHistory } from "react-router-dom";
 
 let count = 1;
 
 export const useCollectionsTreeState = () => {
   const [collections, setCollections] = useState<File[]>([]);
   const db = useDatabase();
+  const history = useHistory();
 
   const updateCollectionItem = useCallback(
     (event: CustomEvent) => {
@@ -37,6 +39,7 @@ export const useCollectionsTreeState = () => {
     const item = createCollectionFile(id, name);
     db.addFile(item).then(() => {
       setCollections((collections) => collections.concat([item]));
+      history.push(`/library/view/${id}`);
     });
   }, [collections]);
 
