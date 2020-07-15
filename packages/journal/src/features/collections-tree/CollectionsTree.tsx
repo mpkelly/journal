@@ -6,6 +6,7 @@ import {
   createAlphaNumericSort,
   Tree,
   Schema,
+  SelectionState,
 } from "@mpkelly/react-tree";
 import { FlexProps, Column, styled, getStyles } from "@mpkelly/siam";
 import { FileType, File } from "../file/File";
@@ -18,23 +19,31 @@ import { useCollectionsTreeState } from "../collection-page/CollectionsPageState
 
 export const CollectionsTreeView = (props: FlexProps) => {
   const { ...rest } = props;
-  const { collections, updateFile } = useCollectionsTreeState();
-
-  const handleChange = (
-    node: FlatNode,
-    property: keyof FlatNode,
-    value: any
-  ) => {
-    const next = { ...node, [property]: value };
-    updateFile(next as File);
-  };
+  const { collections, updateFiles } = useCollectionsTreeState();
+  const history = useHistory();
+  const {
+    location: { pathname },
+  } = history;
 
   // Just to trigger a render
   useParams();
 
-  const {
-    location: { pathname },
-  } = useHistory();
+  const handleChange = (
+    nodes: FlatNode[],
+    property: keyof FlatNode,
+    value: any
+  ) => {
+    updateFiles(nodes as File[], property, value);
+  };
+
+  const handleSelectionChange = (selection: SelectionState) => {
+    if (selection.selected.length == 1) {
+      const selected = selection.selected[0];
+      if (!pathname.endsWith(String(selected))) {
+        history.push(`/library/view/${selected}`);
+      }
+    }
+  };
 
   const renderItem = (file: TreeNode, depth: number) => {
     const selected = (pathname || "").endsWith(String(file.id));
@@ -42,7 +51,7 @@ export const CollectionsTreeView = (props: FlexProps) => {
       selected,
       file,
       pl: depth * 16,
-      onRename: (name: string) => handleChange(file, "name", name),
+      onRename: (name: string) => handleChange([file], "name", name),
     };
     switch (file.type) {
       case FileType.Collection:
@@ -63,14 +72,13 @@ export const CollectionsTreeView = (props: FlexProps) => {
         renderElement={renderItem}
         nodes={collections}
         onChange={handleChange}
-        sortFunction={treeSortFunction}
+        onSelectionChange={handleSelectionChange}
         schema={CollectionsSchema}
+        nameProperty="name"
       />
     </TreeContainer>
   );
 };
-
-export const treeSortFunction = createAlphaNumericSort("name");
 
 export const TreeContainer: FC<FlexProps> = styled(Column)`
   ${(props) => getStyles(props, "components.tree")}

@@ -1,6 +1,6 @@
 import React from "react";
 import { FlexProps, Row, Text, Icon } from "@mpkelly/siam";
-import { treeSortFunction, TreeContainer } from "./CollectionsTree";
+import { TreeContainer } from "./CollectionsTree";
 import { TreeNode, FlatNode, Tree } from "@mpkelly/react-tree";
 import { FileType } from "../file/File";
 
@@ -35,8 +35,8 @@ export const CollectionsTreeSelect = (props: TreeSelectProps) => {
       <Tree
         renderElement={renderItem}
         nodes={nodes}
-        sortFunction={treeSortFunction}
-        readOnly
+        nameProperty="name"
+        disableDrag
       />
     </TreeContainer>
   );

@@ -12,7 +12,7 @@ var config = {
   },
   output: {
     path: path.join(__dirname, "lib"),
-    filename: "index.js",
+    filename: "[name].js",
     publicPath: "./lib",
     libraryTarget: "umd",
     umdNamedDefine: true,

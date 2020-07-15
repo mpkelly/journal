@@ -80,7 +80,7 @@
     "udx": "npm install udx-core@latest udx-react@latest udx-icons@latest"
   },
   "dependencies": {
-    "@mpkelly/react-tree": "0.0.4",
+    "@mpkelly/react-tree": "0.0.14",
     "@mpkelly/react-video-intro": "file:../../../react-video-intro/packages/react-video-intro"
   }
 }

@@ -34,7 +34,7 @@ export interface Database {
   getSettings(): Promise<JournalSettings>;
   updateSettings(settings: JournalSettings): Promise<number>;
 
-  transact(work: UnitOfDBWork, tables: string[]): Promise<void>;
+  transact(work: UnitOfDBWork, tables: string[]): Promise<any>;
 
   exportDb(): Promise<Blob>;
   importDb(file: File): Promise<any>;
@@ -42,7 +42,7 @@ export interface Database {
   delete(): Promise<void>;
 }
 
-export type UnitOfDBWork = () => Promise<void>;
+export type UnitOfDBWork = () => Promise<any>;
 
 export type PagedResult<T> = {
   count: number;

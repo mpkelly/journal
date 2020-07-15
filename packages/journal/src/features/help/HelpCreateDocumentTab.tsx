@@ -15,8 +15,8 @@ export const Card = () => {
       </Row>
       <Text color="secondary.text" mb="md">
         Journal allows you to create new text documents which can be styled and
-        printed as you like. You can store documents in Collections which are
-        top-level folders.
+        printed as you like. You can orgranise your documents into top-level
+        folders called Collections.
       </Text>
       <HelpToolbar />
     </Column>

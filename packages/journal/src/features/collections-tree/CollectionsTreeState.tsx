@@ -43,9 +43,19 @@ export const useCollectionsTreeState = () => {
     });
   }, [collections]);
 
-  const updateFile = async (item: File) => {
-    //TODO optimise
-    await db.updateFile(item.id, item).then(loadCollections);
+  const updateFiles = async (
+    files: File[],
+    property: keyof File,
+    value: any
+  ) => {
+    db.transact(() => {
+      return Promise.all(
+        files.map((file) => {
+          const next = { ...file, [property]: value };
+          db.updateFile(file.id, next);
+        })
+      );
+    }, ["files"]).then(loadCollections);
   };
 
   useEffect(() => {
@@ -55,6 +65,6 @@ export const useCollectionsTreeState = () => {
   return {
     collections,
     addCollection,
-    updateFile,
+    updateFiles,
   };
 };

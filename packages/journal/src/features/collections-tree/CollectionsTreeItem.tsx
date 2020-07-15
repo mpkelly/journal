@@ -2,6 +2,8 @@ import React from "react";
 import { Icon, FlexProps, Row, Optional, EditableText } from "@mpkelly/siam";
 import { Link } from "../../components/link/Link";
 import { TreeNode, CollapseToggle } from "@mpkelly/react-tree";
+import { stopEvent } from "@mpkelly/react-editor-kit";
+import { useHistory } from "react-router-dom";
 
 export interface TreeItemProps extends FlexProps {
   icon: string;
@@ -14,7 +16,6 @@ export interface TreeItemProps extends FlexProps {
 export const CollectionsTreeItem = (props: TreeItemProps) => {
   const { file, canExpand, icon, color, selected, onRename, ...rest } = props;
   const folderIcon = file.expanded ? "folder-open" : "folder-closed";
-
   return (
     <Row
       my="lg"
@@ -24,6 +25,7 @@ export const CollectionsTreeItem = (props: TreeItemProps) => {
       selected={selected}
       selectedBackgroundColor="muted-alpha50"
       hoverBackgroundColor="muted-alpha50"
+      outline="none"
       {...rest}
     >
       <Optional includeIf={canExpand}>

@@ -532,9 +532,21 @@ export const JournalSystem: System = {
     },
     tree: {
       primary: {
-        items: {
+        active: {
+          selector: "li:focus",
+          outlineColor: "transparent",
+        },
+        drop: {
           selector: "[data-rt-drop-valid=true]",
           backgroundColor: "muted-alpha20",
+        },
+        select: {
+          selector: "[data-rt-selected=true]",
+          backgroundColor: "muted-alpha20",
+        },
+        cut: {
+          selector: "[data-rt-cut=true]",
+          opacity: 0.5,
         },
       },
     },

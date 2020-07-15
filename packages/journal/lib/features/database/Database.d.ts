@@ -22,12 +22,12 @@ export interface Database {
     getChildren(id: string, page: number, pageSize: number): Promise<PagedResult<JFile>>;
     getSettings(): Promise<JournalSettings>;
     updateSettings(settings: JournalSettings): Promise<number>;
-    transact(work: UnitOfDBWork, tables: string[]): Promise<void>;
+    transact(work: UnitOfDBWork, tables: string[]): Promise<any>;
     exportDb(): Promise<Blob>;
     importDb(file: File): Promise<any>;
     delete(): Promise<void>;
 }
-export declare type UnitOfDBWork = () => Promise<void>;
+export declare type UnitOfDBWork = () => Promise<any>;
 export declare type PagedResult<T> = {
     count: number;
     pageSize: number;
