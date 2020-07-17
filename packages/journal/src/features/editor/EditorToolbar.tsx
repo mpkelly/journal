@@ -34,13 +34,22 @@ import {
 export interface EditorToolbarProps extends FlexProps {
   saved: boolean;
   onToggleLocked(): void;
+  onPrintPdf(): void;
   onSave(): void;
   readOnly?: boolean;
   children?: JSX.Element | JSX.Element[];
 }
 
 export const EditorToolbar = (props: EditorToolbarProps) => {
-  const { children, onToggleLocked, onSave, saved, readOnly, ...rest } = props;
+  const {
+    children,
+    onToggleLocked,
+    onSave,
+    saved,
+    readOnly,
+    onPrintPdf,
+    ...rest
+  } = props;
 
   return (
     <Row
@@ -181,6 +190,7 @@ export const EditorToolbar = (props: EditorToolbarProps) => {
           </Row>
           <Divider />
           <Icon kind="button" name={"print"} onClick={window.print} />
+          <Icon mx="sm" kind="button" name="pdf" onClick={onPrintPdf} />
           <Divider />
           <ReadOnlyButton
             className="material-icons-round"

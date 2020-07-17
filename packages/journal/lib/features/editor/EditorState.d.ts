@@ -2,11 +2,12 @@ import { Element } from "@mpkelly/react-editor-kit";
 import { EditorPageProps } from "../editor-page/EditorPage";
 export declare const useEditorState: (props: EditorPageProps) => {
     file: import("../file/File").File;
-    saved: boolean;
+    saved: import("react-hanger/useBoolean").UseBoolean;
     value: Element[];
     instantSave: () => void;
     handleToggleLocked: () => void;
     handleChange: (next: Element[]) => void;
-    readOnly: boolean;
+    readOnly: import("react-hanger/useBoolean").UseBoolean;
     handleRestorePreviousValue: () => void;
+    showPdfPrintDialog: import("react-hanger/useBoolean").UseBoolean;
 };

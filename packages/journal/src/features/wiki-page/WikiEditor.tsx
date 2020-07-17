@@ -89,7 +89,7 @@ export const WikiEditor = (props: WikiEditorProps) => {
   const { settings, handleSettingsChange } = useSettings();
   const plugins = useMemo(() => createPlugins(system), []);
   return (
-    <EditorKit plugins={plugins} id="wikieditor" readOnly={readOnly}>
+    <EditorKit plugins={plugins} id="wikieditor" readOnly={readOnly.value}>
       <WikiPageHeader onToggleLocked={handleToggleLocked} />
       <div style={wrapperStyle}>
         <SelectionToolbar>

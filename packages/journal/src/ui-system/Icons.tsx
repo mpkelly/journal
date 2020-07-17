@@ -176,4 +176,8 @@ export const Icons: IconBundle = {
     ligature: "check",
     className,
   },
+  pdf: {
+    ligature: "picture_as_pdf",
+    className,
+  },
 };

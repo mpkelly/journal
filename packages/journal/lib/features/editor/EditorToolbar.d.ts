@@ -2,6 +2,7 @@ import { FlexProps } from "@mpkelly/siam";
 export interface EditorToolbarProps extends FlexProps {
     saved: boolean;
     onToggleLocked(): void;
+    onPrintPdf(): void;
     onSave(): void;
     readOnly?: boolean;
     children?: JSX.Element | JSX.Element[];

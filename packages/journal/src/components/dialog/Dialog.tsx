@@ -1,19 +1,30 @@
 import React, { ReactNode, FC } from "react";
 import { FlexProps, Portal, Column, Scope } from "@mpkelly/siam";
-import { Overlay } from "./Overlay";
 import { stopEvent } from "@mpkelly/react-editor-kit";
+import { Overlay } from "./Overlay";
 
 export interface DialogProps extends FlexProps {
   children: ReactNode;
+  overlayBackground?: string;
   onClickOutside(): void;
 }
 
 export const Dialog: FC<DialogProps> = (props: DialogProps) => {
-  const { children, gravity, onClickOutside, ...rest } = props;
+  const {
+    overlayBackground,
+    children,
+    gravity,
+    onClickOutside,
+    ...rest
+  } = props;
   return (
     <Scope value="dark">
       <Portal>
-        <Overlay onClick={onClickOutside} gravity={gravity}>
+        <Overlay
+          backgroundColor={overlayBackground}
+          onClick={onClickOutside}
+          gravity={gravity}
+        >
           <Column
             p="lg"
             width={300}

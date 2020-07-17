@@ -35,6 +35,7 @@
     "hard-source-webpack-plugin": "^0.13.1",
     "history": "^4.10.1",
     "html-webpack-plugin": "*",
+    "pdfmake": "^0.1.66",
     "react": "16.8.5",
     "react-dom": "^16.8.5",
     "react-router-dom": "^5.1.2",

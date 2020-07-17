@@ -1,13 +1,14 @@
 /// <reference types="react" />
 export declare const EditorStateProvider: import("react").FunctionComponent<import("./EditorPage").EditorPageProps>, useEditorState: import("constate/dist/ts/src/types").ContextHookFunction<{
     file: import("../file/File").File;
-    saved: boolean;
+    saved: import("react-hanger/useBoolean").UseBoolean;
     value: import("@mpkelly/react-editor-kit").Element[];
     instantSave: () => void;
     handleToggleLocked: () => void;
     handleChange: (next: import("@mpkelly/react-editor-kit").Element[]) => void;
-    readOnly: boolean;
+    readOnly: import("react-hanger/useBoolean").UseBoolean;
     handleRestorePreviousValue: () => void;
+    showPdfPrintDialog: import("react-hanger/useBoolean").UseBoolean;
 }>;
 export declare const EditorSideTabStateProvider: import("react").FunctionComponent<unknown>, useEditorSideTabState: import("constate/dist/ts/src/types").ContextHookFunction<import("./EditorSideTabState").EditorSideTabState>;
 export declare const CodeEditorStateProvider: import("react").FunctionComponent<import("../code-editor/CodeEditorState").CodeEditorStateProps>, useCodeEditorState: import("constate/dist/ts/src/types").ContextHookFunction<{

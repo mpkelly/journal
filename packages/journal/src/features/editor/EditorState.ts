@@ -1,15 +1,17 @@
 import { useEffect, useState, useRef, useCallback } from "react";
 import { Element } from "@mpkelly/react-editor-kit";
+import { NodeId } from "@mpkelly/react-tree";
+import useBoolean from "react-hanger/useBoolean";
 import { EditorPageProps } from "../editor-page/EditorPage";
 import { useDatabase } from "../database/DatabaseState";
-import { NodeId } from "@mpkelly/react-tree";
 
 export const useEditorState = (props: EditorPageProps) => {
   const { file } = props;
   const db = useDatabase();
-  const [saved, setSaved] = useState(true);
+  const saved = useBoolean(true);
   const [value, setValue] = useState<Element[]>();
-  const [locked, setLocked] = useState<boolean>();
+  const locked = useBoolean(false);
+  const showPdfPrintDialog = useBoolean(false);
   const lastSave = useRef<Element[]>();
   const createDefault = props.defaultValue || defaultValue;
   const saveTimeout = useRef<any>();
@@ -17,27 +19,28 @@ export const useEditorState = (props: EditorPageProps) => {
   useEffect(() => {
     const value = file.data || createDefault();
     setValue(value);
-    setLocked(file.locked);
+    locked.setValue(!!file.locked);
     lastSave.current = value;
   }, [file.id]);
 
   const handleToggleLocked = useCallback(() => {
-    setLocked((locked) => !locked);
+    locked.toggle();
     db.updateFile(file.id, { locked: !locked });
   }, [locked]);
 
   const handleChange = (next: Element[]) => {
     file.data = next;
     setValue(next);
+    console.log(JSON.stringify(next));
     if (JSON.stringify(next) !== JSON.stringify(value)) {
-      setSaved(false);
+      saved.setValue(false);
       debouncedSave(file.id, next);
     }
   };
 
   const handleSave = (fileId: NodeId, value: Element[]) => {
     db.updateFile(fileId, { data: value }).then(() => {
-      setSaved(true);
+      saved.setValue(true);
       // Remember the last valid value which can be reinstated as part
       // of a rollback
       lastSave.current = value;
@@ -73,6 +76,7 @@ export const useEditorState = (props: EditorPageProps) => {
     handleChange,
     readOnly: locked,
     handleRestorePreviousValue,
+    showPdfPrintDialog,
   };
 };
 

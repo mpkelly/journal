@@ -52,5 +52,8 @@
   },
   "scripts": {
     "watch": "webpack -w --mode=development"
+  },
+  "dependencies": {
+    "pdfmake": "^0.1.66"
   }
 }

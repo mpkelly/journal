@@ -53,6 +53,7 @@
     "history": "^4.10.1",
     "html-webpack-plugin": "^4.3.0",
     "lerna": "^3.21.0",
+    "pdfmake": "^0.1.66",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-hanger": "^2.2.1",

@@ -90,6 +90,12 @@ export const JournalSystem: System = {
       color: "secondary.text",
       fontWeight: "bold",
     },
+    sectionLabel: {
+      extends: ["text.small"],
+      color: "secondary.text",
+      textTransform: "uppercase",
+      my: "lg",
+    },
   },
   icons: Icons,
   labels: Labels,
@@ -322,6 +328,8 @@ export const JournalSystem: System = {
         },
         "si-menu": {
           zIndex: "popup",
+          height: 200,
+          overflow: "auto",
         },
       },
     },
