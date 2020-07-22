@@ -17,7 +17,6 @@ export const MarginPicker = (props: MarginPickerProps) => {
     }
     onChange(next);
   };
-  console.log("M", margin[0]);
   return (
     <Fragment>
       <Text
@@ -32,10 +31,7 @@ export const MarginPicker = (props: MarginPickerProps) => {
           value={margin[0]}
           mr="sm"
           labelKey="left"
-          onChange={(value: number) => {
-            console.log("V", value);
-            handleChange(0, value);
-          }}
+          onChange={(value: number) => handleChange(0, value)}
         />
         <Input
           type={"number"}

@@ -12,13 +12,24 @@ export const createDocumentDefinition = (
   const processNode = (node: any) => {
     let block: any = {};
 
+    const mapStyle = (nodes: any[]) => {
+      nodes.forEach((node) => {
+        if (node.italic) {
+          node.italics = true;
+        } else {
+          delete node.italics;
+        }
+      });
+      return nodes;
+    };
+
     const createListItems = (node: any) => {
       const items: any[] = [];
       node.children.forEach((child: any) => {
         if (child.type) {
           items.push(processNode(child));
         } else {
-          items.push(child.children);
+          items.push(mapStyle(child.children));
         }
       });
       return items;
@@ -41,7 +52,7 @@ export const createDocumentDefinition = (
       case "h6":
       case "paragraph":
         assignTextStyles(node);
-        block.text = node.children;
+        block.text = mapStyle(node.children);
         break;
       case "ordered-list":
         block.ol = createListItems(node);

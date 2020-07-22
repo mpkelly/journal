@@ -20,7 +20,6 @@ import { usePdfPrintDailogState } from "./PdfPrintDialogState";
 import { PdfPreview } from "./PdfPreview";
 import { PdfTextStyles } from "./PdfTextStyles";
 import { Collapse } from "../../components/collapse/Collapse";
-import { Divider } from "../../components/divider/Divider";
 import { PageDetail } from "./PageDetail";
 
 export interface PdfPrintDialogProps extends FlexProps {
@@ -72,7 +71,7 @@ export const PdfPrintDialog = (props: PdfPrintDialogProps) => {
           overflowX="hidden"
           p="md"
         >
-          <Row alignItems="center" mb="md" p="md" mt="md">
+          <Row alignItems="center" mb="lg" mt="md">
             <Icon name="pdf" mr="md" />
             <Text labelKey="Print Settings" kind="large" />
             <Icon

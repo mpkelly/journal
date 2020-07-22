@@ -2,7 +2,7 @@ export const Merriweather = {
   normal: "public/fonts/merriweather/merriweather-v21-latin-regular.ttf",
   bold: "public/fonts/merriweather/merriweather-v21-latin-700.ttf",
   italic: "public/fonts/merriweather/merriweather-v21-latin-italic.ttf",
-  bolditalic: "public/fonts/merriweather/merriweather-v21-latin700-italics.ttf",
+  bolditalic: "public/fonts/merriweather/merriweather-v21-latin-700italic.ttf",
 };
 
 export const createFontsVfs = async () => {
