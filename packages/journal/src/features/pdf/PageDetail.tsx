@@ -45,6 +45,7 @@ export const PageDetail = (props: PageDetailProps) => {
             <Input
               labelKey={["col", index + 1]}
               value={column.text}
+              placeholder={"{page} and {totalPages} supported"}
               onChange={(value: string) =>
                 handleColumnChange("text", value, index)
               }
@@ -55,7 +56,7 @@ export const PageDetail = (props: PageDetailProps) => {
               width={50}
               labelKey={"width %"}
               type={"number"}
-              placeholderKey="auto"
+              placeholderLabelKey="auto"
               value={Number.parseInt(column.width)}
               onChange={(value: string) =>
                 handleColumnChange("width", `${value}%`, index)
