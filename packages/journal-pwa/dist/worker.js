@@ -3,12 +3,10 @@ var urlsToCache = [
   "./public/fonts/noto-sans/noto-sans-tc-v10-latin-700.woff2",
   "./public/fonts/noto-sans/noto-sans-tc-v10-latin-regular.woff2",
   "./public/fonts/noto-sans/noto-sans-tc.css",
-
-  "./public/fonts/merriweather/merriweather-v21-latin-700.woff2",
-  "./public/fonts/merriweather/merriweather-v21-latin-700italic.woff2",
-  "./public/fonts/merriweather/merriweather-v21-latin-regular.woff2",
-  "./public/fonts/merriweather/merriweather-v21-latin-italic.woff2",
-
+  "./public/fonts/merriweather/merriweather-v21-latin-700.ttf",
+  "./public/fonts/merriweather/merriweather-v21-latin-700italic.ttf",
+  "./public/fonts/merriweather/merriweather-v21-latin-regular.ttf",
+  "./public/fonts/merriweather/merriweather-v21-latin-italic.ttf",
   "./public/icons/icon.png",
   "./public/icons/material-round.css",
   "./public/icons/MaterialRoundIconFont.woff2",
