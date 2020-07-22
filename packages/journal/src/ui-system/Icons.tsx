@@ -180,4 +180,13 @@ export const Icons: IconBundle = {
     ligature: "picture_as_pdf",
     className,
   },
+  "arrow-down": {
+    ligature: "expand_more",
+    className,
+  },
+  "arrow-up": {
+    ligature: "expand_more",
+    rotate: -180,
+    className,
+  },
 };

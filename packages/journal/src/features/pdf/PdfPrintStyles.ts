@@ -1,7 +1,11 @@
+import { PageDetailModel } from "./PageDetail";
+
 export type PrintStyle = {
   pageSize: { width: number | string; height: number | string } | string;
   pageOrientation: "landscape" | "portrait";
   pageMargins: number[];
+  header: PageDetailModel;
+  footer: PageDetailModel;
   text: {
     [key: string]: TextStyle;
   };
@@ -9,11 +13,11 @@ export type PrintStyle = {
 
 export type TextStyle = {
   color: string;
-  margin: number[];
+  margin?: number[];
   lineHeight: number;
   fontSize: number;
   font: string;
-  alignment: "left" | "right" | "center";
+  alignment?: "left" | "right" | "center";
 };
 
 export const PageSizes = [
@@ -73,13 +77,15 @@ export const createDefaultPrintStyle = (): PrintStyle => ({
   pageSize: "A4",
   pageMargins: [50, 50, 50, 50],
   pageOrientation: "portrait",
+  header: createDefaultPageDetailModel(),
+  footer: createDefaultPageDetailModel(),
   text: {
     h1: {
       color: "#000000",
       margin: [0, 8, 0, 8],
       lineHeight: 1.5,
       fontSize: 30,
-      font: "Roboto",
+      font: "Merriweather",
       alignment: "left",
     },
     h2: {
@@ -87,7 +93,7 @@ export const createDefaultPrintStyle = (): PrintStyle => ({
       margin: [0, 7, 0, 7],
       lineHeight: 1.45,
       fontSize: 24,
-      font: "Roboto",
+      font: "Merriweather",
       alignment: "left",
     },
     h3: {
@@ -95,7 +101,7 @@ export const createDefaultPrintStyle = (): PrintStyle => ({
       margin: [0, 6, 0, 6],
       lineHeight: 1.4,
       fontSize: 20,
-      font: "Roboto",
+      font: "Merriweather",
       alignment: "left",
     },
     h4: {
@@ -103,7 +109,7 @@ export const createDefaultPrintStyle = (): PrintStyle => ({
       margin: [0, 5, 0, 5],
       lineHeight: 1.35,
       fontSize: 18,
-      font: "Roboto",
+      font: "Merriweather",
       alignment: "left",
     },
     h5: {
@@ -111,7 +117,7 @@ export const createDefaultPrintStyle = (): PrintStyle => ({
       margin: [0, 4, 0, 4],
       lineHeight: 1.3,
       fontSize: 18,
-      font: "Roboto",
+      font: "Merriweather",
       alignment: "left",
     },
     h6: {
@@ -119,7 +125,7 @@ export const createDefaultPrintStyle = (): PrintStyle => ({
       margin: [0, 3, 0, 3],
       lineHeight: 1.25,
       fontSize: 16,
-      font: "Roboto",
+      font: "Merriweather",
       alignment: "left",
     },
     paragraph: {
@@ -127,10 +133,32 @@ export const createDefaultPrintStyle = (): PrintStyle => ({
       margin: [0, 6, 0, 6],
       lineHeight: 1.3,
       fontSize: 14,
-      font: "Roboto",
+      font: "Merriweather",
       alignment: "left",
     },
+    header: {
+      color: "#000000",
+      lineHeight: 1.3,
+      fontSize: 14,
+      font: "Merriweather",
+    },
+    footer: {
+      color: "#000000",
+      lineHeight: 1.3,
+      fontSize: 14,
+      font: "Merriweather",
+    },
   },
+});
+
+const createDefaultPageDetailModel = (): PageDetailModel => ({
+  columns: [
+    { text: "", alignment: "left", width: undefined },
+    { text: "", alignment: "center", width: undefined, height: 100 },
+    { text: "", alignment: "right", width: undefined },
+  ],
+  margin: [8, 8, 8, 8],
+  enabled: false,
 });
 
 export const DefaultPrintStyle = createDefaultPrintStyle();

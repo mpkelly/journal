@@ -11,4 +11,5 @@ export const Labels: I18NBundle = {
   searchByTagOrName: "Search by name or tag then hit enter",
   confirmImportDb: "Replace existing data?",
   uploadOrDropJbf: "Upload or drop a .jbf file to restore to backup version",
+  col: (col: number) => `Col ${col}`,
 };

@@ -31,7 +31,6 @@ export const useEditorState = (props: EditorPageProps) => {
   const handleChange = (next: Element[]) => {
     file.data = next;
     setValue(next);
-    console.log(JSON.stringify(next));
     if (JSON.stringify(next) !== JSON.stringify(value)) {
       saved.setValue(false);
       debouncedSave(file.id, next);

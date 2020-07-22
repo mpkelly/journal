@@ -1,15 +1,13 @@
 import pdfMake from "pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
 import { createDefaultPrintStyle } from "./PdfPrintStyles";
-import { PdfFonts } from "./PdfFonts";
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
-//pdfMake.fonts = PdfFonts;
+import { createFontsVfs } from "./PdfFonts";
 
 export const createDocumentDefinition = (
   nodes: any[],
   style = createDefaultPrintStyle()
 ) => {
+  style = clone(style);
   const content: any = [];
   const processNode = (node: any) => {
     let block: any = {};
@@ -57,12 +55,43 @@ export const createDocumentDefinition = (
   };
 
   nodes.forEach((node) => content.push(processNode(node)));
-  const { text, ...rest } = style;
+
+  const { text, header: headerDetail, footer: footerDetail, ...rest } = style;
+  let header: any = undefined;
+
+  if (headerDetail.enabled) {
+    header = (page: number, totalPages: number) => {
+      const merged = { ...style.text["header"], ...headerDetail };
+
+      merged.columns.forEach((column: any) => {
+        column.text = column.text.split("{page}").join(String(page));
+        column.text = column.text
+          .split("{totalPages}")
+          .join(String(totalPages));
+      });
+      return merged;
+    };
+  }
+  let footer: any = undefined;
+
+  if (footerDetail.enabled) {
+    footer = (page: number, totalPages: number) => {
+      const merged = { ...style.text["footer"], ...footerDetail };
+
+      merged.columns.forEach((column: any) => {
+        column.text = column.text.split("{page}").join(String(page));
+        column.text = column.text
+          .split("{totalPages}")
+          .join(String(totalPages));
+      });
+      return merged;
+    };
+  }
+
   return {
     content,
-    defaultStyle: {
-      font: "Merriweather",
-    },
+    header,
+    footer,
     ...rest,
   };
 };
@@ -71,8 +100,26 @@ export const createPdfDocument = async (
   nodes: any[],
   style = createDefaultPrintStyle()
 ): Promise<string> => {
-  console.log(pdfMake.vfs);
-  console.log(createDocumentDefinition(nodes, style));
+  const fonts = await createFontsVfs();
+
+  pdfMake.vfs = {
+    ...fonts,
+    ...pdfFonts.pdfMake.vfs,
+  };
+  pdfMake.fonts = {
+    Merriweather: {
+      normal: "Merriweather-Regular.ttf",
+      bold: "Merriweather-Bold.ttf",
+      italics: "Merriweather-Italic.ttf",
+      bolditalics: "Merriweather-BoldItalic.ttf",
+    },
+    Roboto: {
+      normal: "Roboto-Regular.ttf",
+      bold: "Roboto-Medium.ttf",
+      italics: "Roboto-Italic.ttf",
+      bolditalics: "Roboto-MediumItalic.ttf",
+    },
+  };
   const generator = pdfMake.createPdf(createDocumentDefinition(nodes, style));
   return new Promise((resolve) => generator.getBase64(resolve));
 };
@@ -83,3 +130,5 @@ export const downloadPdfDocument = (
 ) => {
   return pdfMake.createPdf(createDocumentDefinition(nodes, style)).download();
 };
+
+const clone = (object: any) => JSON.parse(JSON.stringify(object));

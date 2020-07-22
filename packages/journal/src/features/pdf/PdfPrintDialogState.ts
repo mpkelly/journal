@@ -10,13 +10,13 @@ import {
 export const usePdfPrintDailogState = (nodes: Node[], onClose: () => void) => {
   const initialStyle = createDefaultPrintStyle();
   const [preview, setPreview] = useState("");
-
   const [printStyle, setPrintStyle] = useState<PrintStyle>(initialStyle);
 
   useEffect(() => {
+    const time = !!preview ? 1000 : 1;
     const timeout = setTimeout(
       () => createPdfDocument(nodes, printStyle).then(setPreview),
-      1000
+      time
     );
     return () => clearTimeout(timeout);
   }, [printStyle]);
